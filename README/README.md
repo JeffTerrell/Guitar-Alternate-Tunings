@@ -11,3 +11,10 @@
 #### This tutorial is more in line with what I want to accomplish. I've got a better idea of how to implement picture uploads from object creation. Also, I don't anticipate having any issues displaying images from the DB as this should (fingers crossed) be straightforward.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+## How to record guitar
+## https://www.youtube.com/watch?v=awzXNl30lKg
+
+#### Looking into recording my audio samples for tunings and associated chords but there are some extra costs so this will likely end up being a future implementation unless I can find samples on the web or an API
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
