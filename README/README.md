@@ -15,6 +15,16 @@
 ## How to record guitar
 ## https://www.youtube.com/watch?v=awzXNl30lKg
 
-#### Looking into recording my audio samples for tunings and associated chords but there are some extra costs so this will likely end up being a future implementation unless I can find samples on the web or an API
+#### Looking into recording my audio samples for tunings and associated chords but there are some extra costs so this will likely end up being a future implementation unless I can find samples on the web or an API.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+## Alternate Guitar Tunings A Fresh New Sound
+## https://www.musical-u.com/learn/alternate-guitar-tunings-a-fresh-new-sound/
+
+#### Found some audio samples here but not exactly what I need. After searching for a while for samples that I can download or an API I have found nothing. The audio sample feature will have to be a future implementaion to the site.
+
+## Web Audio API
+## https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
+
+#### Looked into this API for potentially creating the audio samples digitally, and although it seems it may be possible, I think exploring this route is out of scope for the project and I should spend my time elsewhere.
