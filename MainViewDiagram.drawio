@@ -1,0 +1,48 @@
+<mxfile host="65bd71144e">
+    <diagram id="V9EPk-yqcem9LwYm7uPE" name="Page-1">
+        <mxGraphModel dx="1502" dy="997" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="250" width="550" height="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="730" y="390" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="4">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="365" y="615" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="380" width="130" height="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Welcome page &lt;br&gt;About the site" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="380" width="400" height="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Home" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="162.5" y="420" width="105" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Alternate Tunings" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="162.5" y="510" width="105" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Artists" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="161.25" y="600" width="105" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Songs" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="162.5" y="690" width="105" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="Header" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="170" y="270" width="510" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Footer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="795" width="380" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Contact" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="795" width="110" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
