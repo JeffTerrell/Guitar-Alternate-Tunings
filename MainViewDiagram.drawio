@@ -7,40 +7,55 @@
                 <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="150" y="250" width="550" height="600" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="Text" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-                    <mxGeometry x="730" y="390" width="40" height="20" as="geometry"/>
-                </mxCell>
                 <mxCell id="7" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="4">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="365" y="615" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="4" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="150" y="380" width="130" height="400" as="geometry"/>
+                    <mxGeometry x="150" y="250" width="130" height="600" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="Welcome page &lt;br&gt;About the site" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="280" y="380" width="400" height="400" as="geometry"/>
+                <mxCell id="5" value="Home page &lt;br&gt;About the site&lt;br&gt;Latest News&lt;br&gt;Feature Artist(s) or Song(s)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="360" width="420" height="490" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" value="Home" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="162.5" y="420" width="105" height="60" as="geometry"/>
+                    <mxGeometry x="162.5" y="380" width="105" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" value="Alternate Tunings" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="162.5" y="510" width="105" height="60" as="geometry"/>
+                    <mxGeometry x="161.25" y="460" width="105" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="10" value="Artists" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="161.25" y="600" width="105" height="60" as="geometry"/>
+                    <mxGeometry x="161.25" y="540" width="105" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="11" value="Songs" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="162.5" y="690" width="105" height="60" as="geometry"/>
+                    <mxGeometry x="161.25" y="620" width="105" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="Header" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="170" y="270" width="510" height="90" as="geometry"/>
+                    <mxGeometry x="280" y="250" width="420" height="110" as="geometry"/>
                 </mxCell>
                 <mxCell id="13" value="Footer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="290" y="795" width="380" height="40" as="geometry"/>
+                    <mxGeometry x="150" y="800" width="130" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="14" value="Contact" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="160" y="795" width="110" height="40" as="geometry"/>
+                    <mxGeometry x="161.25" y="700" width="105" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Interacttive Toggle Side&lt;br&gt;Navbar" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="143.75" y="250" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="260" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="line;strokeWidth=4;html=1;perimeter=backbonePerimeter;points=[];outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="265" width="20" height="10" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="Toggle" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="280" width="50" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Log In" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="640" y="260" width="50" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Search Bar" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="153.75" y="310" width="120" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
