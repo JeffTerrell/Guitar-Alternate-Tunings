@@ -24,7 +24,32 @@
 
 #### Found some audio samples here but not exactly what I need. After searching for a while for samples that I can download or an API I have found nothing. The audio sample feature will have to be a future implementaion to the site.
 
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
 ## Web Audio API
 ## https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
 
 #### Looked into this API for potentially creating the audio samples digitally, and although it seems it may be possible, I think exploring this route is out of scope for the project and I should spend my time elsewhere.
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+## How To Implement Search Functionality In ASP.NET Core MVC Index View VS2019
+## https://www.youtube.com/watch?v=JHrBbQAqm0s
+
+#### As the site is going to have a good bit of objects stored I definitely want a search bar. This was a pretty good tuturial, seems like a feasible addition.
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+## Implement search page in ASP NET Core
+## https://www.youtube.com/watch?v=gb6TMtoGQEM
+
+#### Another pretty good tutorial, simplified a couple of things for me. A search bar hopefully shouldn't be very difficult to implement.
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+## Search Box in Index Page ASP.NET CORE
+## https://www.youtube.com/watch?v=Ra38OYYk_-U
+
+#### Doing more research into the search bar to feel more confident
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
