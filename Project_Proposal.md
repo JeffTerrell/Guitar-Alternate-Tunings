@@ -11,7 +11,8 @@
 
 ## List the absolute minimum features the project requires to meet this purpose or goal:
 #### - Many to many relationships between tunings, artists, and songs. 
-#### - Search bar functionality is essential as there will be many objects, a list for each model is not going to be very user friendly. 
+#### - Search bar functionality is essential as there will be many objects, a list for each model is not going to be very user friendly.
+#### - Ability to upload images for tunings 
 #### - A navbar with links to each model. 
 #### - Identity functionality to allow registered users full CRUD. 
 #### - Chord diagrams for each tuning (min 10) and content, lots of it (songs).
