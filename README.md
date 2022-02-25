@@ -1,15 +1,24 @@
 # Research & Planning Log
 #### Friday 02/18/2022
-* 10:00 - Researching and making final decision to use ASP.Net Core MVC and not React
+* 09:30 - Researching and making final decision to use ASP.Net Core MVC with vanilla JS and not React
 * 10:30 - Making rough draft of project timeline, to-dos, etc.
 * 10:45 - Making rough draft of MVP and stretch goals (maybe mobile app?)
 * 11:00 - Researching solutions for possible mobile app development
+* 11:20 - Researching adding images to/from database
+* 12:30 - Planning website view diagrams
+* 14:00 - Researching recording and adding audio samples
+* 15:15 - Researching adding search bar functionality
+* 16:15 - Working on project proposal
+* 17:00 - Finished project proposal
 
 
+#### Friday 02/25/2022
+* 08:00 - Reviewing learnhowtoprogram lessons on C#/ASP.Net Core MVC
+* 08:40 - Rearrange project file/folder structure
+* 08:45 - Updating README with research and planning time log
+* 09:35 - Planning project classes/models, reviewing more learnhowtoprogram lessons
 
-
-
-
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 ## The Perfect Match: ASP.NET Core Web API + Xamarin Mobile Apps - THR3010
 ## https://www.youtube.com/watch?v=8eKRQYP2s5g
