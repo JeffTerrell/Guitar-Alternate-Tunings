@@ -8,8 +8,8 @@ namespace GuitarTunings.Models
 
     public Tuning()
     {
-      this.joinArtist = new HashSet<ArtistTuning>();
-      this.joinSong = new HashSet<SongTuning>();
+      this.JoinArtist = new HashSet<ArtistTuning>();
+      this.JoinSong = new HashSet<SongTuning>();
     }
 
     public int TuningId { get; set; }
@@ -18,5 +18,9 @@ namespace GuitarTunings.Models
     public string Notes { get; set; }
     public string Description { get; set; }
 
+    // need properties for chord formation diagrams
+
+    public virtual ICollection<ArtistTuning> JoinArtist { get; set; }
+    public virtual ICollection<SongTuning> JoinSong { get; set; }
   }
 }
