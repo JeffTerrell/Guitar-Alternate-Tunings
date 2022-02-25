@@ -17,7 +17,8 @@
 * 08:40 - Rearrange project file/folder structure
 * 08:45 - Updating README with research and planning time log
 * 09:35 - Planning project classes/models, reviewing more learnhowtoprogram lessons
-* 10:35 - Begin setting up base project file/folder structure
+* 10:35 - Begin setting up base project file/folder structure and more ASP.Net Core MVC reading/review
+* 12:05 - Lunch
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
