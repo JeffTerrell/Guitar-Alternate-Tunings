@@ -5,7 +5,7 @@
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 ## Project's Purpose or Goal: (What will it do for users?)
-#### A website that will provide users with information about alternate guitar tunings and songs and artist associated with these tunings. Users will be able to view information about a specific tuning, including chord diagrams, and access links to songs and artists using the tuning. Links to guitar tabs/chord charts and song videos will also to be accesible.
+#### A website that will provide users with information about alternate guitar tunings and songs and artists associated with these tunings. Users will be able to view information about a specific tuning, including chord diagrams, and access links to songs and artists using the tuning. Links to guitar tabs/chord charts and song videos will also be accesible.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
