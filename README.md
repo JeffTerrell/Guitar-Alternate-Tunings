@@ -1,3 +1,30 @@
+# Research & Planning Log
+#### Friday 02/18/2022
+* 10:00 - Researching and making final decision to use ASP.Net Core MVC and not React
+* 10:30 - Making rough draft of project timeline, to-dos, etc.
+* 10:45 - Making rough draft of MVP and stretch goals (maybe mobile app?)
+* 11:00 - Researching solutions for possible mobile app development
+
+
+
+
+
+
+
+## The Perfect Match: ASP.NET Core Web API + Xamarin Mobile Apps - THR3010
+## https://www.youtube.com/watch?v=8eKRQYP2s5g
+
+## Create backend services for native mobile apps with ASP.NET Core
+## https://docs.microsoft.com/en-us/aspnet/core/mobile/native-mobile-backend?view=aspnetcore-6.0
+
+## Guide to Build Cross-Platform Applications with .NET Core
+## https://blog.devgenius.io/guide-to-build-cross-platform-applications-with-net-core-cb4dd73f5c6e
+
+#### I would really like to have a mobile app for this project eventually but I think for now it will be an extended stretch goal. 
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+
 ## ASP.NET Core MVC - Save and Display Image/Photo From Database (SQL Server) 
 ## https://www.youtube.com/watch?v=GZkoeNNjpmA
 
