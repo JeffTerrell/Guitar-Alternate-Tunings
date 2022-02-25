@@ -13,7 +13,6 @@ namespace GuitarTunings.Models
     }
 
     public int TuningId { get; set; }
-    public string Category { get; set; }
     public string Name { get; set; }
     public string Notes { get; set; }
     public string Description { get; set; }
