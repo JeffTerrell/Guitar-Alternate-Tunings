@@ -22,6 +22,7 @@
 * 13:30 - Adding models for tunings, artist, and songs. Do I add a model for genre?
 * 15:30 - Reading through learnhowtoprogram lessons on one to many and many to many relationships
 * 16:00 - Working on DB schema
+* 18:40 - Finished DB schema
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
