@@ -19,7 +19,9 @@
 * 09:35 - Planning project classes/models, reviewing more learnhowtoprogram lessons
 * 10:35 - Begin setting up base project file/folder structure and more ASP.Net Core MVC reading/review
 * 12:05 - Lunch
-* 13:30 - Adding models for tunings, artist, and songs
+* 13:30 - Adding models for tunings, artist, and songs. Do I add a model for genre?
+* 15:30 - Reading through learnhowtoprogram lessons on one to many and many to many relationships
+* 16:00 - Working on DB schema
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
