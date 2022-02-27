@@ -24,6 +24,14 @@
 * 16:00 - Working on DB schema
 * 17:40 - Finished DB schema
 
+
+#### Sunday 02/27/2022
+* 09:15 - Watching ASP.NET Core MVC tutorial video
+* 09:45 - Pause tutorial video
+* 13:00 - Continue watch tutorial video
+* 14:30 - Pause tutorial video
+
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 ## The Perfect Match: ASP.NET Core Web API + Xamarin Mobile Apps - THR3010
@@ -95,3 +103,8 @@
 #### Doing more research into the search bar to feel more confident
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
+
+## Learn ASP.NET Core MVC (.NET 6) - Full Course
+## https://www.youtube.com/watch?v=hZ1DASYd9rk&t=1071s
+
+#### Trying to gain deeper understanding of ASP.NET Core MVC and also pick up some new tools that I might be able to use in my web app
