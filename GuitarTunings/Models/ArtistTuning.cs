@@ -1,7 +1,7 @@
 namespace GuitarTunings.Models
 {
 
-  public class ArtistSong
+  public class ArtistTuning
   {
 
     public int ArtistTuningId { get; set;}
