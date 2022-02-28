@@ -30,7 +30,8 @@
 * 09:45 - Pause tutorial video
 * 13:00 - Continue watching tutorial video
 * 14:30 - Pause tutorial video
-* 17:40 - Continue watching tutorial video
+* 16:40 - Continue watching tutorial video
+* 17:45 - Pause tutorial video 
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
@@ -108,4 +109,4 @@
 ## Learn ASP.NET Core MVC (.NET 6) - Full Course
 ## https://www.youtube.com/watch?v=hZ1DASYd9rk&t=1071s
 
-#### Trying to gain deeper understanding of ASP.NET Core MVC and also pick up some new tools that I might be able to use in my web app
+#### Trying to gain a deeper understanding of ASP.NET Core MVC and also pick up some new tools that I might be able to use in my web app
