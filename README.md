@@ -28,8 +28,9 @@
 #### Sunday 02/27/2022
 * 09:15 - Watching ASP.NET Core MVC tutorial video
 * 09:45 - Pause tutorial video
-* 13:00 - Continue watch tutorial video
+* 13:00 - Continue watching tutorial video
 * 14:30 - Pause tutorial video
+* 17:40 - Continue watching tutorial video
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
