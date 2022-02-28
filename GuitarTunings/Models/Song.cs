@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GuitarTunings.Models
 {
@@ -12,7 +13,9 @@ namespace GuitarTunings.Models
       this.JoinTuning = new HashSet<SongTuning>();
     }
 
+    [Key]
     public int SongId { get; set; }
+    [Required]
     public string Name { get; set; }
     public string Album { get; set; }
     public string Tab { get; set; }
