@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 
 namespace GuitarTunings.Models
@@ -22,8 +23,10 @@ namespace GuitarTunings.Models
     public string Genre { get; set; }
     public string Description { get; set; }
 
-    [DisplayName("Upload Artist/Band Image")]
+    [DisplayName("Artist Image Name")]
     public string ArtistImageName { get; set; }
+    [NotMapped]
+    [DisplayName("Upload Artist/Band Image")]
     public IFormFile ArtistImageFile { get; set; }
 
     public virtual ICollection<ArtistSong> JoinSong { get; set; }

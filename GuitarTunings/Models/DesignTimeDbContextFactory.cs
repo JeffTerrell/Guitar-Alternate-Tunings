@@ -18,7 +18,7 @@ namespace GuitarTunings.Models
 
       var builder = new DbContextOptionsBuilder<GuitarTuningsContext>();
 
-      builder.UseMySql(configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(configuration["ConnectionsString:DefaultConnection"]));
+      builder.UseMySql(configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(configuration["ConnectionStrings:DefaultConnection"]));
 
       return new GuitarTuningsContext(builder.Options);  
     }
