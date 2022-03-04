@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+@using GuitarTunings.Models
+@model TuningCategory
+
+<h1>Add a new alternate tuning category</h1>
+
+@using (Html.BeginForm("Create", "TuningCategories", FormMethod.Post))
+{
+  <ul>
+  <li>@Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name, new {@required = "required"})</li>
+    <li>@Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description, new {@required = "required"})</li>
+  </ul>
+  
+  <input type="submit", value="Add tuningCategory", class="btn btn-dark"/>
+}

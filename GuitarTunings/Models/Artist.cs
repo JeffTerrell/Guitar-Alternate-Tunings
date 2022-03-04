@@ -23,7 +23,7 @@ namespace GuitarTunings.Models
     public string Genre { get; set; }
     public string Description { get; set; }
 
-    [DisplayName("Artist Image Name")]
+    [DisplayName("Image Name For Artist")]
     public string ArtistImageName { get; set; }
     [NotMapped]
     [DisplayName("Upload Artist/Band Image")]

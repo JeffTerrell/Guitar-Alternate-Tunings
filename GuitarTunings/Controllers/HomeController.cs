@@ -7,7 +7,7 @@ namespace GuitarTunings.Controllers
   {
 
     [HttpGet("/")]
-    public IActionResult Index()
+    public ActionResult Index()
     {
       return View();
     }
