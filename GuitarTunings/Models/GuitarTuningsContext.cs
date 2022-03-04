@@ -16,5 +16,11 @@ namespace GuitarTunings.Models
     public DbSet<ArtistTuning> ArtistTunings { get; set; } 
     public DbSet<SongTuning> SongTunings { get; set; }
 
+    public GuitarTuningsContext(DbContextOptions options) : base(options) { }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+      optionsBuilder.UseLazyLoadingProxies();
+    }
   }
 }
