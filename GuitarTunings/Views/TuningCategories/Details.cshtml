@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@using GuitarTunings.Models;
+@model TuningCategory
+
+<h2>Alternate Tuning Category Details</h2>
+<hr/>
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
+
+<a asp-controller="TuningCategories"
+    asp-action="Index">View All Alternate Tuning Categories</a>

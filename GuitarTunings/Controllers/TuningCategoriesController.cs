@@ -34,5 +34,11 @@ namespace GuitarTunings.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Details(int Id)
+    {
+      TuningCategory thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+      return View(thisTuningCategory);
+    }
   }
 }
