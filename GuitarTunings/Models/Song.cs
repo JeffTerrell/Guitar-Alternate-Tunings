@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace GuitarTunings.Models
@@ -18,8 +19,11 @@ namespace GuitarTunings.Models
     [Required]
     public string Name { get; set; }
     public string Album { get; set; }
+    [DisplayName("Guitar Tab")]
     public string Tab { get; set; }
+    [DisplayName("Song Video")]
     public string Video { get; set; }
+    [DisplayName("Guitar Tutorial")]
     public string Tutorial { get; set; }
 
     public virtual ICollection<ArtistSong> JoinArtist { get; set; }
