@@ -42,7 +42,7 @@
 #### Friday 03/04/2022
 * 09:30 - Watching Identity tutorial video
 * 10:15 - Finish watching Identity tutorial video
-* 10:30 - Resume work on models with image upload functionality
+* 10:30 - Resume work on models with image upload functionality(learning how to use tag helpers along the way)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
