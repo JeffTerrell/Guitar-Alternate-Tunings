@@ -2,6 +2,7 @@ using System.Linq;
 using GuitarTunings.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GuitarTunings.Controllers
 {
@@ -39,6 +40,35 @@ namespace GuitarTunings.Controllers
     {
       TuningCategory thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
       return View(thisTuningCategory);
+    }
+
+    public ActionResult Edit(int Id)
+    {
+      var thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+      return View(thisTuningCategory);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(TuningCategory tuningCategory)
+    {
+      _db.Entry(tuningCategory).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = tuningCategory.TuningCategoryId});
+    }
+
+    public ActionResult Delete(int Id)
+    {
+      var thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+      return View(thisTuningCategory);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int Id)
+    {
+      var thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+      _db.TuningCategories.Remove(thisTuningCategory);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }

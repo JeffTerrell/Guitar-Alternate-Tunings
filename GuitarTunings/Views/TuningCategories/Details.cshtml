@@ -2,12 +2,17 @@
   Layout = "_Layout";
 }
 
-@using GuitarTunings.Models;
-@model TuningCategory
+@model GuitarTunings.Models.TuningCategory
 
 <h2>Alternate Tuning Category Details</h2>
 <hr/>
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
 
-<a asp-controller="TuningCategories"
-    asp-action="Index">View All Alternate Tuning Categories</a>
+<a  asp-action="Index">View All Alternate Tuning Categories</a>
+<br>    
+<a  asp-action="Edit"
+    asp-route-id="@Model.TuningCategoryId">Edit Tuning Category: @Model.Name</a>
+<br>
+<a  asp-action="Delete"
+    asp-route-id="@Model.TuningCategoryId">Delete Tuning Category: @Model.Name</a>
+<br>      

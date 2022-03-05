@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GuitarTunings.Models.TuningCategory
+
+<h2>Edit Tuning Category</h2>
+
+<h4>Edit this tuning category: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.TuningCategoryId)
+
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+
+    <input type="submit" value="Save" class="btn btn-warning"/>
+}
+
+<a asp-controller="TuningCategories"
+    asp-action="Index">View All Alternate Tuning Categories</a>
+<br>    
+<a asp-controller="TuningCategories"
+    asp-action="Details"
+    asp-route-id="@Model.TuningCategoryId">Back to Details for: @Model.Name</a>
+<br>   
