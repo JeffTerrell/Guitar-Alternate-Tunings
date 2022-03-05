@@ -7,7 +7,7 @@
 <h2>Delete this Tuning Category</h2>
 <h4>Tuning Category Name: <span>@Html.DisplayFor(model => model.Name)</span></h4>
 
-<form asp-action="Delete">
+<form asp-controller="TuningCategories" asp-action="Delete" method="post">
   <input type="hidden" asp-for="TuningCategoryId" />
   <input type="submit" value="Delete" class="btn btn-danger" />
 </form>  

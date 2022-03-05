@@ -8,9 +8,8 @@
 
 <h4>Edit this tuning category: @Html.DisplayFor(model => model.Name)</h4>
 
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(model => model.TuningCategoryId)
+<form asp-controller="TuningCategories" asp-action="Edit", method="post">
+    <input type="hidden" asp-for="TuningCategoryId" />
 
     <label asp-for="Name"></label>
     <input asp-for="Name" />
@@ -19,7 +18,7 @@
     <input asp-for="Description" />
 
     <input type="submit" value="Save" class="btn btn-warning"/>
-}
+</form>
 
 <a asp-controller="TuningCategories"
     asp-action="Index">View All Alternate Tuning Categories</a>

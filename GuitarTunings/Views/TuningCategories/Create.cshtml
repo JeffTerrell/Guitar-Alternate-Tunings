@@ -7,14 +7,17 @@
 
 <h1>Add a new alternate tuning category</h1>
 
-@using (Html.BeginForm("Create", "TuningCategories", FormMethod.Post))
-{
+<form asp-controller="TuningCategories" asp-action="Create" method="post">
   <ul>
-  <li>@Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name, new {@required = "required"})</li>
-    <li>@Html.LabelFor(model => model.Description)
-  @Html.TextBoxFor(model => model.Description, new {@required = "required"})</li>
+  <li>
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+  </li>
+  <li>
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+  </li>
   </ul>
   
-  <input type="submit", value="Add tuningCategory", class="btn btn-dark"/>
-}
+  <input type="submit", value="Add", class="btn btn-dark"/>
+</form>
