@@ -21,7 +21,7 @@
     <label asp-for="Description"></label>
     <input asp-for="Description" />
   </li>
-  <li>
+  @* <li>
     <label asp-for="ImageNameA"></label>
     <input asp-for="ImageFileA" accept="image/*" />
   </li>
@@ -48,15 +48,15 @@
   <li>
     <label asp-for="ImageNameG"></label>
     <input asp-for="ImageFileG" accept="image/*" />
-  </li>
+  </li> *@
   <li>
-    <label asp-for="TuningCategory"></label>
-    <select asp-for="TuningCategory"
+    <label asp-for="TuningCategoryId">Tuning Category</label>
+    <select asp-for="TuningCategoryId"
             asp-items="ViewBag.TuningCategoryId">
       <option>Please select a category</option>
-    </select>
-            
+    </select>     
   </li>
+
   </ul>
   
   <input type="submit", value="Add", class="btn btn-dark"/>

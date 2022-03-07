@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using GuitarTunings.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -32,10 +35,20 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create (Tuning tuning)
+    public async Task<ActionResult> Create (Tuning tuning) // [Bind("ImageId, Name, Notes, Description, TuningCategoryId, ImageFileA")] 
     {
+      // string wwwRootPath = _hostEnvironment.WebRootPath;
+      // string fileName = Path.GetFileNameWithoutExtension(tuning.ImageFileA.FileName);
+      // string extension = Path.GetExtension(tuning.ImageFileA.FileName);
+      // tuning.ImageNameA= fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+      // string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+      // using (var fileStream = new FileStream(path, FileMode.Create))
+      // {
+      //   await tuning.ImageFileA.CopyToAsync(fileStream);
+      // }
+
       _db.Tunings.Add(tuning);
-      _db.SaveChanges();
+      await _db.SaveChangesAsync();
       return RedirectToAction("Index");
     }
 
