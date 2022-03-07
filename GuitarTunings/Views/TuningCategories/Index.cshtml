@@ -14,8 +14,13 @@
 
 @foreach (TuningCategory tuningCategory in Model)
 {
-  <h4>@Html.ActionLink($"{tuningCategory.Name}", "Details", new { id = tuningCategory.TuningCategoryId })</h4>
+  <h4><a asp-action="Details"
+          asp-route-id="@tuningCategory.TuningCategoryId">@tuningCategory.Name</a></h4>
+  @* <h4>@Html.ActionLink($"{tuningCategory.Name}", "Details", new { id = tuningCategory.TuningCategoryId })</h4> *@
 }
 <br>
 
-<h6>@Html.ActionLink("Add new Category", "Create")</h6>
+<h6><a asp-action="Create">Add new Tuning Category</a></h6>
+<h6><a asp-controller="Home"
+        asp-action="Index">Home</a></h6>
+@* <h6>@Html.ActionLink("Add new Category", "Create")</h6> *@

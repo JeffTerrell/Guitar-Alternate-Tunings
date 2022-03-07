@@ -14,11 +14,11 @@
 
 @foreach (Tuning tuning in Model)
 {
-  <a asp-action="Details"
-    asp-route-id="@tuning.TuningId">@tuning.Name</a>
-  @* <h4>@Html.ActionLink($"{tuning.Name}", "Details", new { id = tuning.TuningId })</h4> *@
+  <h4><a asp-action="Details"
+          asp-route-id="@tuning.TuningId">@tuning.Name</a></h4>
 }
 <br>
 
 <h6><a asp-action="Create">Add new Alternate Tuning</a></h6>
-@* <h6>@Html.ActionLink("Add new Category", "Create")</h6> *@
+<h6><a asp-controller="Home"
+        asp-action="Index">Home</a></h6>
