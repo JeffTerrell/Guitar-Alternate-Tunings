@@ -8,7 +8,7 @@
 
 <h4>Edit this Alternate Tuning: @Html.DisplayFor(model => model.Name)</h4>
 
-<form asp-controller="Tunings" asp-action="Edit", method="post">
+<form asp-controller="Tunings" asp-action="Edit", enctype="multipart/form-data", method="post">
     <input type="hidden" asp-for="TuningId" />
 
     <label asp-for="Name"></label>
@@ -27,7 +27,8 @@
     </select>
 
     <label asp-for="ImageNameA"></label>
-    <input asp-for="ImageFileA" accept="image/*" />
+    @Html.EditorFor(model => model.ImageFileA)
+    @* <input asp-for="ImageFileA" accept="image/*" /> *@
 
     <label asp-for="ImageNameB"></label>
     <input asp-for="ImageFileB" accept="image/*" />
