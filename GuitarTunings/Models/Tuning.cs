@@ -20,7 +20,7 @@ namespace GuitarTunings.Models
     public int TuningId { get; set; }
     [Required]
     public string Name { get; set; }
-    [Required]
+    
     public string Notes { get; set; }
     public string Description { get; set; }
     
@@ -66,6 +66,7 @@ namespace GuitarTunings.Models
     [NotMapped]
     public IFormFile ImageFileG { get; set; }    
 
+    [Required]
     public int TuningCategoryId { get; set; }
     public virtual TuningCategory TuningCategory { get; set; }
     public virtual ICollection<ArtistTuning> JoinArtist { get; set; }

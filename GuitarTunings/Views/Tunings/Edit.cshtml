@@ -14,14 +14,43 @@
     <label asp-for="Name"></label>
     <input asp-for="Name" />
 
+    <label asp-for="Notes"></label>
+    <input asp-for="Notes" />
+
     <label asp-for="Description"></label>
     <input asp-for="Description" />
+
+    <label asp-for="TuningCategoryId">Tuning Category</label>
+    <select asp-for="TuningCategoryId"
+            asp-items="ViewBag.TuningCategoryId">
+      <option>Please select a category</option>
+    </select>
+
+    <label asp-for="ImageNameA"></label>
+    <input asp-for="ImageFileA" accept="image/*" />
+
+    <label asp-for="ImageNameB"></label>
+    <input asp-for="ImageFileB" accept="image/*" />
+
+    <label asp-for="ImageNameC"></label>
+    <input asp-for="ImageFileC" accept="image/*" />
+
+    <label asp-for="ImageNameD"></label>
+    <input asp-for="ImageFileD" accept="image/*" />
+
+    <label asp-for="ImageNameE"></label>
+    <input asp-for="ImageFileE" accept="image/*" />
+
+    <label asp-for="ImageNameF"></label>
+    <input asp-for="ImageFileF" accept="image/*" />
+
+    <label asp-for="ImageNameG"></label>
+    <input asp-for="ImageFileG" accept="image/*" />  
 
     <input type="submit" value="Save" class="btn btn-warning"/>
 </form>
 
 <a asp-action="Index">View All Alternate Tunings</a>
 <br>    
-<a asp-controller="TuningCategories"
-    asp-action="Details"
-    asp-route-id="@Model.TuningCategoryId">Back to Details for: @Model.Name</a>
+<a asp-action="Details"
+    asp-route-id="@Model.TuningId">Back to Details for: @Model.Name</a>

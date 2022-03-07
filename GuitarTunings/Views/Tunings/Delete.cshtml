@@ -5,7 +5,7 @@
 @model GuitarTunings.Models.Tuning
 
 <h2>Delete this Alternate Tuning</h2>
-<h4>Tuning Category Name: <span>@Html.DisplayFor(model => model.Name)</span></h4>
+<h4>Alternate Tuning Name: <span>@Html.DisplayFor(model => model.Name)</span></h4>
 
 <form asp-controller="Tunings" asp-action="Delete" method="post">
   <input type="hidden" asp-for="TuningId" />
