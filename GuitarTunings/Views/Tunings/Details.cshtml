@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GuitarTunings.Models.Tuning
+
+<h2>Alternate Tuning Details</h2>
+<hr/>
+<h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
+<h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>  
+
+<br>
+
+<a  asp-action="Index">View All Alternate Tunings</a>
+<br>    
+<a  asp-action="Edit"
+    asp-route-id="@Model.TuningId">Edit AlternateTuning: @Model.Name</a>
+<br>
+<a  asp-action="Delete"
+    asp-route-id="@Model.TuningId">Delete Alternate Tuning: @Model.Name</a>
+<br>    
