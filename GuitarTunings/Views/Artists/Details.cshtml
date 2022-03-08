@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GuitarTunings.Models.Artist
+
+<h2>Artist Details</h2>
+<hr/>
+<h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
+<h3>@Html.DisplayNameFor(model => model.Genre):</h3><h6>@Html.DisplayFor(model => model.Genre)</h6> 
+<h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>  
+
+<br>
+
+<a  asp-action="Index">View All Artists</a>
+<br>    
+<a  asp-action="Edit"
+    asp-route-id="@Model.ArtistId">Edit Artist: @Model.Name</a>
+<br>
+<a  asp-action="Delete"
+    asp-route-id="@Model.ArtistId">Delete Artist: @Model.Name</a>
+<br>
+
+
+<img src="@("~/image/"+Model.ArtistImageName)" asp-append-version="true" height="250px" width="250px" />

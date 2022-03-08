@@ -1,0 +1,33 @@
+@{
+  Layout = "_Layout";
+}
+
+@using GuitarTunings.Models
+@model Artist
+
+<h1>Add a new artist</h1>
+
+<form asp-controller="Artists" asp-action="Create" enctype="multipart/form-data" method="post">
+  <ul>
+  <li>
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+  </li>
+  <li>
+    <label asp-for="Genre"></label>
+    <input asp-for="Genre" />
+  </li>
+  <li>
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+  </li>
+  <li>
+    <label asp-for="ArtistImageName"></label>
+    <input asp-for="ArtistImageFile" accept="image/*" />
+  </li>
+  </ul>
+  
+  <input type="submit", value="Add", class="btn btn-dark"/>
+</form>
+
+<a asp-action="Index">Back to list of all Artists</a>

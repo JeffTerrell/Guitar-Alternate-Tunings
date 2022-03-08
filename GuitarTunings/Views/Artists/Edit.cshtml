@@ -1,0 +1,33 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GuitarTunings.Models.Artist
+
+<h2>Edit Artist</h2>
+
+<h4>Edit this Artist: @Html.DisplayFor(model => model.Name)</h4>
+
+<form asp-controller="Artists" asp-action="Edit", enctype="multipart/form-data", method="post">
+    <input type="hidden" asp-for="ArtistId" />
+
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+
+    <label asp-for="Genre"></label>
+    <input asp-for="Genre" />
+
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+
+    <label asp-for="ArtistImageName"></label>
+    @Html.EditorFor(model => model.ArtistImageFile)
+    @* <input asp-for="ImageFileA" accept="image/*" /> *@
+
+    <input type="submit" value="Save" class="btn btn-warning"/>
+</form>
+
+<a asp-action="Index">View All Artists</a>
+<br>    
+<a asp-action="Details"
+    asp-route-id="@Model.ArtistId">Back to Details for: @Model.Name</a>
