@@ -10,4 +10,8 @@
 <form asp-controller="Tunings" asp-action="Delete" method="post">
   <input type="hidden" asp-for="TuningId" />
   <input type="submit" value="Delete" class="btn btn-danger" />
-</form>  
+</form>
+
+<a asp-controller="Tunings"
+    asp-action="Details"
+    asp-route-id="@Model.TuningId">Back to Details for: @Model.Name</a>
