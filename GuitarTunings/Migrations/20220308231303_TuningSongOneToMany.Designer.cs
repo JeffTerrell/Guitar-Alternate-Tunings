@@ -3,14 +3,16 @@ using System;
 using GuitarTunings.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GuitarTunings.Migrations
 {
     [DbContext(typeof(GuitarTuningsContext))]
-    partial class GuitarTuningsContextModelSnapshot : ModelSnapshot
+    [Migration("20220308231303_TuningSongOneToMany")]
+    partial class TuningSongOneToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,6 +179,27 @@ namespace GuitarTunings.Migrations
                     b.HasIndex("TuningId");
 
                     b.ToTable("Songs");
+                });
+
+            modelBuilder.Entity("GuitarTunings.Models.SongTuning", b =>
+                {
+                    b.Property<int>("SongTuningId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("SongId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TuningId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SongTuningId");
+
+                    b.HasIndex("SongId");
+
+                    b.HasIndex("TuningId");
+
+                    b.ToTable("SongTunings");
                 });
 
             modelBuilder.Entity("GuitarTunings.Models.Tuning", b =>
@@ -417,6 +440,25 @@ namespace GuitarTunings.Migrations
                         .HasForeignKey("TuningId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Tuning");
+                });
+
+            modelBuilder.Entity("GuitarTunings.Models.SongTuning", b =>
+                {
+                    b.HasOne("GuitarTunings.Models.Song", "Song")
+                        .WithMany()
+                        .HasForeignKey("SongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GuitarTunings.Models.Tuning", "Tuning")
+                        .WithMany()
+                        .HasForeignKey("TuningId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Song");
 
                     b.Navigation("Tuning");
                 });

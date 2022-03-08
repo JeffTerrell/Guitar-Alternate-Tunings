@@ -14,7 +14,6 @@ namespace GuitarTunings.Models
 
     public DbSet<ArtistSong> ArtistSongs { get; set; }
     public DbSet<ArtistTuning> ArtistTunings { get; set; } 
-    public DbSet<SongTuning> SongTunings { get; set; }
 
     public GuitarTuningsContext(DbContextOptions options) : base(options) { }
 

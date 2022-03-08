@@ -13,7 +13,7 @@ namespace GuitarTunings.Models
     public Tuning()
     {
       this.JoinArtist = new HashSet<ArtistTuning>();
-      this.JoinSong = new HashSet<SongTuning>();
+      this.Songs = new HashSet<Song>();
     }
 
     [Key]
@@ -63,6 +63,7 @@ namespace GuitarTunings.Models
     [DisplayName("Image Name For G Chord Diagram")]
     public string ImageNameG { get; set; }
     [DisplayName("Upload G Chord Diagram")]
+    
     [NotMapped]
     public IFormFile ImageFileG { get; set; }    
 
@@ -70,6 +71,6 @@ namespace GuitarTunings.Models
     public int TuningCategoryId { get; set; }
     public virtual TuningCategory TuningCategory { get; set; }
     public virtual ICollection<ArtistTuning> JoinArtist { get; set; }
-    public virtual ICollection<SongTuning> JoinSong { get; set; }
+    public virtual ICollection<Song> Songs { get; set; }
   }
 }
