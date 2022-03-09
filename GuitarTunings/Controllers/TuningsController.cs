@@ -124,6 +124,7 @@ namespace GuitarTunings.Controllers
     public ActionResult Edit(int Id)
     {
       ViewBag.TuningCategoryId = new SelectList(_db.TuningCategories, "TuningCategoryId", "Name");
+      ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
       var thisTuning = _db.Tunings.FirstOrDefault(tuning => tuning.TuningId == Id);
       return View(thisTuning);
     }
@@ -212,7 +213,24 @@ namespace GuitarTunings.Controllers
       // _db.Entry(tuning).State = EntityState.Modified;
       // _db.SaveChanges();
       // return RedirectToAction("Details", new { id = tuning.TuningId});
-    } 
+    }
+
+    [HttpPost]
+    public ActionResult AddArtist(Tuning tuning, int ArtistId)
+    {
+      _db.ArtistTunings.Add(new ArtistTuning() { ArtistId = ArtistId , TuningId = tuning.TuningId});
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = tuning.TuningId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteArtist(Tuning tuning, int joinId)
+    {
+      ArtistTuning joinEntry = _db.ArtistTunings.FirstOrDefault(find => find.ArtistTuningId == joinId);
+      _db.ArtistTunings.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = tuning.TuningId });
+    }
 
     public ActionResult Delete(int Id)
     {

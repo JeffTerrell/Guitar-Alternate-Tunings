@@ -51,6 +51,32 @@
     <input type="submit" value="Save" class="btn btn-warning"/>
 </form>
 
+<br>
+
+<h3>Artists using this tuning:</h3>
+@foreach (var artist in Model.JoinArtist)
+  {
+    <li>
+      <a asp-controller="Artists"
+      asp-action="Details"
+      asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a>
+      <form asp-controller="Tunings" asp-action="DeleteArtist", method="post">
+        <input type="hidden" asp-for="TuningId" />
+        @Html.Hidden("joinId", @artist.ArtistTuningId)
+        <input type="submit" value="Delete Artist" class="btn btn-danger btn-sm"/>
+      </form>
+    </li>
+  }
+
+<br>    
+
+<form asp-controller="Tunings" asp-action="AddArtist", method="post">
+    <input type="submit" value="Add Artist" class="btn btn-success btn-sm"/>
+    <input type="hidden" asp-for="TuningId" />
+    @Html.DropDownList("ArtistId")
+</form>
+
+
 <a asp-action="Index">View All Alternate Tunings</a>
 <br>    
 <a asp-action="Details"
