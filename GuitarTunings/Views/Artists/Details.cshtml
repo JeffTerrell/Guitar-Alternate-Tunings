@@ -10,6 +10,27 @@
 <h3>@Html.DisplayNameFor(model => model.Genre):</h3><h6>@Html.DisplayFor(model => model.Genre)</h6> 
 <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>  
 
+<h3>Songs by @Html.DisplayFor(model => model.Name)</h3>
+@foreach (var song in Model.JoinSong)
+  {
+    <li>
+      <a asp-controller="Songs"
+      asp-action="Details"
+      asp-route-id="@song.Song.SongId">@song.Song.Name</a>
+    </li>
+  }  
+
+<br>
+
+<h3>Tunings used by @Html.DisplayFor(model => model.Name)</h3>
+@foreach (var tuning in Model.JoinTuning)
+  {
+    <li>
+      <a asp-controller="Tunings"
+      asp-action="Details"
+      asp-route-id="@tuning.Tuning.TuningId">@tuning.Tuning.Name</a> : @tuning.Tuning.Notes
+    </li>
+  }    
 <br>
 
 <a  asp-action="Index">View All Artists</a>
