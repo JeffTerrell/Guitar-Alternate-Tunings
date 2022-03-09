@@ -1,5 +1,5 @@
 @{
-  Layout = "_Layout";
+    Layout = "_Layout";
 }
 
 <h1>Alternate Guitar Tunings Home</h1>
@@ -12,3 +12,23 @@
     asp-action="Index">View All Artists</a>
 <a asp-controller="Songs"
     asp-action="Index">View All Songs</a>
+
+<br>
+
+
+<ul>   
+@if (!User.Identity.IsAuthenticated)
+{
+    <li class="nav-item">
+    <a class="nav-link" href="~/Account/Login">Log In</a>
+    </li>
+    <p class="nav-link active">Not logged into account</p>  
+}
+else
+{
+    <li class="nav-item">
+    <a class="nav-link" href="~/Account">Log Out</a>
+    </li>
+    <p class="nav-link active">Logged in as @User.Identity.Name</p>  
+}
+</ul>
