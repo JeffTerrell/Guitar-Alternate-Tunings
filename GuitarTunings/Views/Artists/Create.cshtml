@@ -26,10 +26,12 @@
     <input asp-for="ArtistImageFile" accept="image/*" />
   </li>
   <li>
-    <label asp-label="TuningId">Alternate Tuning</label>
+    @Html.Label("Alternate Tuning")
+    @Html.DropDownList("TuningId")
+    @* <p>Alternate Tuning</p>
     <select asp-items="ViewBag.TuningId">
       <option>Please select an Alternate Tuning</option>
-    </select>     
+    </select>      *@
   </li>
   </ul>
   
