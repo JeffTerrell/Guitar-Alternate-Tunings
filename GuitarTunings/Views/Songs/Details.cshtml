@@ -8,6 +8,13 @@
 <hr/>
 <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
 <h3>@Html.DisplayNameFor(model => model.Album):</h3><h6>@Html.DisplayFor(model => model.Album)</h6>
+<h3>Artist(s)</h3>
+@foreach (var artist in Model.JoinArtist)
+{
+  <h6><a asp-controller="Artists"
+      asp-action="Details"
+      asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a></h6>
+}      
 <h3>@Html.DisplayNameFor(model => model.Tab):</h3><h6>@Html.DisplayFor(model => model.Tab)</h6>
 <h3>@Html.DisplayNameFor(model => model.Video):</h3><h6>@Html.DisplayFor(model => model.Video)</h6>
 <h3>@Html.DisplayNameFor(model => model.Tutorial):</h3><h6>@Html.DisplayFor(model => model.Tutorial)</h6>
