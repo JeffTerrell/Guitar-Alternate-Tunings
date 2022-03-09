@@ -7,7 +7,46 @@
 <h2>Alternate Tuning Details</h2>
 <hr/>
 <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
-<h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>  
+<h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
+<h3>@Html.DisplayNameFor(model => model.Notes):</h3><h6>@Html.DisplayFor(model => model.Notes)</h6>  
+
+<h3>Artists using this tuning:</h3>
+@if (@Model.JoinArtist.Count == 0)
+  {
+    <h6>No artists are using this tuning</h6>
+  }
+else
+{
+  <ul>
+  @foreach (var artist in Model.JoinArtist)
+  {
+    <li>
+      <h6><a asp-controller="Artists"
+      asp-action="Details"
+      asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a></h6>
+    </li>
+  }
+  </ul>
+}
+
+<h3>Songs using this tuning:</h3>
+@if (@Model.Songs.Count == 0)
+  {
+    <h6>No songs are using this tuning</h6>
+  }
+else
+{
+  <ul>
+  @foreach (var song in Model.Songs)
+  {
+    <li>
+      <h6><a asp-controller="Songs"
+        asp-action="Details"
+        asp-route-id="@song.SongId">@song.Name</a></h6>
+    </li>
+  }
+  </ul>
+} 
 
 <br>
 

@@ -21,6 +21,7 @@ namespace GuitarTunings.Models
     [Required]
     public string Name { get; set; }
     
+    [DisplayName("Tuning")]
     public string Notes { get; set; }
     public string Description { get; set; }
     
