@@ -1,0 +1,44 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GuitarTunings.Models.Song
+
+<h2>Edit Song</h2>
+
+<h4>Edit this song: @Html.DisplayFor(model => model.Name)</h4>
+
+<form asp-controller="Songs" asp-action="Edit", method="post">
+    <input type="hidden" asp-for="SongId" />
+
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+
+    <label asp-for="Album"></label>
+    <input asp-for="Album" />
+
+    <label asp-for="Tab"></label>
+    <input asp-for="Tab" />
+
+    <label asp-for="Video"></label>
+    <input asp-for="Video" />
+
+    <label asp-for="Tutorial"></label>
+    <input asp-for="Tutorial" />
+
+    <label asp-for="TuningId">Alternate Tuning</label>
+    <select asp-for="TuningId"
+            asp-items="ViewBag.TuningId">
+      <option>Please select an Alternate Tuning</option>
+    </select>     
+
+    <input type="submit" value="Save" class="btn btn-warning"/>
+</form>
+
+<a asp-controller="Songs"
+    asp-action="Index">View All Alternate Tuning Categories</a>
+<br>    
+<a asp-controller="Songs"
+    asp-action="Details"
+    asp-route-id="@Model.SongId">Back to Details for: @Model.Name</a>
+<br>   

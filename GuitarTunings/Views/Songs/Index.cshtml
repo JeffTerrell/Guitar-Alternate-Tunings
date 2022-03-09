@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@using GuitarTunings.Models;
+@model List<Song>
+
+<h1>Songs</h1>
+
+@if (Model.Count == 0)
+{
+  <p>No songs have been added</p>
+}
+
+@foreach (Song song in Model)
+{
+  <h4><a asp-action="Details"
+          asp-route-id="@song.SongId">@song.Name</a></h4>
+}
+<br>
+
+<h6><a asp-action="Create">Add new Song</a></h6>
+<h6><a asp-controller="Home"
+        asp-action="Index">Home</a></h6>

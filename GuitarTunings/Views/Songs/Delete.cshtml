@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GuitarTunings.Models.Song
+
+<h2>Delete this Song</h2>
+<h4>Song Name: <span>@Html.DisplayFor(model => model.Name)</span></h4>
+
+<form asp-controller="Songs" asp-action="Delete" method="post">
+  <input type="hidden" asp-for="SongId" />
+  <input type="submit" value="Delete" class="btn btn-danger" />
+</form>  
