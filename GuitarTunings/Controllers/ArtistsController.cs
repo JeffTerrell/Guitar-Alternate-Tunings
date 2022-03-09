@@ -79,17 +79,15 @@ namespace GuitarTunings.Controllers
       return RedirectToAction("Details", new { id = artist.ArtistId});
     }
 
-    // [HttpPost]
-    // public ActionResult AddTuning(Artist artist, int TuningId)
-    // {
-    //   Flavor thisFlavor = _db.Flavors.FirstOrDefault(find => find.FlavorId == FlavorId);
-    //   if (FlavorId != 0 && thisFlavor.JoinTreat.Where(find => find.FlavorId == FlavorId).Count() < 5)
-    //   {
-    //   _db.FlavorTreats.Add(new FlavorTreat() { FlavorId = FlavorId , TreatId = treat.TreatId});
-    //   }
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Details", new { id = treat.TreatId });
-    // }
+    [HttpPost]
+    public ActionResult AddTuning(Artist artist, int TuningId)
+    {
+      // Tuning thisTuning = _db.Tunings.FirstOrDefault(find => find.TuningId == TuningId);
+
+      _db.ArtistTunings.Add(new ArtistTuning() { TuningId = TuningId , ArtistId = artist.ArtistId});
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = artist.ArtistId });
+    }
 
     public ActionResult Delete(int Id)
     {

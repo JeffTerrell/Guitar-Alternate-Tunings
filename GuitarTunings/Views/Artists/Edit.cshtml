@@ -27,8 +27,15 @@
     <input type="submit" value="Save" class="btn btn-warning"/>
 </form>
 
-<a asp-action="Index">View All Artists</a>
 <br>
+
+<h3>Tunings used by @Html.DisplayFor(model => model.Name)</h3>
+@foreach (var tuning in Model.JoinTuning)
+  {
+    <li>
+    @Html.ActionLink($"{tuning.Tuning.Name}", "Details", "Tunings", new { id = tuning.Tuning.TuningId })
+    </li>
+  }  
 <form asp-controller="Artists" asp-action="AddTuning", method="post">
     <input type="submit" value="Add Tuning" class="btn btn-success"/>
     <input type="hidden" asp-for="ArtistId" />
@@ -37,5 +44,6 @@
 
 <br>
 
+<a asp-action="Index">View All Artists</a>
 <a asp-action="Details"
     asp-route-id="@Model.ArtistId">Back to Details for: @Model.Name</a>
