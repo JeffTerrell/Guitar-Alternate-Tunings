@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+<h4>Register or Login</h4>
+<hr />
+@if (User.Identity.IsAuthenticated)
+{
+  <p>Logged in as @User.Identity.Name</p>
+  <form asp-controller="Account" asp-action="LogOff" method="post">  
+    <input type="submit" value="Log out" />
+  </form>
+}  
+<a asp-action="Register">Click here to register</a>
+<a asp-action="Login">Click here to login</a>

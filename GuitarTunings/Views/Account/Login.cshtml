@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@using GuitarTunings.ViewModels
+
+@model LoginViewModel
+
+<h4>User Login</h4>
+<hr />
+
+<form method="post">
+  
+  <label asp-for="UserName"></label>
+  <input asp-for="UserName" required />
+  
+  <label asp-for="Password"></label>
+  <input asp-for="Password" required />
+  
+  <input type="submit", value="Add", class="btn btn-dark"/>
+</form>
+
+<br>
+<a  asp-action="Register">Not registered? Click here to register</a>
