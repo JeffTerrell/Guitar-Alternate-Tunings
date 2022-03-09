@@ -21,7 +21,9 @@ else
   @foreach (var tuning in Model.Tunings)
   {
     <li>
-    <h6>@Html.ActionLink($"{tuning.Name}", "Details", "Tunings", new { id = tuning.TuningId }) : @tuning.Notes</h6>
+      <h6><a asp-controller="Tunings"
+      asp-action="Details"
+      asp-route-id="@tuning.TuningId">@tuning.Name</a> : @tuning.Notes</h6>
     </li>
   }
   </ul>

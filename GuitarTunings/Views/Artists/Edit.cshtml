@@ -33,7 +33,9 @@
 @foreach (var tuning in Model.JoinTuning)
   {
     <li>
-    @Html.ActionLink($"{tuning.Tuning.Name}", "Details", "Tunings", new { id = tuning.Tuning.TuningId })
+      <h6><a asp-controller="Tunings"
+      asp-action="Details"
+      asp-route-id="@tuning.Tuning.TuningId">@tuning.Tuning.Name</a></h6>
     </li>
   }  
 <form asp-controller="Artists" asp-action="AddTuning", method="post">
