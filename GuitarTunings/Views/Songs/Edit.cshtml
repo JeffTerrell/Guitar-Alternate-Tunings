@@ -35,6 +35,32 @@
     <input type="submit" value="Save" class="btn btn-warning"/>
 </form>
 
+<br>
+
+<h3>Written/Performed by:</h3>
+@foreach (var artist in Model.JoinArtist)
+  {
+    <li>
+      <a asp-controller="Artists"
+      asp-action="Details"
+      asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a>
+      <form asp-controller="Songs" asp-action="DeleteArtist", method="post">
+        <input type="hidden" asp-for="SongId" />
+        @Html.Hidden("joinId", @artist.ArtistSongId)
+        <input type="submit" value="Delete Artist" class="btn btn-danger btn-sm"/>
+      </form>
+    </li>
+  }
+
+<br>    
+
+<form asp-controller="Songs" asp-action="AddArtist", method="post">
+    <input type="submit" value="Add Artist" class="btn btn-success btn-sm"/>
+    <input type="hidden" asp-for="SongId" />
+    @Html.DropDownList("ArtistId")
+</form>
+
+
 <a asp-controller="Songs"
     asp-action="Index">View All Alternate Tuning Categories</a>
 <br>    
