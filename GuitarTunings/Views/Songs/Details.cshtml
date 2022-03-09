@@ -12,9 +12,13 @@
 @foreach (var artist in Model.JoinArtist)
 {
   <h6><a asp-controller="Artists"
-      asp-action="Details"
-      asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a></h6>
-}      
+          asp-action="Details"
+          asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a></h6>
+}
+<h3>Tuning</h3>
+<h6><a asp-controller="Tunings"
+        asp-action="Details"
+        asp-route-id="@Model.Tuning.TuningId">@Model.Tuning.Name</a></h6>
 <h3>@Html.DisplayNameFor(model => model.Tab):</h3><h6>@Html.DisplayFor(model => model.Tab)</h6>
 <h3>@Html.DisplayNameFor(model => model.Video):</h3><h6>@Html.DisplayFor(model => model.Video)</h6>
 <h3>@Html.DisplayNameFor(model => model.Tutorial):</h3><h6>@Html.DisplayFor(model => model.Tutorial)</h6>
