@@ -33,13 +33,21 @@
 @foreach (var tuning in Model.JoinTuning)
   {
     <li>
-      <h6><a asp-controller="Tunings"
+      <a asp-controller="Tunings"
       asp-action="Details"
-      asp-route-id="@tuning.Tuning.TuningId">@tuning.Tuning.Name</a></h6>
+      asp-route-id="@tuning.Tuning.TuningId">@tuning.Tuning.Name</a>
+      <form asp-controller="Artists" asp-action="DeleteTuning", method="post">
+        <input type="hidden" asp-for="ArtistId" />
+        @Html.Hidden("joinId", @tuning.ArtistTuningId)
+        <input type="submit" value="Delete Tuning" class="btn btn-danger btn-sm"/>
+      </form>
     </li>
-  }  
+  }
+
+<br>    
+
 <form asp-controller="Artists" asp-action="AddTuning", method="post">
-    <input type="submit" value="Add Tuning" class="btn btn-success"/>
+    <input type="submit" value="Add Tuning" class="btn btn-success btn-sm"/>
     <input type="hidden" asp-for="ArtistId" />
     @Html.DropDownList("TuningId")
 </form>

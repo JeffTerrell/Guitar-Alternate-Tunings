@@ -89,6 +89,15 @@ namespace GuitarTunings.Controllers
       return RedirectToAction("Edit", new { id = artist.ArtistId });
     }
 
+    [HttpPost]
+    public ActionResult DeleteTuning(Artist artist, int joinId)
+    {
+      ArtistTuning joinEntry = _db.ArtistTunings.FirstOrDefault(find => find.ArtistTuningId == joinId);
+      _db.ArtistTunings.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = artist.ArtistId });
+    }
+
     public ActionResult Delete(int Id)
     {
       Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == Id);
