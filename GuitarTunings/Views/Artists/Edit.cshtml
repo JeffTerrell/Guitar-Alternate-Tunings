@@ -28,6 +28,14 @@
 </form>
 
 <a asp-action="Index">View All Artists</a>
-<br>    
+<br>
+<form asp-controller="Artists" asp-action="AddTuning", method="post">
+    <input type="submit" value="Add Tuning" class="btn btn-success"/>
+    <input type="hidden" asp-for="ArtistId" />
+    @Html.DropDownList("TuningId")
+</form>
+
+<br>
+
 <a asp-action="Details"
     asp-route-id="@Model.ArtistId">Back to Details for: @Model.Name</a>

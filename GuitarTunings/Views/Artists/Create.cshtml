@@ -25,6 +25,12 @@
     <label asp-for="ArtistImageName"></label>
     <input asp-for="ArtistImageFile" accept="image/*" />
   </li>
+  <li>
+    <label asp-label="TuningId">Alternate Tuning</label>
+    <select asp-items="ViewBag.TuningId">
+      <option>Please select an Alternate Tuning</option>
+    </select>     
+  </li>
   </ul>
   
   <input type="submit", value="Add", class="btn btn-dark"/>

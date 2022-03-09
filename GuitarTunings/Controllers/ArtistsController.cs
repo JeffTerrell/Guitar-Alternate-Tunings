@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GuitarTunings.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuitarTunings.Controllers
@@ -28,11 +29,12 @@ namespace GuitarTunings.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
       return View();
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create ([Bind("ImageId, Name, Genre, Description, ArtistImageFile")] Artist artist)
+    public async Task<ActionResult> Create ([Bind("ImageId, Name, Genre, Description, ArtistImageFile")] Artist artist, int TuningId)
     {
 
         string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -47,6 +49,12 @@ namespace GuitarTunings.Controllers
 
       _db.Artists.Add(artist);
       _db.SaveChanges();
+
+      if (TuningId != 0)
+      {
+        _db.ArtistTunings.Add(new ArtistTuning() { ArtistId = artist.ArtistId, TuningId = TuningId});
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
 
@@ -58,6 +66,7 @@ namespace GuitarTunings.Controllers
 
     public ActionResult Edit(int Id)
     {
+      ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
       Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == Id);
       return View(thisArtist);
     }
@@ -69,6 +78,18 @@ namespace GuitarTunings.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = artist.ArtistId});
     }
+
+    // [HttpPost]
+    // public ActionResult AddTuning(Artist artist, int TuningId)
+    // {
+    //   Flavor thisFlavor = _db.Flavors.FirstOrDefault(find => find.FlavorId == FlavorId);
+    //   if (FlavorId != 0 && thisFlavor.JoinTreat.Where(find => find.FlavorId == FlavorId).Count() < 5)
+    //   {
+    //   _db.FlavorTreats.Add(new FlavorTreat() { FlavorId = FlavorId , TreatId = treat.TreatId});
+    //   }
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Details", new { id = treat.TreatId });
+    // }
 
     public ActionResult Delete(int Id)
     {
