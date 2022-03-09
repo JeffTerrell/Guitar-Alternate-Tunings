@@ -12,7 +12,7 @@
     <input type="hidden" asp-for="ArtistId" />
 
     <label asp-for="Name"></label>
-    <input asp-for="Name" />
+    <input asp-for="Name", required />
 
     <label asp-for="Genre"></label>
     <input asp-for="Genre" />
@@ -21,7 +21,7 @@
     <input asp-for="Description" />
 
     <label asp-for="ArtistImageName"></label>
-    @Html.EditorFor(model => model.ArtistImageFile)
+    <input asp-for="ArtistImageFile" accept="image/*" required />
     @* <input asp-for="ImageFileA" accept="image/*" /> *@
 
     <input type="submit" value="Save" class="btn btn-warning"/>
