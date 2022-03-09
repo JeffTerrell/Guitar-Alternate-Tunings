@@ -8,8 +8,17 @@
 <hr/>
 <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
 <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>  
-
 <br>
+<h5>Alternate Tunings</h5>
+  <ul>
+  @foreach (var tuning in Model.Tunings)
+  {
+    <li>
+    <h6>@Html.ActionLink($"{tuning.Name}", "Details", "Tunings", new { id = tuning.TuningId }) : @tuning.Notes</h6>
+    </li>
+  }
+  </ul>
+
 
 <a  asp-action="Index">View All Alternate Tuning Categories</a>
 <br>    
