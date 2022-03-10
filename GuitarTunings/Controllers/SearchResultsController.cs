@@ -33,7 +33,7 @@ namespace GuitarTunings.Controllers
           ViewBag.resultsTuningCategories = _db.TuningCategories.Where(result => result.Name.Contains(searchText)).ToList();
         }
         else
-          ViewBag.resultsTuningCategories = _db.TuningCategories.ToList();
+          ViewBag.resultsTuningCategories = _db.TuningCategories.Where(result => result.Name.Contains(searchText)).ToList();
         }
     if (model == "Tuning")
         {
@@ -43,7 +43,7 @@ namespace GuitarTunings.Controllers
           ViewBag.resultsTunings = _db.Tunings.Where(result => result.Name.Contains(searchText)).ToList();
         }
         else
-          ViewBag.resultsTunings = _db.Tunings.ToList();
+          ViewBag.resultsTunings = _db.Tunings.Where(result => result.Name.Contains(searchText)).ToList();
         }
 
     if (model == "Artist")
@@ -54,7 +54,7 @@ namespace GuitarTunings.Controllers
           ViewBag.resultsArtists = _db.Artists.Where(result => result.Name.Contains(searchText)).ToList();
         }
         else
-          ViewBag.resultsArtists = _db.Artists.ToList();
+          ViewBag.resultsArtists = _db.Artists.Where(result => result.Name.Contains(searchText)).ToList();
         }
 
     if (model == "Song")
@@ -65,7 +65,7 @@ namespace GuitarTunings.Controllers
           ViewBag.resultsSongs = _db.Songs.Where(result => result.Name.Contains(searchText)).ToList();
         }
         else
-          ViewBag.resultsSongs = _db.Songs.ToList();
+          ViewBag.resultsSongs = _db.Songs.Where(result => result.Name.Contains(searchText)).ToList();
         }          
   
       return View();
