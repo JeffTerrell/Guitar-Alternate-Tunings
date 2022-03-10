@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GuitarTunings.Models;
@@ -20,18 +21,54 @@ namespace GuitarTunings.Controllers
       this._hostEnvironment = hostEnvironment;
     }
 
-    public ActionResult Index(string searchText = "")
+    public ActionResult Index(string model, string searchText = "")
     {
-      List<TuningCategory> results;
+      // List<TuningCategory> results;
+      // List<Tuning> results;
+      if (model == "TuningCategory")
+        {
 
-      if (searchText != "" && searchText != null)
-      {
-        results = _db.TuningCategories.Where(result => result.Name.Contains(searchText)).ToList();
-      }
-      else
-        results = _db.TuningCategories.ToList();
+        if (searchText != "" && searchText != null)
+        {
+          ViewBag.resultsTuningCategories = _db.TuningCategories.Where(result => result.Name.Contains(searchText)).ToList();
+        }
+        else
+          ViewBag.resultsTuningCategories = _db.TuningCategories.ToList();
+        }
+    if (model == "Tuning")
+        {
 
-      return View(results);
+        if (searchText != "" && searchText != null)
+        {
+          ViewBag.resultsTunings = _db.Tunings.Where(result => result.Name.Contains(searchText)).ToList();
+        }
+        else
+          ViewBag.resultsTunings = _db.Tunings.ToList();
+        }
+
+    if (model == "Artist")
+        {
+
+        if (searchText != "" && searchText != null)
+        {
+          ViewBag.resultsArtists = _db.Artists.Where(result => result.Name.Contains(searchText)).ToList();
+        }
+        else
+          ViewBag.resultsArtists = _db.Artists.ToList();
+        }
+
+    if (model == "Song")
+        {
+
+        if (searchText != "" && searchText != null)
+        {
+          ViewBag.resultsSongs = _db.Songs.Where(result => result.Name.Contains(searchText)).ToList();
+        }
+        else
+          ViewBag.resultSongs = _db.Songs.ToList();
+        }          
+  
+      return View();
     }
   }  
 }
