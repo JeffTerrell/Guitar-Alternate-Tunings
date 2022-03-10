@@ -15,6 +15,7 @@
 			<nav id="sidebar">
 				<div class="p-4 pt-5">
           <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(image/logo.jpg);"></a>
+          @await Html.PartialAsync("_SearchBar") 
           <ul class="list-unstyled components mb-5">
           <li class="active">
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
@@ -31,7 +32,7 @@
               </ul>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="#">Tuning Categories</a>
             </li>
             <li>
               <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
@@ -48,10 +49,13 @@
               </ul>
             </li>
             <li>
-              <a href="#">Portfolio</a>
+              <a href="#">Alternate Tunings</a>
             </li>
             <li>
-              <a href="#">Contact</a>
+              <a href="#">Artists</a>
+            </li>
+            <li>
+              <a href="#">Songs</a>
             </li>
           </ul>
 
