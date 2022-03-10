@@ -15,26 +15,24 @@
 			<nav id="sidebar">
 				<div class="p-4 pt-5">
           @* <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(image/logo.jpg);"></a> *@
+          <img src="~/image/logo.jpg" class="img Log rounded-circle mb-5" alt="guitar" style="background-image" height="200px">
           @await Html.PartialAsync("_SearchBar") 
           <ul class="list-unstyled components mb-5">
           <li class="active">
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
               <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li>
-                    <a href="#">Home 1</a>
+                    <a href="#">About</a>
                 </li>
                 <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
+                    <a href="#">Contact</a>
                 </li>
               </ul>
             </li>
             <li>
-                <a href="#">Tuning Categories</a>
+                <a href="~/TuningCategories">Tuning Categories</a>
             </li>
-            <li>
+            @* <li>
               <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
               <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
@@ -47,15 +45,15 @@
                     <a href="#">Page 3</a>
                 </li>
               </ul>
+            </li> *@
+            <li>
+              <a href="~/Tunings">Alternate Tunings</a>
             </li>
             <li>
-              <a href="#">Alternate Tunings</a>
+              <a href="~/Artists">Artists</a>
             </li>
             <li>
-              <a href="#">Artists</a>
-            </li>
-            <li>
-              <a href="#">Songs</a>
+              <a href="~/Songs">Songs</a>
             </li>
           </ul>
 
@@ -85,17 +83,27 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="~/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Portfolio</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                  <li class="nav-item">
+                      <a class="nav-link" href="~/Account/Login">Log In</a>
+                  </li>
+                }
+                else
+                {
+                  <li class="nav-item">
+                    <a class="nav-link" href="~/Account">Log Out</a>
+                  </li>
+                  <p class="nav-link active">Logged In As @User.Identity.Name</p>
+                }
               </ul>
             </div>
           </div>
