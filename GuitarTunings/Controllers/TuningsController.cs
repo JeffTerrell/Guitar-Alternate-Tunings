@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GuitarTunings.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 namespace GuitarTunings.Controllers
 {
 
+  [Authorize]
   public class TuningsController : Controller
   {
     private readonly GuitarTuningsContext _db;
@@ -24,6 +26,7 @@ namespace GuitarTunings.Controllers
       this._hostEnvironment = hostEnvironment;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.Tunings.ToList());
@@ -115,6 +118,7 @@ namespace GuitarTunings.Controllers
         return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int Id)
     {
       Tuning thisTuning = _db.Tunings.FirstOrDefault(tuning => tuning.TuningId == Id);

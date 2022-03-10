@@ -1,5 +1,6 @@
 using System.Linq;
 using GuitarTunings.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace GuitarTunings.Controllers
 {
 
+  [Authorize]
   public class TuningCategoriesController : Controller
   {
     private readonly GuitarTuningsContext _db;
@@ -19,6 +21,7 @@ namespace GuitarTunings.Controllers
       this._hostEnvironment = hostEnvironment;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.TuningCategories.ToList());
@@ -37,6 +40,7 @@ namespace GuitarTunings.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int Id)
     {
       TuningCategory thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);

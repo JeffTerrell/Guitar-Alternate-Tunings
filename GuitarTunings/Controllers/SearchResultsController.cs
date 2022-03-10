@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GuitarTunings.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,7 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GuitarTunings.Controllers
 {
-
+  
+  [Authorize]
   public class SearchResultsController : Controller
   {
     private readonly GuitarTuningsContext _db;
@@ -20,11 +22,10 @@ namespace GuitarTunings.Controllers
       _db = db;
       this._hostEnvironment = hostEnvironment;
     }
-
+    [AllowAnonymous]
     public ActionResult Index(string model, string searchText = "")
     {
-      // List<TuningCategory> results;
-      // List<Tuning> results;
+
       if (model == "TuningCategory")
         {
 
