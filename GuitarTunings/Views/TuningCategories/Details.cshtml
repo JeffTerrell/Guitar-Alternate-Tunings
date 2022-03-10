@@ -31,10 +31,16 @@ else
 
 
 <a  asp-action="Index">View All Alternate Tuning Categories</a>
-<br>    
+<br>
+@if (!User.Identity.IsAuthenticated)
+{
+}
+else
+{    
 <a  asp-action="Edit"
     asp-route-id="@Model.TuningCategoryId">Edit Tuning Category: @Model.Name</a>
 <br>
 <a  asp-action="Delete"
     asp-route-id="@Model.TuningCategoryId">Delete Tuning Category: @Model.Name</a>
-<br>      
+<br>
+}

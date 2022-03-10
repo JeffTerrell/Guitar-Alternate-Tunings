@@ -25,10 +25,16 @@
 <br>
 
 <a  asp-action="Index">View All Songs</a>
-<br>    
+<br>
+@if (!User.Identity.IsAuthenticated)
+{
+}
+else
+{    
 <a  asp-action="Edit"
     asp-route-id="@Model.SongId">Edit Song: @Model.Name</a>
 <br>
 <a  asp-action="Delete"
     asp-route-id="@Model.SongId">Delete Song: @Model.Name</a>
 <br>
+}

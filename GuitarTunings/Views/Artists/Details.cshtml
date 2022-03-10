@@ -34,13 +34,19 @@
 <br>
 
 <a  asp-action="Index">View All Artists</a>
-<br>    
+<br>
+@if (!User.Identity.IsAuthenticated)
+{
+}
+else
+{    
 <a  asp-action="Edit"
     asp-route-id="@Model.ArtistId">Edit Artist: @Model.Name</a>
 <br>
 <a  asp-action="Delete"
     asp-route-id="@Model.ArtistId">Delete Artist: @Model.Name</a>
 <br>
+}
 
 
 <img src="@("~/image/"+Model.ArtistImageName)" asp-append-version="true" height="250px" width="250px" />

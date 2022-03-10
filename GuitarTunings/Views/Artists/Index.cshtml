@@ -19,6 +19,12 @@
 }
 <br>
 
+@if (!User.Identity.IsAuthenticated)
+{
+}
+else
+{
 <h6><a asp-action="Create">Add new Artist</a></h6>
+}
 <h6><a asp-controller="Home"
         asp-action="Index">Home</a></h6>

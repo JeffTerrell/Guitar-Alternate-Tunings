@@ -51,13 +51,19 @@ else
 <br>
 
 <a  asp-action="Index">View All Alternate Tunings</a>
-<br>    
+<br>
+@if (!User.Identity.IsAuthenticated)
+{
+}
+else
+{
 <a  asp-action="Edit"
     asp-route-id="@Model.TuningId">Edit AlternateTuning: @Model.Name</a>
 <br>
 <a  asp-action="Delete"
     asp-route-id="@Model.TuningId">Delete Alternate Tuning: @Model.Name</a>
 <br>
+}
 
 
 <img src="@("~/image/"+Model.ImageNameA)" asp-append-version="true" height="250px" width="250px" />
