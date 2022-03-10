@@ -7,39 +7,58 @@
 
 <h1>Search Results</h1>
 
-@* @foreach (var tuningCategory in ViewBag.resultsTuningCategories)
+@* @if (ViewBag.resultsTuningCategories.Count == 0 & ViewBag.resultsTunings.Count == 0 & ViewBag.resultsArtists.Count == 0 & ViewBag.resultsSongs.Count == 0)
 {
-  <h6>@tuningCategory.Name</h6>
+  <p>No results from your search could be found</p>
 } *@
 
-@* @foreach (var tuning in ViewBag.resultsTunings)
-{
-  <h6>@tuning.Name</h6>
-} *@
+<p>No results from your search could be found</p>
 
-@* @foreach (var artist in ViewBag.resultsArtists)
-{
-  <h6>@artist.Name</h6>
-} *@
+@if (ViewBag.resultsTuningCategories != null)  
+  {
+    @foreach (var tuningCategory in ViewBag.resultsTuningCategories)
+    {
+      <h6>@tuningCategory.Name</h6>
+    }
+  }  
 
-@foreach (var song in ViewBag.resultsSongs)
+@if (ViewBag.resultsTunings != null)
+  {
+  @foreach (var tuning in ViewBag.resultsTunings)
+  {
+    <h6>@tuning.Name</h6>
+  }
+}  
+
+@if (ViewBag.resultsArtists != null)
 {
-  <h6>@song.Name</h6>
-}
+  @foreach (var artist in ViewBag.resultsArtists)
+  {
+    <h6>@artist.Name</h6>
+  }
+}  
+
+@if (ViewBag.resultsSongs != null)
+{
+  @foreach (var song in ViewBag.resultsSongs)
+  {
+    <h6>@song.Name</h6>
+  }
+} 
 
 
 
 @* @if (Model.Count == 0)
 {
   <p>No categories have been added</p>
-}
+} *@
 
-@foreach (TuningCategory tuningCategory in Model)
+@* @foreach (TuningCategory tuningCategory in Model)
 {
   <h4><a asp-action="Details"
           asp-route-id="@tuningCategory.TuningCategoryId">@tuningCategory.Name</a></h4>
-}
-<br> *@
+} *@
+<br>
 
 <h6><a asp-action="Create">Add new Tuning Category</a></h6>
 <h6><a asp-controller="Home"

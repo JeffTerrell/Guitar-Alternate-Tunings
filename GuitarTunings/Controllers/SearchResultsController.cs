@@ -65,7 +65,7 @@ namespace GuitarTunings.Controllers
           ViewBag.resultsSongs = _db.Songs.Where(result => result.Name.Contains(searchText)).ToList();
         }
         else
-          ViewBag.resultSongs = _db.Songs.ToList();
+          ViewBag.resultsSongs = _db.Songs.ToList();
         }          
   
       return View();
