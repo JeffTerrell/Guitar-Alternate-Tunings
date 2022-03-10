@@ -44,6 +44,11 @@
 * 10:15 - Finish watching Identity tutorial video
 * 10:30 - Resume work on models with image upload functionality(learning how to use tag helpers along the way)
 
+
+#### Thursday 03/10/2022
+* 11:00 - Making chord diagrams
+* 11:40 - Finish making chord diagrams
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 # Mobile
