@@ -8138,13 +8138,13 @@ body {
   line-height: 1.8;
   font-weight: normal;
   background: #fafafa;
-  color: gray; }
+  color: gray; } /* Main text color */
 
 a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #f8b739; }
+  color: #396ff8; }   /* Main link color */
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
