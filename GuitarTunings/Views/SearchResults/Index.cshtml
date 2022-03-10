@@ -17,13 +17,15 @@
 {
   if (ViewBag.resultsTuningCategories.Count < 1)
   {
-    <p>No results from your search could be found</p>
+    <p>No tuning categories from your search could be found</p>
   }
   else
   {
     @foreach (var tuningCategory in ViewBag.resultsTuningCategories)
     {
-      <h6>@tuningCategory.Name</h6>
+      <h6><a asp-controller="TuningCategories"
+            asp-action="Details"
+            asp-route-id="@tuningCategory.TuningCategoryId">@tuningCategory.Name</a></h6>
     }
   }  
 }
@@ -32,13 +34,15 @@
 {
   if (ViewBag.resultsTunings.Count < 1)
   {
-    <p>No results from your search could be found</p>
+    <p>No alternate tunings from your search could be found</p>
   }
   else
   {
     @foreach (var tuning in ViewBag.resultsTunings)
     {
-      <h6>@tuning.Name</h6>
+      <h6><a asp-controller="Tunings"
+              asp-action="Details"
+              asp-route-id="@tuning.TuningId">@tuning.Name</a></h6>
     }
   }  
 }  
@@ -47,13 +51,15 @@
 {
   if (ViewBag.resultsArtists.Count < 1)
   {
-    <p>No results from your search could be found</p>
+    <p>No artists from your search could be found</p>
   }
   else
     {
     @foreach (var artist in ViewBag.resultsArtists)
     {
-      <h6>@artist.Name</h6>
+      <h6><a asp-controller="Artists"
+              asp-action="Details"
+              asp-route-id="@artist.ArtistId">@artist.Name</a></h6>
     }
   }
 }  
@@ -62,13 +68,15 @@
 {
   if (ViewBag.resultsSongs.Count < 1)
   {
-    <p>No results from your search could be found</p>
+    <p>No songs from your search could be found</p>
   }
   else
   {
     @foreach (var song in ViewBag.resultsSongs)
     {
-      <h6>@song.Name</h6>
+      <h6><a asp-controller="Songs"
+              asp-action="Details"
+              asp-route-id="@song.SongId">@song.Name</a></h6>
     }
   }  
 } 

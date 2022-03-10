@@ -15,7 +15,7 @@
 @foreach (Tuning tuning in Model)
 {
   <h4><a asp-action="Details"
-          asp-route-id="@tuning.TuningId">@tuning.Name</a></h4>
+          asp-route-id="@tuning.TuningId">@tuning.Name</a> : @tuning.Notes</h4>
 }
 <br>
 

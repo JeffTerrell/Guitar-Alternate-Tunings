@@ -6,11 +6,65 @@
 
 <h2>Alternate Tuning Details</h2>
 <hr/>
-<h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
-<h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
-<h3>@Html.DisplayNameFor(model => model.Notes):</h3><h6>@Html.DisplayFor(model => model.Notes)</h6>  
+<div class="row">
+  <div class="col-sm">
+    <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
+    <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
+    <h3>@Html.DisplayNameFor(model => model.Notes):</h3><h6>@Html.DisplayFor(model => model.Notes)</h6>
+    <h3>Artists using this tuning:</h3>
+    @if (@Model.JoinArtist.Count == 0)
+      {
+        <h6>No artists are using this tuning</h6>
+      }
+    else
+    {
+      <ul>
+      @foreach (var artist in Model.JoinArtist)
+      {
+        <li>
+          <h6><a asp-controller="Artists"
+          asp-action="Details"
+          asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a></h6>
+        </li>
+      }
+      </ul>
+    }
 
-<h3>Artists using this tuning:</h3>
+    <h3>Songs using this tuning:</h3>
+    @if (@Model.Songs.Count == 0)
+      {
+        <h6>No songs are using this tuning</h6>
+      }
+    else
+    {
+      <ul>
+      @foreach (var song in Model.Songs)
+      {
+        <li>
+          <h6><a asp-controller="Songs"
+            asp-action="Details"
+            asp-route-id="@song.SongId">@song.Name</a></h6>
+        </li>
+      }
+      </ul>
+    }
+  </div>    
+  <div class="col-sm">
+    <h3>Chord Diagrams</h3>
+    <img src="@("~/image/"+Model.ImageNameA)" asp-append-version="true" height="200px" width="110px" />
+    <img src="@("~/image/"+Model.ImageNameB)" asp-append-version="true" height="200px" width="110px" />
+    <img src="@("~/image/"+Model.ImageNameC)" asp-append-version="true" height="200px" width="110px" />
+    <img src="@("~/image/"+Model.ImageNameD)" asp-append-version="true" height="200px" width="110px" />
+    <br>
+    <br>
+    <img src="@("~/image/"+Model.ImageNameE)" asp-append-version="true" height="200px" width="110px" />
+    <img src="@("~/image/"+Model.ImageNameF)" asp-append-version="true" height="200px" width="110px" />
+    <img src="@("~/image/"+Model.ImageNameG)" asp-append-version="true" height="200px" width="110px" />
+  </div>
+  <div class="col-sm">
+  </div>  
+</div>  
+@* <h3>Artists using this tuning:</h3>
 @if (@Model.JoinArtist.Count == 0)
   {
     <h6>No artists are using this tuning</h6>
@@ -46,7 +100,7 @@ else
     </li>
   }
   </ul>
-} 
+}  *@
 
 <br>
 
@@ -64,12 +118,3 @@ else
     asp-route-id="@Model.TuningId">Delete Alternate Tuning: @Model.Name</a>
 <br>
 }
-
-
-<img src="@("~/image/"+Model.ImageNameA)" asp-append-version="true" height="250px" width="250px" />
-<img src="@("~/image/"+Model.ImageNameB)" asp-append-version="true" height="250px" width="250px" />
-<img src="@("~/image/"+Model.ImageNameC)" asp-append-version="true" height="250px" width="250px" />
-<img src="@("~/image/"+Model.ImageNameD)" asp-append-version="true" height="250px" width="250px" />
-<img src="@("~/image/"+Model.ImageNameE)" asp-append-version="true" height="250px" width="250px" />
-<img src="@("~/image/"+Model.ImageNameF)" asp-append-version="true" height="250px" width="250px" />
-<img src="@("~/image/"+Model.ImageNameG)" asp-append-version="true" height="250px" width="250px" />
