@@ -16,6 +16,15 @@
 {
   <h4><a asp-action="Details"
           asp-route-id="@tuningCategory.TuningCategoryId">@tuningCategory.Name</a></h4>
+  
+  @foreach (Tuning tuning in tuningCategory.Tunings)
+  {
+    <ul>
+    <li><h6><a asp-controller="Tunings"
+                asp-action="Details"
+                asp-route-id="@tuning.TuningId">@tuning.Name</a></h6></li>
+    </ul>        
+  }        
 }
 <br>
 
