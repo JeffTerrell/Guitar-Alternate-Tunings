@@ -148,4 +148,4 @@
 ## Edit identity user in asp net core
 ## https://www.youtube.com/watch?v=QYlIfH8qyrU
 
-#### I think I can use this video to have edit user functionality for my webpage. I only want username and password edit capability.
+#### I think I can use this video to have edit user functionality for my webpage. I only want username, email and password edit capability.
