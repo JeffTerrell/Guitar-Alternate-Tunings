@@ -2,14 +2,15 @@
   Layout = "_Layout";
 }
 
-<h4>Log Out</h4>
+<h4>Account Settings</h4>
 <hr />
 @if (User.Identity.IsAuthenticated)
 {
   <p>Logged in as @User.Identity.Name</p>
+  <a asp-controller="Account" asp-action="Edit" method="post"
+      asp-route-id="@User.Identity.Name" class="btn btn-primary">Edit</a>
+  
   <form asp-controller="Account" asp-action="LogOff" method="post">  
     <input type="submit" value="Log Out" class="btn btn-dark"/>
   </form>
-}  
-<a asp-action="Register">Click here to register</a>
-<a asp-action="Login">Click here to login</a>
+}

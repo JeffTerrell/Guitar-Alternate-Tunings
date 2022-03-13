@@ -49,6 +49,11 @@
 * 11:00 - Making chord diagrams
 * 11:40 - Finish making chord diagrams
 
+
+#### Sunday 03/13/2022
+* 15:00 - Watching tutorial for editing Identity user info
+* 15:25 - Finish watching tutorial
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 # Mobile
@@ -138,3 +143,9 @@
 ## https://www.youtube.com/watch?v=CzRM-hOe35o
 
 #### Good tuturial on setting up and implementing Identity. Most of this was review but I pick up a few ideas that I may incorporate in my project
+
+
+## Edit identity user in asp net core
+## https://www.youtube.com/watch?v=QYlIfH8qyrU
+
+#### I think I can use this video to have edit user functionality for my webpage. I only want username and password edit capability.
