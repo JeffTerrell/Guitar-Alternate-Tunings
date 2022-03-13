@@ -106,7 +106,11 @@
                     <p class="nav-link active"><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-item">Account: @User.Identity.Name</a></p>
                       <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li class="nav-item">
-                          <a class="nav-link" href="~/Account">Log Out</a>
+                          <form asp-controller="Account" asp-action="LogOff" method="post">  
+                            <a asp-controller="Account"
+                                asp-action="LogOff">Log Out</a>
+                            @* <a class="nav-link" href="~/Account">Log Out</a> *@
+                          </form>  
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#">Edit</a>
@@ -114,6 +118,14 @@
                       </ul>
                   </li>      
                 }
+
+                  @* <form asp-controller="Account" asp-action="LogOff" method="post">  
+                  <input type="submit" value="Log Out" class="btn btn-dark"/>
+                </form>
+              }  
+              <a asp-action="Register">Click here to register</a> *@
+
+
               </ul>
             </div>
           </div>
@@ -128,6 +140,21 @@
   </body>
 </html>
 
+
+
+                @* {
+                  <li class="nav-item">
+                    <p class="nav-link active"><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-item">Account: @User.Identity.Name</a></p>
+                      <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li class="nav-item">
+                          <a class="nav-link" href="~/Account">Log Out</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Edit</a>
+                        </li>
+                      </ul>
+                  </li>      
+                } *@
 
 
 
