@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="~/css/style.css">
   </head>
@@ -103,29 +103,19 @@
                 else
                 {
                   <li class="nav-item">
-                    <p class="nav-link active"><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-item">Account: @User.Identity.Name</a></p>
+                    <p class="nav-link active"><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-item">@User.Identity.Name <i class="bi bi-gear"></i></a></p>
                       <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li class="nav-item">
-                          <form asp-controller="Account" asp-action="LogOff" method="post">  
-                            <a asp-controller="Account"
-                                asp-action="LogOff">Log Out</a>
-                            @* <a class="nav-link" href="~/Account">Log Out</a> *@
-                          </form>  
+                          <a class="nav-link" href="#">Edit</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#">Edit</a>
+                          <form asp-controller="Account" asp-action="LogOff" method="post">
+                            <input type="submit" value="Log Out" class="btn btn-dark"/>  
+                          </form>  
                         </li>
                       </ul>
                   </li>      
                 }
-
-                  @* <form asp-controller="Account" asp-action="LogOff" method="post">  
-                  <input type="submit" value="Log Out" class="btn btn-dark"/>
-                </form>
-              }  
-              <a asp-action="Register">Click here to register</a> *@
-
-
               </ul>
             </div>
           </div>
@@ -139,28 +129,6 @@
     <script src="~/js/main.js"></script>
   </body>
 </html>
-
-
-
-                @* {
-                  <li class="nav-item">
-                    <p class="nav-link active"><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav-item">Account: @User.Identity.Name</a></p>
-                      <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li class="nav-item">
-                          <a class="nav-link" href="~/Account">Log Out</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Edit</a>
-                        </li>
-                      </ul>
-                  </li>      
-                } *@
-
-
-
-
-
-
 
 
 

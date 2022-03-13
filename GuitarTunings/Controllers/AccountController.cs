@@ -72,7 +72,7 @@ public class AccountController : Controller
     public async Task<ActionResult> LogOffConfirmed()
     {
       await _signInManager.SignOutAsync();
-      return RedirectToAction("Index");
+      return RedirectToAction("LogOff");
     }
   }
 }
