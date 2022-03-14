@@ -118,6 +118,7 @@ public class AccountController : Controller
         {
             user.Email = model.Email;
             user.UserName = model.UserName;
+            user.PasswordHash = model.Password;
 
             var result = await _userManager.UpdateAsync(user);
 
@@ -136,11 +137,3 @@ public class AccountController : Controller
     }
   }
 }
-
-
-
-
-
-
-
-// var id = _userManager.FindByNameAsync(name)

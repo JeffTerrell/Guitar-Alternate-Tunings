@@ -286,6 +286,3 @@ namespace GuitarTunings.Controllers
         // {
         //   await tuning.ImageFileD.CopyToAsync(fileStream);
         // }
-
-
-
