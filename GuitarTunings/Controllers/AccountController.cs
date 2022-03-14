@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using GuitarTunings.Models;
@@ -122,7 +123,7 @@ public class AccountController : Controller
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Account", "LogOff");
+                return await(LogOffConfirmed());
             }
 
             foreach (var error in result.Errors)
