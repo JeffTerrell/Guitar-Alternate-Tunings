@@ -1,9 +1,7 @@
-@using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityOptions> userManager
-
 @{
   Layout = "_Layout";
 }
+
 
 @using GuitarTunings.ViewModels
 @model RegisterViewModel
@@ -14,10 +12,16 @@
 {
   <p>Logged in as @User.Identity.Name</p>
   <a asp-controller="Account" asp-action="Edit" method="post"
-      asp-route-id="@userManager.GetUserId(User)" class="btn btn-primary">Edit</a>
+      asp-route-id="@User.Identity.Name" class="btn btn-primary">Edit</a>
 
   
   <form asp-controller="Account" asp-action="LogOff" method="post">  
     <input type="submit" value="Log Out" class="btn btn-dark"/>
   </form>
 }
+
+
+
+
+ @* <a asp-controller="Account" asp-action="Edit" method="post"
+      asp-route-id="@userManager.GetUserId(User)" class="btn btn-primary">Edit</a> *@
