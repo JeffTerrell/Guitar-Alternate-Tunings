@@ -1,5 +1,5 @@
 # Guitar Alternate Tunings
-An informational website that allows visitors to view alternate tunings for the guitar based on category, specific tuning, artist, or song. Registered users are able to create, update, and delete entries.
+An informational website that allows visitors to view alternate tunings for the guitar based on category, specific tuning, artist, or song.
 
 #### By Jeff Terrell
 
@@ -31,7 +31,7 @@ A web application that allows registered users to create, update, and delete tun
 * If needed, download and install .NET 5 here: https://dotnet.microsoft.com/en-us/download/dotnet/5.0
 * From a terminal, navigate to a directory of your choosing and use the "Git clone" command to copy the repository from this address (https://github.com/JeffTerrell/Guitar-Alternate-Tunings).
 Navigate to the sub directory "GuitarTunings" of the cloned main directory on your local machine.
-* From the same directory "GuitarTunings", enter the following commands individually:
+* From the same directory "GuitarTunings", enter the following command:
   - _dotnet tool install --global dotnet-ef --version 3.0.0_
 * From the same directory "GuitarTunings", create a new file called .appsettings.json.		
 * Open this file with a code editor and add the following:
@@ -60,7 +60,7 @@ After completing the Setup/Installation requirements follow these steps to creat
 
 
 ## Run the Application 
-  * From a terminal, navigate to the sub directory "PierreTreats".
+  * From a terminal, navigate to the sub directory "GuitarTunings".
   * Enter the following command, "dotnet restore" to create necessary folders and files.
   * Next enter the following command, "dotnet run". This will launch the application in your terminal. Enter "Ctrl c" to exit the application at any point.
   * To access the application, load a web browser and in the URL bar insert the specific URL(s) listed in your terminal (ex: Now listening on: http://localhost:5000).
