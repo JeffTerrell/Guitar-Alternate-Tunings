@@ -1,12 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
 @model GuitarTunings.ViewModels.EditViewModel
 
-@{
+@* @{
     ViewBag.Title = "Edit User";
-}
+} *@
 
 <h1>Edit User</h1>
 
-<form method="post" class="mt-3">
+<form asp-controller="Account" asp-action="Edit", method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <label asp-for="Email"></label>
+    <input asp-for="Email" required/>
+
+    <label asp-for="UserName"></label>
+    <input asp-for="UserName" />
+
+    <input type="submit" value="Save" class="btn btn-warning"/>
+</form>
+
+
+
+@* <form asp-controller="Account" asp-action="Edit" method="post" class="mt-3">
     <div class="form-group row">
         <label asp-for="Id" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
@@ -32,12 +50,16 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a asp-action="ListUsers" class="btn btn-primary">Cancel</a>
+            <input type="submit", value="Update", class="btn btn-dark"/>
+            <a asp-action="Index" class="btn btn-primary">Cancel</a>
         </div>
     </div>
+</form> *@
 
-    <div class="card">
+
+
+
+    @* <div class="card">
         <div class="card-header">
             <h3>User Roles</h3>
         </div>
@@ -83,5 +105,4 @@
                 Manage Claims
             </a>
         </div>
-    </div>
-</form>
+    </div> *@

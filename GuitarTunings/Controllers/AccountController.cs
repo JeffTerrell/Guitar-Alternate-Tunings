@@ -80,11 +80,11 @@ public class AccountController : Controller
     {
     var user = await _userManager.FindByNameAsync(name);
 
-    // if (user == null)
-    // {
-    //     ViewBag.ErrorMessage = $"User with Id = {"Jeff"} cannot be found";
-    //     return View("Index");
-    // }
+    if (user == null)
+    {
+        ViewBag.ErrorMessage = $"User with Id = {"Jeff"} cannot be found";
+        return View("NotFound");  // setup "NotFound" view in Shared
+    }
 
     // GetClaimsAsync returns the list of user Claims
     var userClaims = await _userManager.GetClaimsAsync(user);
@@ -111,7 +111,7 @@ public class AccountController : Controller
         if (user == null)
         {
             ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
-            return View("NotFound");
+            return View("NotFound");  // setup "NotFound" view in Shared
         }
         else
         {
@@ -122,7 +122,7 @@ public class AccountController : Controller
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Account", "LogOff");
             }
 
             foreach (var error in result.Errors)
