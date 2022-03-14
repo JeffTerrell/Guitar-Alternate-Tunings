@@ -32,5 +32,9 @@ namespace GuitarTunings.ViewModels
     [Display(Name = "Confirm password")]
     [Compare("Password", ErrorMessage = "Password does not match.")]
     public string ConfirmPassword {get; set;}
+
+    public List<string> Claims { get; set; }
+    public List<string> Roles { get; set; }
+
   }
 }

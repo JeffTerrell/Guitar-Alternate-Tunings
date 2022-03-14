@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using GuitarTunings.Models;
 using System.Threading.Tasks;
 using GuitarTunings.ViewModels;
+using System.Linq;
 
 namespace GuitarTunings.Controllers
 {
@@ -46,7 +47,6 @@ public class AccountController : Controller
 
     public ActionResult Login()
     {
-      // var id = _userManager.FindByNameAsync(name)
       return View();
     }
 
@@ -75,5 +75,71 @@ public class AccountController : Controller
       await _signInManager.SignOutAsync();
       return RedirectToAction("LogOff");
     }
+
+    public async Task<ActionResult> Edit(string name)
+    {
+    var user = await _userManager.FindByNameAsync(name);
+
+    // if (user == null)
+    // {
+    //     ViewBag.ErrorMessage = $"User with Id = {"Jeff"} cannot be found";
+    //     return View("Index");
+    // }
+
+    // GetClaimsAsync returns the list of user Claims
+    var userClaims = await _userManager.GetClaimsAsync(user);
+    // GetRolesAsync returns the list of user Roles
+    var userRoles = await _userManager.GetRolesAsync(user);
+
+    var model = new EditViewModel
+    {
+        Id = user.Id,
+        Email = user.Email,
+        UserName = user.UserName,
+        Claims = userClaims.Select(c => c.Value).ToList(),
+        Roles = (System.Collections.Generic.List<string>)userRoles
+    };
+
+    return View(model);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Edit(EditViewModel model)
+    {
+        var user = await _userManager.FindByIdAsync(model.Id);
+
+        if (user == null)
+        {
+            ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
+            return View("NotFound");
+        }
+        else
+        {
+            user.Email = model.Email;
+            user.UserName = model.UserName;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View(model);
+        }
+    }
   }
 }
+
+
+
+
+
+
+
+// var id = _userManager.FindByNameAsync(name)
