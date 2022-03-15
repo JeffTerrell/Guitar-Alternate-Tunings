@@ -9,15 +9,20 @@
 
 <form asp-controller="TuningCategories" asp-action="Create" method="post">
   <ul>
-  <li>
-    <label asp-for="Name"></label>
-    <input asp-for="Name" required/>
-  </li>
-  <li>
-    <label asp-for="Description"></label>
-    <input asp-for="Description" />
-  </li>
+    <li>
+      <label asp-for="Name"></label>
+      <input asp-for="Name" required/>
+    </li>
+    <li>
+      <label asp-for="Description"></label>
+      <input asp-for="Description" />
+    </li>
   </ul>
   
   <input type="submit", value="Add", class="btn btn-dark"/>
 </form>
+
+<br>
+<br>
+
+<h6><a asp-action="Index">View all Categories</a></h6>

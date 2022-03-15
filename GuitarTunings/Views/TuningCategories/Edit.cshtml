@@ -23,9 +23,11 @@
 <br>
 
 <a asp-controller="TuningCategories"
-    asp-action="Index">View All Alternate Tuning Categories</a>
-<br>    
-<a asp-controller="TuningCategories"
     asp-action="Details"
-    asp-route-id="@Model.TuningCategoryId">Back to Details for: @Model.Name</a>
-<br>   
+    asp-route-id="@Model.TuningCategoryId">Back to details for: @Model.Name</a>
+
+<br>
+<br>
+ 
+<h6><a asp-controller="TuningCategories"
+    asp-action="Index">View All Categories</a></h6>
