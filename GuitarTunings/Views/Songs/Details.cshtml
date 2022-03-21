@@ -19,9 +19,9 @@
 <h6><a asp-controller="Tunings"
         asp-action="Details"
         asp-route-id="@Model.Tuning.TuningId">@Model.Tuning.Name</a></h6>
-<h3>@Html.DisplayNameFor(model => model.Tab):</h3><h6><a href="@Html.DisplayFor(model => model.Tab)">@Html.DisplayFor(model => model.Tab)</a></h6>
-<h3>@Html.DisplayNameFor(model => model.Video):</h3><h6><a href="@Html.DisplayFor(model => model.Video)">@Html.DisplayFor(model => model.Video)</a></h6>
-<h3>@Html.DisplayNameFor(model => model.Tutorial):</h3><h6><a href="@Html.DisplayFor(model => model.Tutorial)">@Html.DisplayFor(model => model.Tutorial)</a></h6>
+<h3>@Html.DisplayNameFor(model => model.Tab):</h3><h6><a href="@Html.DisplayFor(model => model.Tab)" Target="_blank">@Html.DisplayFor(model => model.Tab)</a></h6>
+<h3>@Html.DisplayNameFor(model => model.Video):</h3><h6><a href="@Html.DisplayFor(model => model.Video)" Target="_blank">@Html.DisplayFor(model => model.Video)</a></h6>
+<h3>@Html.DisplayNameFor(model => model.Tutorial):</h3><h6><a href="@Html.DisplayFor(model => model.Tutorial)" Target="_blank">@Html.DisplayFor(model => model.Tutorial)</a></h6>
 <br>
 
 <a  asp-action="Index">View All Songs</a>
