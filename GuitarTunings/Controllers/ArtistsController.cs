@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GuitarTunings.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +38,7 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create ([Bind("ImageId, Name, Genre, Description, ArtistImageFile")] Artist artist, int TuningId)
+    public async Task<ActionResult> Create([Bind("ImageId, Name, Genre, Description, ArtistImageFile")] Artist artist, int TuningId)
     {
 
         string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -77,10 +78,24 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Artist artist)
+    public async Task<ActionResult> Edit(Artist artist)
     {
-      _db.Entry(artist).State = EntityState.Modified;
-      _db.SaveChanges();
+      if(artist != null)
+      {
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(artist.ArtistImageFile.FileName);
+        string extension = Path.GetExtension(artist.ArtistImageFile.FileName);
+        artist.ArtistImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await artist.ArtistImageFile.CopyToAsync(fileStream);
+        }
+      
+        artist.ArtistImageName = fileName;
+        _db.Entry(artist).State = EntityState.Modified;
+        _db.SaveChanges();      
+      }
       return RedirectToAction("Details", new { id = artist.ArtistId});
     }
 
@@ -138,3 +153,14 @@ namespace GuitarTunings.Controllers
     }
   }
 }
+
+
+
+
+// [HttpPost]
+// public ActionResult Edit(Artist artist)
+// {
+//   _db.Entry(artist).State = EntityState.Modified;
+//   _db.SaveChanges();
+//   return RedirectToAction("Details", new { id = artist.ArtistId});
+// }

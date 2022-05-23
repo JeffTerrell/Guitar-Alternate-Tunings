@@ -39,7 +39,7 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create ([Bind("ImageId, Name, Notes, Description, TuningCategoryId, ImageFileA, ImageFileB, ImageFileC, ImageFileD, ImageFileE, ImageFileF, ImageFileG")] Tuning tuning)
+    public async Task<ActionResult> Create ([Bind("Name, Notes, Description, TuningCategoryId, ImageFileA, ImageFileB, ImageFileC, ImageFileD, ImageFileE, ImageFileF, ImageFileG")] Tuning tuning)
     {
       // if ("ImageFileA"!= null || tuning.ImageFileB != null || tuning.ImageFileC != null || tuning.ImageFileD != null || tuning.ImageFileE != null || tuning.ImageFileF != null || tuning.ImageFileG != null)
       // {
