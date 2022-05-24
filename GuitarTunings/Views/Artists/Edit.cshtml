@@ -7,9 +7,11 @@
 <h2>Edit Artist</h2>
 
 <h4>Edit this Artist: @Html.DisplayFor(model => model.Name)</h4>
+@ViewBag.Message
 
 <form asp-controller="Artists" asp-action="Edit", enctype="multipart/form-data", method="post">
     <input type="hidden" asp-for="ArtistId" />
+    @Html.HiddenFor(model => model.ArtistImageName)
 
     <label asp-for="Name"></label>
     <input asp-for="Name", required />

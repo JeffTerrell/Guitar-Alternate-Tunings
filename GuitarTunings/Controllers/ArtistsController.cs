@@ -78,8 +78,18 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Edit(Artist artist)
+    public async Task<ActionResult> Edit(Artist artist, string ArtistImageName)
     {
+      if (ArtistImageName == null)
+      {
+        ViewBag.Message = "Image is null";
+        return View(artist);
+      }
+      if (ArtistImageName != null)
+      {
+        DeleteImage(ArtistImageName);
+      }
+
       if(artist != null)
       {
         string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -151,8 +161,22 @@ namespace GuitarTunings.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [NonAction]
+    public void DeleteImage(string imageName)
+    {
+      string wwwRootPath = Path.Combine(_hostEnvironment.WebRootPath, "Image");
+      var imagePath = Path.Combine(Directory.GetCurrentDirectory(),wwwRootPath, imageName);
+      // string wwwRootPath = _hostEnvironment.WebRootPath;
+      // var imagePath = Path.Combine(wwwRootPath + "/Image/", imageName);
+      if (System.IO.File.Exists(imagePath))
+      {
+        System.IO.File.Delete(imagePath);
+      }
+    }
   }
 }
+
 
 
 
