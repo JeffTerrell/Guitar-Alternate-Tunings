@@ -70,7 +70,6 @@ After completing the Setup/Installation requirements follow these steps to creat
 
 ## Known Bugs
 * Duplicate entries are allowed
-* Editing an object with images will result in errors
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
