@@ -83,9 +83,10 @@ namespace GuitarTunings.Controllers
 
       if(artist != null)
       {
+        TempData["Message"] = "Artist updated successfully!"; 
         AddImage(artist);
         _db.Entry(artist).State = EntityState.Modified;
-        _db.SaveChanges();      
+        _db.SaveChanges();     
       }
       return RedirectToAction("Details", new { id = artist.ArtistId});
     }

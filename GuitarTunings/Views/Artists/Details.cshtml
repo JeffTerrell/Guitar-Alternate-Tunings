@@ -4,6 +4,13 @@
 
 @model GuitarTunings.Models.Artist
 
+@if(@TempData["Message"] != null)
+{
+  <div class="alert alert-success" role="alert">
+    @TempData["Message"]
+  </div>
+}  
+
 <h2>Artist Details</h2>
 <hr/>
 <div class="row">
@@ -35,7 +42,7 @@
       }
   </div>
   <div class="col-sm">
-    <img src="@("~/image/"+Model.ArtistImageName)" asp-append-version="true" id="artist-logo" height="25%" />  
+    <img src="@("~/image/"+Model.ArtistImageName)" asp-append-version="true" id="artist-logo" height="20%" />  
   </div>
   <div class="col-sm">
   </div>  
