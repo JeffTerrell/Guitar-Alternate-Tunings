@@ -38,18 +38,9 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create([Bind("ImageId, Name, Genre, Description, ArtistImageFile")] Artist artist, int TuningId)
+    public ActionResult Create([Bind("ImageId, Name, Genre, Description, ArtistImageFile")] Artist artist, int TuningId)
     {
-
-        string wwwRootPath = _hostEnvironment.WebRootPath;
-        string fileName = Path.GetFileNameWithoutExtension(artist.ArtistImageFile.FileName);
-        string extension = Path.GetExtension(artist.ArtistImageFile.FileName);
-        artist.ArtistImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-        using (var fileStream = new FileStream(path, FileMode.Create))
-        {
-          await artist.ArtistImageFile.CopyToAsync(fileStream);
-        }
+      AddImage(artist);
 
       _db.Artists.Add(artist);
       _db.SaveChanges();
@@ -78,7 +69,7 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Edit(Artist artist, string ArtistImageName)
+    public ActionResult Edit(Artist artist, string ArtistImageName)
     {
       if (ArtistImageName == null)
       {
@@ -92,17 +83,7 @@ namespace GuitarTunings.Controllers
 
       if(artist != null)
       {
-        string wwwRootPath = _hostEnvironment.WebRootPath;
-        string fileName = Path.GetFileNameWithoutExtension(artist.ArtistImageFile.FileName);
-        string extension = Path.GetExtension(artist.ArtistImageFile.FileName);
-        artist.ArtistImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-        using (var fileStream = new FileStream(path, FileMode.Create))
-        {
-          await artist.ArtistImageFile.CopyToAsync(fileStream);
-        }
-      
-        artist.ArtistImageName = fileName;
+        AddImage(artist);
         _db.Entry(artist).State = EntityState.Modified;
         _db.SaveChanges();      
       }
@@ -163,6 +144,20 @@ namespace GuitarTunings.Controllers
     }
 
     [NonAction]
+    public async void AddImage (Artist artist)
+    {
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(artist.ArtistImageFile.FileName);
+        string extension = Path.GetExtension(artist.ArtistImageFile.FileName);
+        artist.ArtistImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await artist.ArtistImageFile.CopyToAsync(fileStream);
+        }
+    }
+
+    [NonAction]
     public void DeleteImage(string imageName)
     {
       string wwwRootPath = Path.Combine(_hostEnvironment.WebRootPath, "Image");
@@ -176,15 +171,3 @@ namespace GuitarTunings.Controllers
     }
   }
 }
-
-
-
-
-
-// [HttpPost]
-// public ActionResult Edit(Artist artist)
-// {
-//   _db.Entry(artist).State = EntityState.Modified;
-//   _db.SaveChanges();
-//   return RedirectToAction("Details", new { id = artist.ArtistId});
-// }
