@@ -85,7 +85,7 @@ namespace GuitarTunings.Controllers
 
       if(artist != null)
       {
-        TempData["ArtistUpdate"] = "Artist updated successfully!"; 
+        TempData["ArtistUpdate"] = ($"{artist.Name} updated successfully!"); 
         AddImage(artist);
         _db.Entry(artist).State = EntityState.Modified;
         _db.SaveChanges();     
