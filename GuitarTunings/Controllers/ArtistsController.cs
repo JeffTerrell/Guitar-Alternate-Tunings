@@ -48,8 +48,7 @@ namespace GuitarTunings.Controllers
 
       if (TuningId != 0)
       {
-        string artistName = artist.Name;
-        TempData["ArtistCreate"] = ($"Artist {artistName} succesfully created");
+        TempData["ArtistCreate"] = ($"Artist {artist.Name} succesfully created");
         _db.ArtistTunings.Add(new ArtistTuning() { ArtistId = artist.ArtistId, TuningId = TuningId});
         _db.SaveChanges();
       }
