@@ -26,8 +26,9 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Index()
+    public ActionResult Index(int Id)
     {
+      ViewBag.ArtistId = Id;
       return View(_db.Artists.ToList());
     }
 
@@ -47,10 +48,12 @@ namespace GuitarTunings.Controllers
 
       if (TuningId != 0)
       {
+        string artistName = artist.Name;
+        TempData["ArtistCreate"] = ($"Artist {artistName} succesfully created");
         _db.ArtistTunings.Add(new ArtistTuning() { ArtistId = artist.ArtistId, TuningId = TuningId});
         _db.SaveChanges();
       }
-      return RedirectToAction("Index");
+      return RedirectToAction("Index", new {id = artist.ArtistId});
     }
 
     [AllowAnonymous]
@@ -83,7 +86,7 @@ namespace GuitarTunings.Controllers
 
       if(artist != null)
       {
-        TempData["Message"] = "Artist updated successfully!"; 
+        TempData["ArtistUpdate"] = "Artist updated successfully!"; 
         AddImage(artist);
         _db.Entry(artist).State = EntityState.Modified;
         _db.SaveChanges();     
