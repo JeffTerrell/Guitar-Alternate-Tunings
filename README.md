@@ -70,6 +70,7 @@ After completing the Setup/Installation requirements follow these steps to creat
 
 ## Known Bugs
 * Duplicate entries are allowed
+* Images are not deleted from wwwroot upon object deletion
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
