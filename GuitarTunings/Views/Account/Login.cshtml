@@ -21,4 +21,10 @@
 </form>
 
 <br>
-<a  asp-action="Register">Not registered? Click here to register</a>
+@if (!User.Identity.IsAuthenticated)
+{
+}
+else
+{
+  <a  asp-action="Register">Not registered? Click here to register</a>
+}

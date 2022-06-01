@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using GuitarTunings.Models;
@@ -8,6 +9,7 @@ using System.Linq;
 
 namespace GuitarTunings.Controllers
 {
+[Authorize]
 public class AccountController : Controller
 {
     private readonly GuitarTuningsContext _db;
@@ -46,11 +48,13 @@ public class AccountController : Controller
         }
     }
 
+    [AllowAnonymous]
     public ActionResult Login()
     {
       return View();
     }
 
+    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult> Login(LoginViewModel model)
     {
