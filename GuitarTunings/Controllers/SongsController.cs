@@ -22,8 +22,9 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Index()
+    public ActionResult Index(int Id)
     {
+      ViewBag.SongId = Id;
       return View(_db.Songs.ToList());
     }
 
@@ -36,9 +37,13 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create (Song song)
     {
-      _db.Songs.Add(song);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      if(song != null)
+      {
+        TempData["SongCreate"] = ($"Song {song.Name} successfully created");
+        _db.Songs.Add(song);
+        _db.SaveChanges();
+      }  
+      return RedirectToAction("Index", new {id = song.SongId});
     }
 
     [AllowAnonymous]
@@ -59,8 +64,12 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Edit(Song song)
     {
-      _db.Entry(song).State = EntityState.Modified;
-      _db.SaveChanges();
+      if(song != null)
+      {
+        TempData["SongUpdate"] = ($"{song.Name} updated successfully!") ;
+        _db.Entry(song).State = EntityState.Modified;
+        _db.SaveChanges();
+      }  
       return RedirectToAction("Details", new { id = song.SongId});
     }
 
