@@ -36,9 +36,12 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create (TuningCategory tuningCategory)
     {
-      TempData["TuningCategoryCreate"] = ($"Tuning category {tuningCategory.Name} succesfully created");
-      _db.TuningCategories.Add(tuningCategory);
-      _db.SaveChanges();
+      if(tuningCategory != null)
+      {
+        TempData["TuningCategoryCreate"] = ($"Tuning category {tuningCategory.Name} successfully created");
+        _db.TuningCategories.Add(tuningCategory);
+        _db.SaveChanges();
+      }  
       return RedirectToAction("Index", new {id = tuningCategory.TuningCategoryId});
     }
 
