@@ -37,6 +37,13 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create (Song song)
     {
+      if(song.TuningId == 0)
+      {
+        ViewBag.Message = "Please choose an Alternate Tuning";
+        ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
+        return View();
+      }
+
       if(song != null)
       {
         TempData["SongCreate"] = ($"Song {song.Name} successfully created");

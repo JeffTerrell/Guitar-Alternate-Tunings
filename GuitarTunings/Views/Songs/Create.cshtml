@@ -5,7 +5,12 @@
 @using GuitarTunings.Models
 @model Song
 
-<h1>Add a new alternate tuning</h1>
+@if(ViewBag.Message != null)
+{
+  @ViewBag.Message
+}
+
+<h1>Add a new song</h1>
 
 <form asp-controller="Songs" asp-action="Create" method="post">
   <ul>
@@ -33,7 +38,6 @@
     <label asp-for="TuningId">Alternate Tuning</label>
     <select asp-for="TuningId"
             asp-items="ViewBag.TuningId">
-      <option>Please select an Alternate Tuning</option>
     </select>     
   </li>
   </ul>
