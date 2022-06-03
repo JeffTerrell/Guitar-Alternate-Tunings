@@ -4,6 +4,13 @@
 
 @model GuitarTunings.Models.TuningCategory
 
+@if(@TempData["TuningCategoryUpdate"] != null)
+{
+  <div class="alert alert-success" role="alert">
+    @TempData["TuningCategoryUpdate"]
+  </div>
+}  
+
 <h2>Alternate Tuning Category Details</h2>
 <hr/>
 <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>

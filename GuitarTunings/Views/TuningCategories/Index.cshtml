@@ -5,6 +5,13 @@
 @using GuitarTunings.Models;
 @model List<TuningCategory>
 
+@if(@TempData["TuningCategoryCreate"] != null)
+{
+  <div class="alert alert-success" role="alert">
+    <a asp-action="Details" asp-route-id="@ViewBag.TuningCategoryId">@TempData["TuningCategoryCreate"]</a>
+  </div>  
+}
+
 <h1>Alternate Tuning Categories</h1>
 
 @if (Model.Count == 0)

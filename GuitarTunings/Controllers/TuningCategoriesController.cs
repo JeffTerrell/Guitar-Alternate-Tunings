@@ -22,8 +22,9 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Index()
+    public ActionResult Index(int Id)
     {
+      ViewBag.TuningCategoryId = Id;
       return View(_db.TuningCategories.ToList());
     }
 
@@ -35,9 +36,10 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create (TuningCategory tuningCategory)
     {
+      TempData["TuningCategoryCreate"] = ($"Tuning category {tuningCategory.Name} succesfully created");
       _db.TuningCategories.Add(tuningCategory);
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Index", new {id = tuningCategory.TuningCategoryId});
     }
 
     [AllowAnonymous]
@@ -56,8 +58,12 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Edit(TuningCategory tuningCategory)
     {
-      _db.Entry(tuningCategory).State = EntityState.Modified;
-      _db.SaveChanges();
+      if(tuningCategory != null)
+      {
+        TempData["TuningCategoryUpdate"] = ($"{tuningCategory.Name} updated successfully!");
+        _db.Entry(tuningCategory).State = EntityState.Modified;
+        _db.SaveChanges();
+      }
       return RedirectToAction("Details", new { id = tuningCategory.TuningCategoryId});
     }
 
