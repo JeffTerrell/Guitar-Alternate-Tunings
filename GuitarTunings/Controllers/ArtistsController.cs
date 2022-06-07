@@ -73,11 +73,6 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Edit(Artist artist, string ArtistImageName)
     {
-      if (ArtistImageName == null)
-      {
-        ViewBag.Message = "Image is null";
-        return View(artist);
-      }
       if (ArtistImageName != null)
       {
         DeleteImage(ArtistImageName);
@@ -85,7 +80,7 @@ namespace GuitarTunings.Controllers
 
       if(artist != null)
       {
-        TempData["ArtistUpdate"] = ($"{artist.Name} updated successfully!"); 
+        TempData["ArtistUpdate"] = ($"{artist.Name} updated successfully!");
         AddImage(artist);
         _db.Entry(artist).State = EntityState.Modified;
         _db.SaveChanges();     
@@ -165,8 +160,6 @@ namespace GuitarTunings.Controllers
     {
       string wwwRootPath = Path.Combine(_hostEnvironment.WebRootPath, "Image");
       var imagePath = Path.Combine(Directory.GetCurrentDirectory(),wwwRootPath, imageName);
-      // string wwwRootPath = _hostEnvironment.WebRootPath;
-      // var imagePath = Path.Combine(wwwRootPath + "/Image/", imageName);
       if (System.IO.File.Exists(imagePath))
       {
         System.IO.File.Delete(imagePath);
