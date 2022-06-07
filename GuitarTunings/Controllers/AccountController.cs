@@ -69,6 +69,7 @@ public class AccountController : Controller
       }
     }
 
+    [AllowAnonymous]
     public ActionResult LogOff()
     {
       return View();
