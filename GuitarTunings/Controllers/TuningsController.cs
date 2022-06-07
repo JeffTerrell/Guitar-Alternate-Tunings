@@ -27,8 +27,9 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Index()
+    public ActionResult Index(int Id)
     {
+      ViewBag.TuningId = Id;
       return View(_db.Tunings.ToList());
     }
 
@@ -41,81 +42,12 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public async Task<ActionResult> Create ([Bind("Name, Notes, Description, TuningCategoryId, ImageFileA, ImageFileB, ImageFileC, ImageFileD, ImageFileE, ImageFileF, ImageFileG")] Tuning tuning)
     {
-      // if ("ImageFileA"!= null || tuning.ImageFileB != null || tuning.ImageFileC != null || tuning.ImageFileD != null || tuning.ImageFileE != null || tuning.ImageFileF != null || tuning.ImageFileG != null)
-      // {
-        string wwwRootPathA = _hostEnvironment.WebRootPath;
-        string fileNameA = Path.GetFileNameWithoutExtension(tuning.ImageFileA.FileName);
-        string extensionA = Path.GetExtension(tuning.ImageFileA.FileName);
-        tuning.ImageNameA = fileNameA = fileNameA + DateTime.Now.ToString("yymmssfff") + extensionA;
-        string pathA = Path.Combine(wwwRootPathA + "/Image/", fileNameA);
-        using (var fileStream = new FileStream(pathA, FileMode.Create))
-        {
-          await tuning.ImageFileA.CopyToAsync(fileStream);
-        }
 
-        string wwwRootPathB = _hostEnvironment.WebRootPath;
-        string fileNameB = Path.GetFileNameWithoutExtension(tuning.ImageFileB.FileName);
-        string extensionB = Path.GetExtension(tuning.ImageFileB.FileName);
-        tuning.ImageNameB = fileNameB = fileNameB + DateTime.Now.ToString("yymmssfff") + extensionB;
-        string pathB = Path.Combine(wwwRootPathB + "/Image/", fileNameB);
-        using (var fileStream = new FileStream(pathB, FileMode.Create))
-        {
-          await tuning.ImageFileB.CopyToAsync(fileStream);
-        }
-
-        string wwwRootPathC = _hostEnvironment.WebRootPath;
-        string fileNameC = Path.GetFileNameWithoutExtension(tuning.ImageFileC.FileName);
-        string extensionC = Path.GetExtension(tuning.ImageFileC.FileName);
-        tuning.ImageNameC = fileNameC = fileNameC + DateTime.Now.ToString("yymmssfff") + extensionC;
-        string pathC = Path.Combine(wwwRootPathC + "/Image/", fileNameC);
-        using (var fileStream = new FileStream(pathC, FileMode.Create))
-        {
-          await tuning.ImageFileC.CopyToAsync(fileStream);
-        }
-
-        string wwwRootPathD = _hostEnvironment.WebRootPath;
-        string fileNameD = Path.GetFileNameWithoutExtension(tuning.ImageFileD.FileName);
-        string extensionD = Path.GetExtension(tuning.ImageFileD.FileName);
-        tuning.ImageNameD = fileNameD = fileNameD + DateTime.Now.ToString("yymmssfff") + extensionD;
-        string pathD = Path.Combine(wwwRootPathD + "/Image/", fileNameD);
-        using (var fileStream = new FileStream(pathD, FileMode.Create))
-        {
-          await tuning.ImageFileD.CopyToAsync(fileStream);
-        }
-
-        string wwwRootPathE = _hostEnvironment.WebRootPath;
-        string fileNameE = Path.GetFileNameWithoutExtension(tuning.ImageFileE.FileName);
-        string extensionE = Path.GetExtension(tuning.ImageFileE.FileName);
-        tuning.ImageNameE = fileNameE = fileNameE + DateTime.Now.ToString("yymmssfff") + extensionE;
-        string pathE = Path.Combine(wwwRootPathE + "/Image/", fileNameE);
-        using (var fileStream = new FileStream(pathE, FileMode.Create))
-        {
-          await tuning.ImageFileE.CopyToAsync(fileStream);
-        }
-
-        string wwwRootPathF = _hostEnvironment.WebRootPath;
-        string fileNameF = Path.GetFileNameWithoutExtension(tuning.ImageFileF.FileName);
-        string extensionF = Path.GetExtension(tuning.ImageFileB.FileName);
-        tuning.ImageNameF = fileNameF = fileNameF + DateTime.Now.ToString("yymmssfff") + extensionF;
-        string pathF = Path.Combine(wwwRootPathF + "/Image/", fileNameF);
-        using (var fileStream = new FileStream(pathF, FileMode.Create))
-        {
-          await tuning.ImageFileF.CopyToAsync(fileStream);
-        }
-
-        string wwwRootPathG = _hostEnvironment.WebRootPath;
-        string fileNameG = Path.GetFileNameWithoutExtension(tuning.ImageFileG.FileName);
-        string extensionG = Path.GetExtension(tuning.ImageFileG.FileName);
-        tuning.ImageNameG = fileNameG = fileNameG + DateTime.Now.ToString("yymmssfff") + extensionG;
-        string pathG = Path.Combine(wwwRootPathG + "/Image/", fileNameG);
-        using (var fileStream = new FileStream(pathG, FileMode.Create))
-        {
-          await tuning.ImageFileG.CopyToAsync(fileStream);
-        }
-
-        _db.Tunings.Add(tuning);
-        await _db.SaveChangesAsync();
-        return RedirectToAction("Index");
+      AddImage(tuning);
+      TempData["TuningCreate"] = ($"Tuning {tuning.Name} successfully created");
+      _db.Tunings.Add(tuning);
+      await _db.SaveChangesAsync();
+      return RedirectToAction("Index", new {id = tuning.TuningId});
     }
 
     [AllowAnonymous]
@@ -134,89 +66,29 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Edit (Tuning tuning)
-    {
-      DeleteImage(tuning.ImageNameA);
-      tuning.ImageNameA = await SaveImage(tuning.ImageFileA);
-      
+    public async Task<ActionResult> Edit (Tuning tuning, string ImageNameA, string ImageNameB, string ImageNameC, string ImageNameD, string ImageNameE, string ImageNameF, string ImageNameG)
+    {      
 
-      _db.Entry(tuning).State = EntityState.Modified;
-      await _db.SaveChangesAsync();
+      if((ImageNameA != null) || (ImageNameB != null) || (ImageNameC != null) || (ImageNameD != null) || (ImageNameE != null) || (ImageNameF != null) || (ImageNameG != null))
+      {
+        DeleteImage(ImageNameA);
+        DeleteImage(ImageNameB);
+        DeleteImage(ImageNameC);
+        DeleteImage(ImageNameD);
+        DeleteImage(ImageNameE);
+        DeleteImage(ImageNameF);
+        DeleteImage(ImageNameG);
+      }
+
+      if(tuning != null)
+      {
+        TempData["TuningUpdate"] = ($"{tuning.Name} updated successfully!");
+        AddImage(tuning);
+        _db.Entry(tuning).State = EntityState.Modified;
+        await _db.SaveChangesAsync();
+      }
+
       return RedirectToAction("Details", new { id = tuning.TuningId});
-
-      // string wwwRootPathA = _hostEnvironment.WebRootPath;
-      // string fileNameA = Path.GetFileNameWithoutExtension(tuning.ImageFileA.FileName);
-      // string extensionA = Path.GetExtension(tuning.ImageFileA.FileName);
-      // tuning.ImageNameA = fileNameA = fileNameA + DateTime.Now.ToString("yymmssfff") + extensionA;
-      // string pathA = Path.Combine(wwwRootPathA + "/Image/", fileNameA);
-      // using (var fileStream = new FileStream(pathA, FileMode.Create))
-      // {
-      //   await tuning.ImageFileA.CopyToAsync(fileStream);
-      // }
-
-      // string wwwRootPathB = _hostEnvironment.WebRootPath;
-      // string fileNameB = Path.GetFileNameWithoutExtension(tuning.ImageFileB.FileName);
-      // string extensionB = Path.GetExtension(tuning.ImageFileB.FileName);
-      // tuning.ImageNameB = fileNameB = fileNameB + DateTime.Now.ToString("yymmssfff") + extensionB;
-      // string pathB = Path.Combine(wwwRootPathB + "/Image/", fileNameB);
-      // using (var fileStream = new FileStream(pathB, FileMode.Create))
-      // {
-      //   await tuning.ImageFileB.CopyToAsync(fileStream);
-      // }
-
-      // string wwwRootPathC = _hostEnvironment.WebRootPath;
-      // string fileNameC = Path.GetFileNameWithoutExtension(tuning.ImageFileC.FileName);
-      // string extensionC = Path.GetExtension(tuning.ImageFileC.FileName);
-      // tuning.ImageNameC = fileNameC = fileNameC + DateTime.Now.ToString("yymmssfff") + extensionC;
-      // string pathC = Path.Combine(wwwRootPathC + "/Image/", fileNameC);
-      // using (var fileStream = new FileStream(pathC, FileMode.Create))
-      // {
-      //   await tuning.ImageFileC.CopyToAsync(fileStream);
-      // }
-
-      // string wwwRootPathD = _hostEnvironment.WebRootPath;
-      // string fileNameD = Path.GetFileNameWithoutExtension(tuning.ImageFileD.FileName);
-      // string extensionD = Path.GetExtension(tuning.ImageFileD.FileName);
-      // tuning.ImageNameD = fileNameD = fileNameD + DateTime.Now.ToString("yymmssfff") + extensionD;
-      // string pathD = Path.Combine(wwwRootPathD + "/Image/", fileNameD);
-      // using (var fileStream = new FileStream(pathD, FileMode.Create))
-      // {
-      //   await tuning.ImageFileD.CopyToAsync(fileStream);
-      // }
-
-      // string wwwRootPathE = _hostEnvironment.WebRootPath;
-      // string fileNameE = Path.GetFileNameWithoutExtension(tuning.ImageFileE.FileName);
-      // string extensionE = Path.GetExtension(tuning.ImageFileE.FileName);
-      // tuning.ImageNameE = fileNameE = fileNameE + DateTime.Now.ToString("yymmssfff") + extensionE;
-      // string pathE = Path.Combine(wwwRootPathE + "/Image/", fileNameE);
-      // using (var fileStream = new FileStream(pathE, FileMode.Create))
-      // {
-      //   await tuning.ImageFileE.CopyToAsync(fileStream);
-      // }
-
-      // string wwwRootPathF = _hostEnvironment.WebRootPath;
-      // string fileNameF = Path.GetFileNameWithoutExtension(tuning.ImageFileF.FileName);
-      // string extensionF = Path.GetExtension(tuning.ImageFileB.FileName);
-      // tuning.ImageNameF = fileNameF = fileNameF + DateTime.Now.ToString("yymmssfff") + extensionF;
-      // string pathF = Path.Combine(wwwRootPathF + "/Image/", fileNameF);
-      // using (var fileStream = new FileStream(pathF, FileMode.Create))
-      // {
-      //   await tuning.ImageFileF.CopyToAsync(fileStream);
-      // }
-
-      // string wwwRootPathG = _hostEnvironment.WebRootPath;
-      // string fileNameG = Path.GetFileNameWithoutExtension(tuning.ImageFileG.FileName);
-      // string extensionG = Path.GetExtension(tuning.ImageFileG.FileName);
-      // tuning.ImageNameG = fileNameG = fileNameG + DateTime.Now.ToString("yymmssfff") + extensionG;
-      // string pathG = Path.Combine(wwwRootPathG + "/Image/", fileNameG);
-      // using (var fileStream = new FileStream(pathG, FileMode.Create))
-      // {
-      //   await tuning.ImageFileG.CopyToAsync(fileStream);
-      // }
-      
-      // _db.Entry(tuning).State = EntityState.Modified;
-      // _db.SaveChanges();
-      // return RedirectToAction("Details", new { id = tuning.TuningId});
     }
 
     [HttpPost]
@@ -252,37 +124,112 @@ namespace GuitarTunings.Controllers
     }
 
     [NonAction]
-    public async Task<string> SaveImage(IFormFile imageFile)
+    public async void AddImage (Tuning tuning)
     {
-      string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
-      imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
-      var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "/Image/", imageName);
-      using (var fileStream = new FileStream(imagePath, FileMode.Create))
+      if(tuning.ImageFileA != null)
       {
-        await imageFile.CopyToAsync(fileStream);
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(tuning.ImageFileA.FileName);
+        string extension = Path.GetExtension(tuning.ImageFileA.FileName);
+        tuning.ImageNameA = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await tuning.ImageFileA.CopyToAsync(fileStream);
+        }
       }
-      return imageName;
+
+      if(tuning.ImageFileB != null)
+      {
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(tuning.ImageFileB.FileName);
+        string extension = Path.GetExtension(tuning.ImageFileB.FileName);
+        tuning.ImageNameB = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await tuning.ImageFileB.CopyToAsync(fileStream);
+        }
+      }
+
+      if(tuning.ImageFileC != null)
+      {
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(tuning.ImageFileC.FileName);
+        string extension = Path.GetExtension(tuning.ImageFileA.FileName);
+        tuning.ImageNameC = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await tuning.ImageFileC.CopyToAsync(fileStream);
+        }
+      }
+
+      if(tuning.ImageFileD != null)
+      {
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(tuning.ImageFileD.FileName);
+        string extension = Path.GetExtension(tuning.ImageFileD.FileName);
+        tuning.ImageNameD = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await tuning.ImageFileD.CopyToAsync(fileStream);
+        }
+      }
+
+      if(tuning.ImageFileE != null)
+      {
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(tuning.ImageFileE.FileName);
+        string extension = Path.GetExtension(tuning.ImageFileE.FileName);
+        tuning.ImageNameE = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await tuning.ImageFileE.CopyToAsync(fileStream);
+        }
+      }
+
+      if(tuning.ImageFileF != null)
+      {
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(tuning.ImageFileF.FileName);
+        string extension = Path.GetExtension(tuning.ImageFileF.FileName);
+        tuning.ImageNameF = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await tuning.ImageFileF.CopyToAsync(fileStream);
+        }
+      }
+
+      if(tuning.ImageFileG != null)
+      {
+        string wwwRootPath = _hostEnvironment.WebRootPath;
+        string fileName = Path.GetFileNameWithoutExtension(tuning.ImageFileG.FileName);
+        string extension = Path.GetExtension(tuning.ImageFileG.FileName);
+        tuning.ImageNameG = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+          await tuning.ImageFileG.CopyToAsync(fileStream);
+        }
+      }                                      
     }
 
     [NonAction]
     public void DeleteImage(string imageName)
     {
-      string wwwRootPath = Path.Combine(_hostEnvironment.WebRootPath, "Image");
-      var imagePath = Path.Combine(Directory.GetCurrentDirectory(),wwwRootPath, imageName);
-      // string wwwRootPath = _hostEnvironment.WebRootPath;
-      // var imagePath = Path.Combine(wwwRootPath + "/Image/", imageName);
-      if (System.IO.File.Exists(imagePath))
-          System.IO.File.Delete(imagePath);
+      if(imageName != null)
+      {
+        string wwwRootPath = Path.Combine(_hostEnvironment.WebRootPath, "Image");
+        var imagePath = Path.Combine(Directory.GetCurrentDirectory(),wwwRootPath, imageName);
+        if (System.IO.File.Exists(imagePath))
+        {
+            System.IO.File.Delete(imagePath);
+        }
+      }
     }
   }
 }
-
-        // string wwwRootPathD = _hostEnvironment.WebRootPath;
-        // string fileNameD = Path.GetFileNameWithoutExtension(tuning.ImageFileD.FileName);
-        // string extensionD = Path.GetExtension(tuning.ImageFileD.FileName);
-        // tuning.ImageNameD = fileNameD = fileNameD + DateTime.Now.ToString("yymmssfff") + extensionD;
-        // string pathD = Path.Combine(wwwRootPathD + "/Image/", fileNameD);
-        // using (var fileStream = new FileStream(pathD, FileMode.Create))
-        // {
-        //   await tuning.ImageFileD.CopyToAsync(fileStream);
-        // }

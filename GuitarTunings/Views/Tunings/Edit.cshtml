@@ -11,6 +11,14 @@
 <form asp-controller="Tunings" asp-action="Edit", enctype="multipart/form-data", method="post">
   <ul>
     <input type="hidden" asp-for="TuningId" />
+    <input type="hidden" asp-for="ImageNameA" />
+    <input type="hidden" asp-for="ImageNameB" />
+    <input type="hidden" asp-for="ImageNameC" />
+    <input type="hidden" asp-for="ImageNameD" />
+    <input type="hidden" asp-for="ImageNameE" />
+    <input type="hidden" asp-for="ImageNameF" />
+    <input type="hidden" asp-for="ImageNameG" />
+
     <li>
       <label asp-for="Name"></label>
       <input asp-for="Name" required/>
@@ -27,13 +35,11 @@
       <label asp-for="TuningCategoryId">Tuning Category</label>
       <select asp-for="TuningCategoryId"
               asp-items="ViewBag.TuningCategoryId">
-        <option>Please select a Tuning Category</option>
       </select>
     </li>  
     <li>
       <label asp-for="ImageNameA"></label>
-      @Html.EditorFor(model => model.ImageFileA)
-      @* <input asp-for="ImageFileA" accept="image/*" /> *@
+      <input asp-for="ImageFileA" accept="image/*" required />
     </li>
     <li>
       <label asp-for="ImageNameB"></label>
