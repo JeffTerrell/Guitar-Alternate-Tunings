@@ -6,6 +6,13 @@
 
 @model LoginViewModel
 
+@if(@TempData["UserNotFound"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+    @TempData["UserNotFound"]
+  </div>  
+}
+
 <h4>User Login</h4>
 <hr />
 

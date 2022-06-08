@@ -25,12 +25,12 @@ public class AccountController : Controller
 
     public ActionResult Index()
     {
-        return View();
+      return View();
     }
 
     public IActionResult Register()
     {
-        return View();
+      return View();
     }
 
     [HttpPost]
@@ -44,7 +44,7 @@ public class AccountController : Controller
         }
         else
         {
-            return View();
+          return View();
         }
     }
 
@@ -61,10 +61,12 @@ public class AccountController : Controller
       Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: true, lockoutOnFailure: false);
       if (result.Succeeded)
       {
+        TempData["LoginSuccess"] = ($"{model.UserName} successfully logged in!");
         return RedirectToAction("Index");
       }
       else
       {
+        TempData["UserNotFound"] = "User not found!";
         return View();
       }
     }
@@ -88,8 +90,8 @@ public class AccountController : Controller
 
     if (user == null)
     {
-        ViewBag.ErrorMessage = $"User with Id = {"Jeff"} cannot be found";
-        return View("NotFound");  // setup "NotFound" view in Shared
+      ViewBag.ErrorMessage = $"User with Id = {"Jeff"} cannot be found";
+      return View("NotFound");  // setup "NotFound" view in Shared
     }
 
     // GetClaimsAsync returns the list of user Claims
@@ -99,11 +101,11 @@ public class AccountController : Controller
 
     var model = new EditViewModel
     {
-        Id = user.Id,
-        Email = user.Email,
-        UserName = user.UserName,
-        Claims = userClaims.Select(c => c.Value).ToList(),
-        Roles = (System.Collections.Generic.List<string>)userRoles
+      Id = user.Id,
+      Email = user.Email,
+      UserName = user.UserName,
+      Claims = userClaims.Select(c => c.Value).ToList(),
+      Roles = (System.Collections.Generic.List<string>)userRoles
     };
 
     return View(model);
@@ -112,33 +114,33 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<ActionResult> Edit(EditViewModel model)
     {
-        var user = await _userManager.FindByIdAsync(model.Id);
+      var user = await _userManager.FindByIdAsync(model.Id);
 
-        if (user == null)
+      if (user == null)
+      {
+        ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
+        return View("NotFound");  // setup "NotFound" view in Shared
+      }
+      else
+      {
+        user.Email = model.Email;
+        user.UserName = model.UserName;
+        user.PasswordHash = model.Password;
+
+        var result = await _userManager.UpdateAsync(user);
+
+        if (result.Succeeded)
         {
-            ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
-            return View("NotFound");  // setup "NotFound" view in Shared
+            return await(LogOffConfirmed());
         }
-        else
+
+        foreach (var error in result.Errors)
         {
-            user.Email = model.Email;
-            user.UserName = model.UserName;
-            user.PasswordHash = model.Password;
-
-            var result = await _userManager.UpdateAsync(user);
-
-            if (result.Succeeded)
-            {
-                return await(LogOffConfirmed());
-            }
-
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
-
-            return View(model);
+            ModelState.AddModelError("", error.Description);
         }
+
+        return View(model);
+      }
     }
   }
 }
