@@ -13,29 +13,33 @@
 
 <h2>Alternate Tuning Category Details</h2>
 <hr/>
-<h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
-<h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>  
+<div class="row">
+  <div class="col-sm-3">
+    <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
+    <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
+  </div>    
 <br>
-
-<h3>Alternate Tunings:</h3>
-@if (@Model.Tunings.Count == 0)
-  {
-    <h6>This category contains no alternate tunings</h6>
-  }
-else
-{
-  <ul>
-  @foreach (var tuning in Model.Tunings)
-  {
-    <li>
-      <h6><a asp-controller="Tunings"
-      asp-action="Details"
-      asp-route-id="@tuning.TuningId">@tuning.Name</a> : @tuning.Notes</h6>
-    </li>
-  }
-  </ul>
-}  
-
+  <div class="col-sm-9">
+    <h3>Alternate Tunings:</h3>
+    @if (@Model.Tunings.Count == 0)
+      {
+        <h6>This category contains no alternate tunings</h6>
+      }
+    else
+    {
+      <ul>
+      @foreach (var tuning in Model.Tunings)
+      {
+        <li>
+          <h6><a asp-controller="Tunings"
+          asp-action="Details"
+          asp-route-id="@tuning.TuningId">@tuning.Name</a> : @tuning.Notes</h6>
+        </li>
+      }
+      </ul>
+    }
+  </div>   
+</div>
 <br>
 
 @if (!User.Identity.IsAuthenticated)

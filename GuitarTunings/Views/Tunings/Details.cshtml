@@ -14,12 +14,12 @@
 <h2>Alternate Tuning Details</h2>
 <hr/>
 <div class="row">
-  <div class="col-sm">
+  <div class="col-sm-3">
     <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
     <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
     <h3>@Html.DisplayNameFor(model => model.Notes):</h3><h6>@Html.DisplayFor(model => model.Notes)</h6>
   </div>    
-  <div class="col-sm">
+  <div class="col-sm-4">
     <h3>Artists using this tuning:</h3>
     @if (@Model.JoinArtist.Count == 0)
       {
@@ -39,7 +39,7 @@
       </ul>
     }
   </div>
-  <div class="col-sm">
+  <div class="col-sm-4">
     <h3>Songs using this tuning:</h3>
     @if (@Model.Songs.Count == 0)
       {
