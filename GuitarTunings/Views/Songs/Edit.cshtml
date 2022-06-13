@@ -60,11 +60,11 @@
     @Html.DropDownList("ArtistId")
 </form>
 
+<br>
 
-<a asp-controller="Songs"
-    asp-action="Index">View All Alternate Tuning Categories</a>
-<br>    
 <a asp-controller="Songs"
     asp-action="Details"
     asp-route-id="@Model.SongId">Back to Details for: @Model.Name</a>
 <br>   
+<a asp-controller="Songs"
+    asp-action="Index">View All Songs</a>
