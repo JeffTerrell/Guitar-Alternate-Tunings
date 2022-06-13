@@ -283,9 +283,17 @@ progress {
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; }
 
-::-webkit-file-upload-button {
+::-webkit-file-upload-button { /* iformfile button */
+  background-color:  rgb(217, 228, 250);
+  border: 2px solid #005cbf;
   font: inherit;
   -webkit-appearance: button; }
+
+::-webkit-file-upload-button:hover {
+  background-color: #0056b3;
+  border: 2px solid rgb(217, 228, 250);
+  color: white;
+}
 
 output {
   display: inline-block; }
@@ -1597,7 +1605,7 @@ pre {
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
+  background-color: rgb(217, 228, 250); /* background color of form-control */
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
