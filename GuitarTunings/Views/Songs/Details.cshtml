@@ -28,15 +28,15 @@
     <h6><a asp-controller="Tunings"
             asp-action="Details"
             asp-route-id="@Model.Tuning.TuningId">@Model.Tuning.Name</a></h6>
+    <h3>@Html.DisplayNameFor(model => model.Tab):</h3><h6><a href="@Html.DisplayFor(model => model.Tab)" Target="_blank">@Html.DisplayFor(model => model.Tab)</a></h6>       
   </div>
   <div class="col-sm-4">      
-    <h3>@Html.DisplayNameFor(model => model.Tutorial):</h3>
-    <iframe id="youtube-iframe" width="448" height="252" src="https://www.youtube-nocookie.com/embed/WGFm1vezqZE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <h3>@Html.DisplayNameFor(model => model.Tab):</h3><h6><a href="@Html.DisplayFor(model => model.Tab)" Target="_blank">@Html.DisplayFor(model => model.Tab)</a></h6>   
+    <h3>@Html.DisplayNameFor(model => model.Tutorial):</h3>  
+    <iframe id="youtube-iframe" width="448" height="252" src="@Url.Content(Model.Video)" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
   </div>
-  <div class="col-sm-5">
+  <div class="col-sm-4">
     <h3>@Html.DisplayNameFor(model => model.Video):</h3>
-    <iframe id="youtube-iframe" width="448" height="252" src="https://www.youtube-nocookie.com/embed/YSh-YsyjpXk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe id="youtube-iframe" width="448" height="252" src="@Url.Content(Model.Tutorial)" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>  
 </div>    
 <br>
