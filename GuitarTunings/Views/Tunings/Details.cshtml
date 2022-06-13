@@ -18,6 +18,8 @@
     <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
     <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
     <h3>@Html.DisplayNameFor(model => model.Notes):</h3><h6>@Html.DisplayFor(model => model.Notes)</h6>
+  </div>    
+  <div class="col-sm">
     <h3>Artists using this tuning:</h3>
     @if (@Model.JoinArtist.Count == 0)
       {
@@ -36,7 +38,8 @@
       }
       </ul>
     }
-
+  </div>
+  <div class="col-sm">
     <h3>Songs using this tuning:</h3>
     @if (@Model.Songs.Count == 0)
       {
@@ -50,42 +53,32 @@
         <li>
           <h6><a asp-controller="Songs"
             asp-action="Details"
-            asp-route-id="@song.SongId">@song.Name</a></h6>
+            asp-route-id="@song.SongId">@song.Name
+              @foreach (var artist in song.JoinArtist)
+              {
+              <span>(@artist.Artist.Name)</span>
+              }
+          </a></h6>
         </li>
       }
       </ul>
     }
-  </div>    
-  <div class="col-sm">
-    <h3>Major Chord Diagrams</h3>
-    <img src="@("~/image/"+Model.ImageNameA)" asp-append-version="true" height="200px" width="110px" />
-    <img src="@("~/image/"+Model.ImageNameB)" asp-append-version="true" height="200px" width="110px" />
-    <img src="@("~/image/"+Model.ImageNameC)" asp-append-version="true" height="200px" width="110px" />
-    <img src="@("~/image/"+Model.ImageNameD)" asp-append-version="true" height="200px" width="110px" />
-    <br>
-    <br>
-    <img src="@("~/image/"+Model.ImageNameE)" asp-append-version="true" height="200px" width="110px" />
-    <img src="@("~/image/"+Model.ImageNameF)" asp-append-version="true" height="200px" width="110px" />
-    <img src="@("~/image/"+Model.ImageNameG)" asp-append-version="true" height="200px" width="110px" />
-  </div>
-  <div class="col-sm">
-    <p>Testing</p>
   </div>  
 </div>  
 
 <br>
 
 @if (!User.Identity.IsAuthenticated)
-{
-}
+  {
+  }
 else
-{
-<a  asp-action="Edit"
-    asp-route-id="@Model.TuningId">Edit AlternateTuning: @Model.Name</a>
-<br>
-<a  asp-action="Delete"
-    asp-route-id="@Model.TuningId">Delete Alternate Tuning: @Model.Name</a>
-}
+  {
+    <a  asp-action="Edit"
+        asp-route-id="@Model.TuningId">Edit AlternateTuning: @Model.Name</a>
+    <br>
+    <a  asp-action="Delete"
+        asp-route-id="@Model.TuningId">Delete Alternate Tuning: @Model.Name</a>
+  }
 
 <br>
 <br>
