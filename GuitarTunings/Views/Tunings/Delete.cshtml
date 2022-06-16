@@ -11,13 +11,13 @@
   <input type="hidden" asp-for="TuningId" />
   <input type="submit" value="Delete" class="btn btn-danger" />
 </form>
-
+<br>
 <a asp-controller="Tunings"
     asp-action="Details"
     asp-route-id="@Model.TuningId">Back to Details for: @Model.Name</a>
-
 <br>
 <br>
-
 <h6><a asp-controller="Tunings"
     asp-action="Index">View All Alternate Tunings</a></h6>
+<h6><a asp-controller="Home"
+  asp-action="Index">Home</a></h6>

@@ -25,18 +25,13 @@
           asp-route-id="@tuning.TuningId">@tuning.Name</a> : @tuning.Notes</h4>
 }
 <br>
-
+<br>
 @if (!User.Identity.IsAuthenticated)
 {
 }
 else
 {
-<a asp-action="Create">Add new Alternate Tuning</a>
+<h6><a asp-action="Create">Add new Alternate Tuning</a></h6>
 }
-
-
-<br>
-<br>
-
 <h6><a asp-controller="Home"
         asp-action="Index">Home</a></h6>

@@ -4,10 +4,18 @@
 
 @model GuitarTunings.Models.Song
 
-<h2>Delete this Song</h2>
+<h2>Delete @Html.DisplayFor(model => model.Name)</h2>
 <h4>Song Name: <span>@Html.DisplayFor(model => model.Name)</span></h4>
 
 <form asp-controller="Songs" asp-action="Delete" method="post">
   <input type="hidden" asp-for="SongId" />
   <input type="submit" value="Delete" class="btn btn-danger" />
-</form>  
+</form>
+<br>
+<a asp-action="Details"
+    asp-route-id="Model.SongId">Back to Details for: @Model.Name</a>
+<br>
+<br>
+<h6><a asp-action="Index">View All Songs</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>    

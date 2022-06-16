@@ -11,7 +11,7 @@
   </div>
 }  
 
-<h2>Alternate Tuning Details</h2>
+<h2>@Html.DisplayFor(model => model.Name) Details</h2>
 <hr/>
 <div class="row">
   <div class="col-sm-3">
@@ -65,9 +65,8 @@
     }
   </div>  
 </div>  
-
 <br>
-
+<br>
 @if (!User.Identity.IsAuthenticated)
   {
   }
@@ -79,8 +78,8 @@ else
     <a  asp-action="Delete"
         asp-route-id="@Model.TuningId">Delete Alternate Tuning: @Model.Name</a>
   }
-
 <br>
 <br>
-
 <h6><a  asp-action="Index">View All Alternate Tunings</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>

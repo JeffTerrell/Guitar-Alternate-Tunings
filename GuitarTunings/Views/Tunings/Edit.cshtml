@@ -4,9 +4,7 @@
 
 @model GuitarTunings.Models.Tuning
 
-<h2>Edit Alternate Tuning</h2>
-
-<h4>Edit this Alternate Tuning: @Html.DisplayFor(model => model.Name)</h4>
+<h2>Edit @Html.DisplayFor(model => model.Name)</h2>
 
 <form asp-controller="Tunings" asp-action="Edit", enctype="multipart/form-data", method="post">
   <ul>
@@ -85,21 +83,17 @@
       </form>
     </li>
   }
-
 <br>    
-
 <form asp-controller="Tunings" asp-action="AddArtist", method="post">
     <input type="submit" value="Add Artist" class="btn btn-success btn-sm"/>
     <input type="hidden" asp-for="TuningId" />
     @Html.DropDownList("ArtistId")
 </form>
-
 <br>    
-
 <a asp-action="Details"
     asp-route-id="@Model.TuningId">Back to Details for: @Model.Name</a>
-
 <br>
 <br>
-
-<h6><a asp-action="Index">View All Alternate Tunings</a></h6>    
+<h6><a asp-action="Index">View All Alternate Tunings</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>

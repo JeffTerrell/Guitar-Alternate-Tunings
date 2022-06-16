@@ -11,7 +11,7 @@
   </div>
 } 
 
-<h2>Song Details</h2>
+<h2>@Html.DisplayFor(model => model.Name) Details</h2>
 <hr/>
 <div class="row">
   <div class="col-sm-3">
@@ -40,8 +40,6 @@
   </div>
 </div>    
 <br>
-
-<a  asp-action="Index">View All Songs</a>
 <br>
 @if (!User.Identity.IsAuthenticated)
 {
@@ -53,5 +51,9 @@ else
 <br>
 <a  asp-action="Delete"
     asp-route-id="@Model.SongId">Delete Song: @Model.Name</a>
-<br>
 }
+<br>
+<br>
+<h6><a  asp-action="Index">View All Songs</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>

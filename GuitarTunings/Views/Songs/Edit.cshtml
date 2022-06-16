@@ -51,20 +51,19 @@
       </form>
     </li>
   }
-
 <br>    
-
 <form asp-controller="Songs" asp-action="AddArtist", method="post">
     <input type="submit" value="Add Artist" class="btn btn-success btn-sm"/>
     <input type="hidden" asp-for="SongId" />
     @Html.DropDownList("ArtistId")
 </form>
-
 <br>
-
 <a asp-controller="Songs"
     asp-action="Details"
     asp-route-id="@Model.SongId">Back to Details for: @Model.Name</a>
-<br>   
-<a asp-controller="Songs"
-    asp-action="Index">View All Songs</a>
+<br>
+<br>
+<h6><a asp-controller="Songs"
+    asp-action="Index">View All Songs</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>

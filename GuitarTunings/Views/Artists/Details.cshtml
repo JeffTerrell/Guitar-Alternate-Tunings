@@ -11,26 +11,16 @@
   </div>
 }  
 
-<h2>Artist Details</h2>
+<h2>@Html.DisplayFor(model => model.Name) Details</h2>
 <hr/>
 <div class="row">
-  <div class="col-sm">
+  <div class="col-sm-3">
     <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
     <h3>@Html.DisplayNameFor(model => model.Genre):</h3><h6>@Html.DisplayFor(model => model.Genre)</h6> 
     <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>  
-
-    <h3>Songs by @Html.DisplayFor(model => model.Name)</h3>
-    @foreach (var song in Model.JoinSong)
-      {
-        <li>
-          <a asp-controller="Songs"
-          asp-action="Details"
-          asp-route-id="@song.Song.SongId">@song.Song.Name</a>
-        </li>
-      }  
-
     <br>
-
+  </div>
+  <div class="col-sm-4">
     <h3>Tunings used by @Html.DisplayFor(model => model.Name)</h3>
     @foreach (var tuning in Model.JoinTuning)
       {
@@ -40,16 +30,20 @@
           asp-route-id="@tuning.Tuning.TuningId">@tuning.Tuning.Name</a> : @tuning.Tuning.Notes
         </li>
       }
-  </div>
-  <div class="col-sm">
-    <img src="@("~/image/"+Model.ArtistImageName)" asp-append-version="true" id="artist-logo" height="200", width="200" />  
-  </div>
-  <div class="col-sm">
-  </div>  
+  </div>    
+  <div class="col-sm-4">
+    <h3>Songs by @Html.DisplayFor(model => model.Name)</h3>
+    @foreach (var song in Model.JoinSong)
+      {
+        <li>
+          <a asp-controller="Songs"
+          asp-action="Details"
+          asp-route-id="@song.Song.SongId">@song.Song.Name</a>
+        </li>
+      } 
+  </div> 
 </div>            
 <br>
-
-<h6><a  asp-action="Index">View All Artists</a></h6>
 <br>
 @if (!User.Identity.IsAuthenticated)
 {
@@ -61,5 +55,9 @@ else
 <br>
 <a  asp-action="Delete"
     asp-route-id="@Model.ArtistId">Delete Artist: @Model.Name</a>
-<br>
 }
+<br>
+<br>
+<h6><a  asp-action="Index">View All Artists</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>
