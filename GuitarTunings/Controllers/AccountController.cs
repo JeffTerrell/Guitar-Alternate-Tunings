@@ -80,6 +80,7 @@ public class AccountController : Controller
     [HttpPost, ActionName("LogOff")]
     public async Task<ActionResult> LogOffConfirmed()
     {
+      TempData["AccountLogOff"] = ($"{User.Identity.Name} successfully logged out");
       await _signInManager.SignOutAsync();
       return RedirectToAction("LogOff");
     }
