@@ -22,7 +22,7 @@
   </div>
   <div class="col-sm-4">
     <h3>Tunings used by @Html.DisplayFor(model => model.Name)</h3>
-    @foreach (var tuning in Model.JoinTuning)
+    @foreach (var tuning in Model.JoinTuning.OrderBy(tuning => tuning.Tuning.Name))
       {
         <li>
           <a asp-controller="Tunings"
@@ -33,7 +33,7 @@
   </div>    
   <div class="col-sm-4">
     <h3>Songs by @Html.DisplayFor(model => model.Name)</h3>
-    @foreach (var song in Model.JoinSong)
+    @foreach (var song in Model.JoinSong.OrderBy(song => song.Song.Name))
       {
         <li>
           <a asp-controller="Songs"
