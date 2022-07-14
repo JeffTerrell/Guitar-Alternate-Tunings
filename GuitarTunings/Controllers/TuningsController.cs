@@ -30,7 +30,7 @@ namespace GuitarTunings.Controllers
     public ActionResult Index(int Id)
     {
       ViewBag.TuningId = Id;
-      return View(_db.Tunings.ToList());
+      return View(_db.Tunings.OrderBy(tuning => tuning.Name).ToList());
     }
 
     public ActionResult Create()
