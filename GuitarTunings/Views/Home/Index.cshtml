@@ -2,9 +2,23 @@
     Layout = "_Layout";
 }
 
+@using GuitarTunings.Models;
+@model List<Song>
+
 <h1>Alternate Guitar Tunings Home</h1>
 
 <img src="~/image/cash_guitar.jpg" id="home-image" alt="johhny cash with guitar" height="500px">
+
+<h3>Latest Songs</h3>
+@foreach (Song song in Model)
+    {
+        <h6><a asp-controller="Songs"
+                asp-action="Details"
+                asp-route-id="@song.SongId">@song.Name</a></h6>
+    } 
+
+@* <h2>@ViewBag.LastUpdated</h2>
+<h2>@ViewBag.aSong</h2> *@
 
 @* <a asp-controller="TuningCategories"
     asp-action="Index">View All Alternate Tuning Categories</a>
