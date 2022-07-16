@@ -22,6 +22,14 @@ namespace GuitarTunings.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
+      var listArtists = _db.Artists.ToList();
+      var listSongs = _db.Songs.ToList();
+      var listTunings = _db.Tunings.ToList();
+
+      ViewBag.artistCount = listArtists.Count;
+      ViewBag.songCount = listSongs.Count;
+      ViewBag.tuningCount = listTunings.Count;
+
       return View(_db.Songs.OrderByDescending(song => song.SongId).Take(5).ToList());
     }
   }
