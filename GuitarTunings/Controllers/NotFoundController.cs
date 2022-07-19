@@ -11,11 +11,9 @@ namespace GuitarTunings.Controllers
   [Authorize]
   public class NotFoundController : Controller
   {
-    private readonly GuitarTuningsContext _db;
 
-    public NotFoundController(GuitarTuningsContext db)
+    public NotFoundController()
     {
-      _db = db;
     }
 
     [AllowAnonymous]
