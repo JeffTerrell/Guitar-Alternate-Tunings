@@ -78,11 +78,26 @@ namespace GuitarTunings.Controllers
       return View(thisArtist);
     }
 
-    public ActionResult Edit(int Id)
+    public ActionResult Edit(int? Id)
     {
-      ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
-      ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        TempData["artistNotFound"] = ($"Artist not found");
+        return RedirectToAction("Index", "NotFound");
+      }
+
       Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == Id);
+
+      if (thisArtist == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        TempData["artistNotFound"] = ($"Artist {Id} not found");
+        return RedirectToAction("Index", "NotFound");
+      }
+
+      ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
+      ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");     
       return View(thisArtist);
     }
 
@@ -142,9 +157,23 @@ namespace GuitarTunings.Controllers
       return RedirectToAction("Edit", new { id = artist.ArtistId });
     }
 
-    public ActionResult Delete(int Id)
+    public ActionResult Delete(int? Id)
     {
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        TempData["artistNotFound"] = ($"Artist not found");
+        return RedirectToAction("Index", "NotFound");
+      }
+
       Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == Id);
+
+      if (thisArtist == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        TempData["artistNotFound"] = ($"Artist {Id} not found");
+        return RedirectToAction("Index", "NotFound");
+      }
       return View(thisArtist);
     }
 
