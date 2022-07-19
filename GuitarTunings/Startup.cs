@@ -53,7 +53,8 @@ namespace GuitarTunings
 
       app.Run(async (context) =>
       {
-        await context.Response.WriteAsync("Error, URL path does not exist");
+        context.Response.Redirect("/NotFound");
+        // await context.Response.WriteAsync("Error, URL path does not exist");
       });
     }
   }

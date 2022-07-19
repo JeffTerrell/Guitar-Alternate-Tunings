@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Web;
 using System.Threading.Tasks;
 using GuitarTunings.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -56,9 +58,23 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Details(int Id)
+    public ActionResult Details(int? Id)
     {
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        TempData["artistNotFound"] = ($"Artist not found");
+        return RedirectToAction("Index", "NotFound");
+      }
+
       Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == Id);
+
+      if (thisArtist == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        TempData["artistNotFound"] = ($"Artist {Id} not found");
+        return RedirectToAction("Index", "NotFound");
+      }
       return View(thisArtist);
     }
 
@@ -140,6 +156,12 @@ namespace GuitarTunings.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    // [AllowAnonymous]
+    // public ActionResult NotFound()
+    // {
+
+    // }
 
     [NonAction]
     public async void AddImage (Artist artist)

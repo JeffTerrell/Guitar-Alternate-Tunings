@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+@model int
+
+<h1>Page Not Found</h1>
+
+<h6>@TempData["urlNotFound"]</h6>
+<h6>@TempData["artistNotFound"]</h6>
+<br>
+<br>
+<h6><a asp-controller="Artists"
+      asp-action="Index">View All Artists</a></h6>
+<h6><a asp-controller="Tunings"
+      asp-action="Index">View All Alternate Tunings</a></h6>
+<h6><a asp-controller="Songs"
+      asp-action="Index">View All Songs</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>
