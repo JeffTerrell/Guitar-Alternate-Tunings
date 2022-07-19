@@ -157,12 +157,6 @@ namespace GuitarTunings.Controllers
       return RedirectToAction("Index");
     }
 
-    // [AllowAnonymous]
-    // public ActionResult NotFound()
-    // {
-
-    // }
-
     [NonAction]
     public async void AddImage (Artist artist)
     {
