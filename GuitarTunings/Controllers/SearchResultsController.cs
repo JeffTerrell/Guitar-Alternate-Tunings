@@ -25,49 +25,23 @@ namespace GuitarTunings.Controllers
     [AllowAnonymous]
     public ActionResult Index(string model, string searchText = "")
     {
-
       if (model == "TuningCategory")
-        {
+          {
+            ViewBag.resultsTuningCategories = _db.TuningCategories.Where(result => result.Name.Contains(searchText)).ToList();
+          }
+      if (model == "Tuning")
+          {
+            ViewBag.resultsTunings = _db.Tunings.Where(result => result.Name.Contains(searchText)).ToList();
+          }
+      if (model == "Artist")
+          {
+            ViewBag.resultsArtists = _db.Artists.Where(result => result.Name.Contains(searchText)).ToList();
+          }
 
-        if (searchText != "" && searchText != null)
-        {
-          ViewBag.resultsTuningCategories = _db.TuningCategories.Where(result => result.Name.Contains(searchText)).ToList();
-        }
-        else
-          ViewBag.resultsTuningCategories = _db.TuningCategories.Where(result => result.Name.Contains(searchText)).ToList();
-        }
-    if (model == "Tuning")
-        {
-
-        if (searchText != "" && searchText != null)
-        {
-          ViewBag.resultsTunings = _db.Tunings.Where(result => result.Name.Contains(searchText)).ToList();
-        }
-        else
-          ViewBag.resultsTunings = _db.Tunings.Where(result => result.Name.Contains(searchText)).ToList();
-        }
-
-    if (model == "Artist")
-        {
-
-        if (searchText != "" && searchText != null)
-        {
-          ViewBag.resultsArtists = _db.Artists.Where(result => result.Name.Contains(searchText)).ToList();
-        }
-        else
-          ViewBag.resultsArtists = _db.Artists.Where(result => result.Name.Contains(searchText)).ToList();
-        }
-
-    if (model == "Song")
-        {
-
-        if (searchText != "" && searchText != null)
-        {
-          ViewBag.resultsSongs = _db.Songs.Where(result => result.Name.Contains(searchText)).ToList();
-        }
-        else
-          ViewBag.resultsSongs = _db.Songs.Where(result => result.Name.Contains(searchText)).ToList();
-        }          
+      if (model == "Song")
+          {
+            ViewBag.resultsSongs = _db.Songs.Where(result => result.Name.Contains(searchText)).ToList();
+          }
   
       return View();
     }
