@@ -7,12 +7,6 @@
 
 <h1>Search Results</h1>
 
-@* @if (ViewBag.resultsTuningCategories.Count == 0 & ViewBag.resultsTunings.Count == 0 & ViewBag.resultsArtists.Count == 0 & ViewBag.resultsSongs.Count == 0)
-{
-  <p>No results from your search could be found</p>
-} *@
-
-
 @if (ViewBag.resultsTuningCategories != null)  
 {
   if (ViewBag.resultsTuningCategories.Count < 1)
