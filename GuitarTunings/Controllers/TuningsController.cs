@@ -134,7 +134,7 @@ namespace GuitarTunings.Controllers
       return RedirectToAction("Edit", new { id = tuning.TuningId });
     }
 
-    public ActionResult Delete(int Id)
+    public ActionResult Delete(int? Id)
     {
       if (Id == null)
       {
