@@ -54,17 +54,42 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Details(int Id)
+    public ActionResult Details(int? Id)
     {
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       Song thisSong = _db.Songs.FirstOrDefault(song => song.SongId == Id);
+
+      if (thisSong == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
       return View(thisSong);
     }
 
-    public ActionResult Edit(int Id)
+    public ActionResult Edit(int? Id)
     {
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
+      Song thisSong = _db.Songs.FirstOrDefault(song => song.SongId == Id);
+
+      if (thisSong == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
       ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
-      Song thisSong = _db.Songs.FirstOrDefault(song => song.SongId == Id);
       return View(thisSong);
     }
 
@@ -97,9 +122,22 @@ namespace GuitarTunings.Controllers
       return RedirectToAction("Edit", new { id = song.SongId });
     }
 
-    public ActionResult Delete(int Id)
+    public ActionResult Delete(int? Id)
     {
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       Song thisSong = _db.Songs.FirstOrDefault(song => song.SongId == Id);
+
+      if (thisSong == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       return View(thisSong);
     }
 
