@@ -46,15 +46,41 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Details(int Id)
+    public ActionResult Details(int? Id)
     {
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       TuningCategory thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+
+      if (thisTuningCategory == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       return View(thisTuningCategory);
     }
 
-    public ActionResult Edit(int Id)
+    public ActionResult Edit(int? Id)
     {
-      var thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
+      TuningCategory thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+
+      if (thisTuningCategory == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       return View(thisTuningCategory);
     }
 
@@ -70,9 +96,22 @@ namespace GuitarTunings.Controllers
       return RedirectToAction("Details", new { id = tuningCategory.TuningCategoryId});
     }
 
-    public ActionResult Delete(int Id)
+    public ActionResult Delete(int? Id)
     {
-      var thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
+      TuningCategory thisTuningCategory = _db.TuningCategories.FirstOrDefault(tuningCategory => tuningCategory.TuningCategoryId == Id);
+
+      if (thisTuningCategory == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       return View(thisTuningCategory);
     }
 
