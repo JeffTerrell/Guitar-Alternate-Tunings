@@ -87,12 +87,19 @@ public class AccountController : Controller
 
     public async Task<ActionResult> Edit(string name)
     {
+
+    if (name == null)
+    {
+      TempData["userNotFound"] = "null";
+      return RedirectToAction("Index");
+    }
+
     var user = await _userManager.FindByNameAsync(name);
 
     if (user == null)
     {
-      ViewBag.ErrorMessage = $"User with Id = {"Jeff"} cannot be found";
-      return View("NotFound");  // setup "NotFound" view in Shared
+      TempData["userNotFound"] = $"{name}";
+      return RedirectToAction("Index");
     }
 
     // GetClaimsAsync returns the list of user Claims
@@ -119,8 +126,8 @@ public class AccountController : Controller
 
       if (user == null)
       {
-        ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
-        return View("NotFound");  // setup "NotFound" view in Shared
+        TempData["userNotFound"] = $"User {model.UserName} cannot be found";
+        return RedirectToAction("Index", "NotFound");
       }
       else
       {

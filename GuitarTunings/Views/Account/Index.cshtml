@@ -13,6 +13,13 @@
   </div>  
 }
 
+@if(@TempData["userNotFound"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+    <b>User not found: </b>@TempData["userNotFound"]
+  </div>
+}
+
 <h4>Account Settings</h4>
 <hr />
 @if (User.Identity.IsAuthenticated)

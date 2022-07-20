@@ -63,8 +63,7 @@ namespace GuitarTunings.Controllers
       if (Id == null)
       {
         TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
-        TempData["artistNotFound"] = ($"Artist not found");
-        return RedirectToAction("Index", "NotFound");
+        return RedirectToAction("Index");
       }
 
       Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == Id);
@@ -72,8 +71,7 @@ namespace GuitarTunings.Controllers
       if (thisArtist == null)
       {
         TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
-        TempData["artistNotFound"] = ($"Artist {Id} not found");
-        return RedirectToAction("Index", "NotFound");
+        return RedirectToAction("Index");
       }
       return View(thisArtist);
     }
@@ -83,8 +81,7 @@ namespace GuitarTunings.Controllers
       if (Id == null)
       {
         TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
-        TempData["artistNotFound"] = ($"Artist not found");
-        return RedirectToAction("Index", "NotFound");
+        return RedirectToAction("Index");
       }
 
       Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == Id);
@@ -92,8 +89,7 @@ namespace GuitarTunings.Controllers
       if (thisArtist == null)
       {
         TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
-        TempData["artistNotFound"] = ($"Artist {Id} not found");
-        return RedirectToAction("Index", "NotFound");
+        return RedirectToAction("Index");
       }
 
       ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
@@ -162,8 +158,7 @@ namespace GuitarTunings.Controllers
       if (Id == null)
       {
         TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
-        TempData["artistNotFound"] = ($"Artist not found");
-        return RedirectToAction("Index", "NotFound");
+        return RedirectToAction("Index");
       }
 
       Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == Id);
@@ -171,8 +166,7 @@ namespace GuitarTunings.Controllers
       if (thisArtist == null)
       {
         TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
-        TempData["artistNotFound"] = ($"Artist {Id} not found");
-        return RedirectToAction("Index", "NotFound");
+        return RedirectToAction("Index");
       }
       return View(thisArtist);
     }
