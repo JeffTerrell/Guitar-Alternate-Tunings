@@ -51,17 +51,43 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Details(int Id)
+    public ActionResult Details(int? Id)
     {
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       Tuning thisTuning = _db.Tunings.FirstOrDefault(tuning => tuning.TuningId == Id);
+
+      if (thisTuning == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       return View(thisTuning);
     }
 
-    public ActionResult Edit(int Id)
+    public ActionResult Edit(int? Id)
     {
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
+      Tuning thisTuning = _db.Tunings.FirstOrDefault(tuning => tuning.TuningId == Id);
+
+      if (thisTuning == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
       ViewBag.TuningCategoryId = new SelectList(_db.TuningCategories, "TuningCategoryId", "Name");
       ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
-      var thisTuning = _db.Tunings.FirstOrDefault(tuning => tuning.TuningId == Id);
       return View(thisTuning);
     }
 
@@ -110,7 +136,20 @@ namespace GuitarTunings.Controllers
 
     public ActionResult Delete(int Id)
     {
-      var thisTuning = _db.Tunings.FirstOrDefault(tuning => tuning.TuningId == Id);
+      if (Id == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }
+
+      Tuning thisTuning = _db.Tunings.FirstOrDefault(tuning => tuning.TuningId == Id);
+
+      if (thisTuning == null)
+      {
+        TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
+        return RedirectToAction("Index");
+      }      
+
       return View(thisTuning);
     }
 
