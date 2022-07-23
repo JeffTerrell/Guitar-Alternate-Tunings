@@ -12,6 +12,7 @@ namespace GuitarTunings.Models
     
     public Artist() 
     {
+      this.JoinAlbum = new HashSet<AlbumArtist>();
       this.JoinSong = new HashSet<ArtistSong>();
       this.JoinTuning = new HashSet<ArtistTuning>();
     }
@@ -29,6 +30,7 @@ namespace GuitarTunings.Models
     [DisplayName("Upload Artist/Band Image")]
     public IFormFile ArtistImageFile { get; set; }
 
+    public virtual ICollection<AlbumArtist> JoinAlbum { get; set; }
     public virtual ICollection<ArtistSong> JoinSong { get; set; }
     public virtual ICollection<ArtistTuning> JoinTuning { get; set; }
   }

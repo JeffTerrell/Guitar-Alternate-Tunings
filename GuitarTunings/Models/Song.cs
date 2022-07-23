@@ -10,6 +10,7 @@ namespace GuitarTunings.Models
 
     public Song()
     {
+      this.JoinAlbum = new HashSet<AlbumSong>();
       this.JoinArtist = new HashSet<ArtistSong>();
     }
 
@@ -17,7 +18,6 @@ namespace GuitarTunings.Models
     public int SongId { get; set; }
     [Required]
     public string Name { get; set; }
-    public string Album { get; set; }
     [DisplayName("Guitar Tab")]
     public string Tab { get; set; }
     [DisplayName("Song Video")]
@@ -27,6 +27,7 @@ namespace GuitarTunings.Models
 
     public int TuningId { get; set; }
     public virtual Tuning Tuning { get; set; }
+    public virtual ICollection<AlbumSong> JoinAlbum { get; set; }
     public virtual ICollection<ArtistSong> JoinArtist { get; set; }
   }
 }
