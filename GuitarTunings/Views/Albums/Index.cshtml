@@ -1,0 +1,44 @@
+@{
+  Layout = "_Layout";
+}
+
+@using GuitarTunings.Models;
+@model List<Album>
+
+@if(@TempData["AlbumCreate"] != null)
+{
+  <div class="alert alert-success" role="alert">
+    <a asp-action="Details" asp-route-id="@ViewBag.AlbumId">@TempData["AlbumCreate"]</a>
+  </div>  
+}
+
+@if(@TempData["urlNotFound"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+    <b>Page not found: </b>@TempData["urlNotFound"]
+  </div>
+}
+
+<h1>Albums</h1>
+
+@if (Model.Count == 0)
+{
+  <p>No albums have been added</p>
+}
+
+@foreach (Album album in Model)
+{
+  <h4><a asp-action="Details"
+          asp-route-id="@album.AlbumId">@album.Name</a></h4>
+}
+<br>
+<br>
+@if (!User.Identity.IsAuthenticated)
+{
+}
+else
+{
+<h6><a asp-action="Create">Add new Album</a></h6>
+}
+<h6><a asp-controller="Home"
+        asp-action="Index">Home</a></h6>

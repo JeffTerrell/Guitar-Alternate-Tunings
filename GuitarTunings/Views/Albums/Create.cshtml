@@ -1,0 +1,51 @@
+@{
+  Layout = "_Layout";
+}
+
+@using GuitarTunings.Models
+@model Album
+
+@if(ViewBag.chooseArtist != null)
+{
+  @ViewBag.chooseArtist
+}
+
+@if(TempData["chooseSong"] != null)
+{
+  @TempData["chooseSong"]
+}
+
+<h1>Add a new album</h1>
+
+<form asp-controller="Albums" asp-action="Create" method="post">
+  <ul>
+  <li>
+    <label asp-for="Name"></label>
+    <input asp-for="Name" required/>
+  </li>
+  <li>
+    <label asp-for="ReleaseDate">Release Date</label>
+    <input asp-for="ReleaseDate" />
+  </li>
+  <li>
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+  </li>
+  <li>
+    @Html.Label("Artist")
+    @Html.DropDownList("ArtistId")
+  </li>
+  <li>
+    @Html.Label("Song")
+    @Html.DropDownList("SongId")
+    </select>     
+  </li>
+  </ul>
+  
+  <input type="submit", value="Add", class="btn btn-dark"/>
+</form>
+<br>
+<br>
+<h6><a asp-action="Index">Back to list of all albums</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>
