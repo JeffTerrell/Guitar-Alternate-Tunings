@@ -18,7 +18,7 @@ namespace GuitarTunings.Models
     }
 
     [Key]
-    public int ArtistId { get; set; }
+    public int AlbumId { get; set; }
     [Required]
     public string Name { get; set; }
     [DataType(DataType.Date)]
