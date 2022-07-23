@@ -58,6 +58,19 @@ namespace GuitarTunings.Controllers
         _db.Albums.Add(album);
         _db.SaveChanges();
       }  
+
+      if(ArtistId != 0)
+      {
+        _db.AlbumArtists.Add(new AlbumArtist() { AlbumId = album.AlbumId, ArtistId = ArtistId});
+        _db.SaveChanges();
+      }
+
+      if(SongId != 0)
+      {
+        _db.AlbumSongs.Add(new AlbumSong() { AlbumId = album.AlbumId, SongId = SongId});
+        _db.SaveChanges();
+      }
+
       return RedirectToAction("Index", new {id = album.AlbumId});
     }
 

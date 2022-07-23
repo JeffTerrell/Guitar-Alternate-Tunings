@@ -17,7 +17,12 @@
   <div class="col-sm-3">
     <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
     <h3>@Html.DisplayNameFor(model => model.Genre):</h3><h6>@Html.DisplayFor(model => model.Genre)</h6> 
-    <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>  
+    <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
+    <h3>Albums:</h3>
+    @foreach (var album in Model.JoinAlbum)
+    {
+      <h6>@album.Album.Name : @album.Album.ReleaseDate.ToLongDateString()</h6>
+    }  
     <br>
   </div>
   <div class="col-sm-4">
