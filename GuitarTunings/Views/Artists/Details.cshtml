@@ -19,9 +19,11 @@
     <h3>@Html.DisplayNameFor(model => model.Genre):</h3><h6>@Html.DisplayFor(model => model.Genre)</h6> 
     <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
     <h3>Albums:</h3>
-    @foreach (var album in Model.JoinAlbum)
+    @foreach (var album in Model.JoinAlbum.OrderBy(album => album.Album.ReleaseDate))
     {
-      <h6>@album.Album.Name : @album.Album.ReleaseDate.ToLongDateString()</h6>
+      <h6><a asp-controller="Albums"
+          asp-action="Details"
+          asp-route-id="@album.Album.AlbumId">@album.Album.Name : @album.Album.ReleaseDate.ToShortDateString()</a></h6>
     }  
     <br>
   </div>

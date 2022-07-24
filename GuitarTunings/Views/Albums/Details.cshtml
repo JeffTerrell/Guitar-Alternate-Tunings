@@ -1,0 +1,59 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GuitarTunings.Models.Album
+
+@if(@TempData["AlbumUpdate"] != null)
+{
+  <div class="alert alert-success" role="alert">
+    @TempData["AlbumUpdate"]
+  </div>
+}  
+
+<h2>@Html.DisplayFor(model => model.Name) Details</h2>
+<hr/>
+<div class="row">
+  <div class="col-sm-3">
+    <h3>@Html.DisplayNameFor(model => model.Name):</h3><h6>@Html.DisplayFor(model => model.Name)</h6>
+    <h3>@Html.DisplayNameFor(model => model.ReleaseDate):</h3><h6>@Html.DisplayFor(model => model.ReleaseDate)</h6> 
+    <h3>@Html.DisplayNameFor(model => model.Description):</h3><h6>@Html.DisplayFor(model => model.Description)</h6>
+    <h3>Artists:</h3>
+    @foreach (var artist in Model.JoinArtist)
+    {
+      <h6><a asp-controller="Artists"
+          asp-action="Details"
+          asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a></h6>
+    }  
+    <br>
+  </div>
+  <div class="col-sm-9">
+    <h3>Songs on this album @Html.DisplayFor(model => model.Name)</h3>
+    @foreach (var song in Model.JoinSong.OrderBy(song => song.Song.Name))
+      {
+        <li>
+          <a asp-controller="Songs"
+          asp-action="Details"
+          asp-route-id="@song.Song.SongId">@song.Song.Name</a>
+        </li>
+      }
+  </div>    
+</div>            
+<br>
+<br>
+@if (!User.Identity.IsAuthenticated)
+{
+}
+else
+{    
+<a  asp-action="Edit"
+    asp-route-id="@Model.AlbumId">Edit Album: @Model.Name</a>
+<br>
+<a  asp-action="Delete"
+    asp-route-id="@Model.AlbumId">Delete Album: @Model.Name</a>
+}
+<br>
+<br>
+<h6><a  asp-action="Index">View All Albums</a></h6>
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>

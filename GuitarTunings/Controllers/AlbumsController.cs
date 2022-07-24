@@ -38,21 +38,7 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create (Album album, int ArtistId, int SongId)
     {
-      if(ArtistId == 0)
-      {
-        ViewBag.chooseArtist = "Please choose an Artist";
-        ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistsId", "Name");
-        return View();
-      }
-
-      if(SongId == 0)
-      {
-        TempData["chooseSong"] = "Please choose a song";
-        ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
-        return View();
-      }
-
-      if(album != null)
+      if(album != null & ArtistId != 0 & SongId != 0)
       {
         TempData["AlbumCreate"] = ($"Album {album.Name} successfully created");
         _db.Albums.Add(album);
@@ -115,15 +101,15 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Song song)
+    public ActionResult Edit(Album album)
     {
-      if(song != null)
+      if(album != null)
       {
-        TempData["SongUpdate"] = ($"{song.Name} updated successfully!") ;
-        _db.Entry(song).State = EntityState.Modified;
+        TempData["AlbumUpdate"] = ($"{album.Name} updated successfully!") ;
+        _db.Entry(album).State = EntityState.Modified;
         _db.SaveChanges();
       }  
-      return RedirectToAction("Details", new { id = song.SongId});
+      return RedirectToAction("Details", new { id = album.AlbumId});
     }
 
     [HttpPost]
