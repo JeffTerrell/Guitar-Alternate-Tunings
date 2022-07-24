@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model GuitarTunings.Models.Album
+
+<h2>Delete @Html.DisplayFor(model => model.Name)</h2>
+<h4>Album Name: <span>@Html.DisplayFor(model => model.Name)</span></h4>
+
+<form asp-controller="Albums" asp-action="Delete" method="post">
+  <input type="hidden" asp-for="AlbumId" />
+  <input type="submit" value="Delete" class="btn btn-danger" />
+</form>
+<br>
+<a asp-action="Details"
+    asp-route-id="@Model.AlbumId">Back to Details for: @Model.Name</a>
+<br>
+<br>
+<h6><a asp-action="Index">View All Albums</a></h6>    
+<h6><a asp-controller="Home"
+      asp-action="Index">Home</a></h6>

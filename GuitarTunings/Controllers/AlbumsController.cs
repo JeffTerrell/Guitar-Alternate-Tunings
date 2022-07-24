@@ -95,8 +95,8 @@ namespace GuitarTunings.Controllers
         return RedirectToAction("Index");
       }
 
-      ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
       ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+      ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
       return View(thisAlbum);
     }
 
@@ -113,20 +113,37 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddArtist(Song song, int ArtistId)
+    public ActionResult AddArtist(Album album, int ArtistId)
     {
-      _db.ArtistSongs.Add(new ArtistSong() { ArtistId = ArtistId , SongId = song.SongId});
+      _db.AlbumArtists.Add(new AlbumArtist() { ArtistId = ArtistId , AlbumId = album.AlbumId});
       _db.SaveChanges();
-      return RedirectToAction("Edit", new { id = song.SongId });
+      return RedirectToAction("Edit", new { id = album.AlbumId });
     }
 
     [HttpPost]
-    public ActionResult DeleteArtist(Song song, int joinId)
+    public ActionResult DeleteArtist(Album album, int joinId)
     {
-      ArtistSong joinEntry = _db.ArtistSongs.FirstOrDefault(find => find.ArtistSongId == joinId);
-      _db.ArtistSongs.Remove(joinEntry);
+      AlbumArtist joinEntry = _db.AlbumArtists.FirstOrDefault(find => find.AlbumArtistId == joinId);
+      _db.AlbumArtists.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Edit", new { id = song.SongId });
+      return RedirectToAction("Edit", new { id = album.AlbumId });
+    }
+
+    [HttpPost]
+    public ActionResult AddSong(Album album, int SongId)
+    {
+      _db.AlbumSongs.Add(new AlbumSong() { SongId = SongId , AlbumId = album.AlbumId});
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = album.AlbumId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteSong(Album album, int joinId)
+    {
+      AlbumSong joinEntry = _db.AlbumSongs.FirstOrDefault(find => find.AlbumSongId == joinId);
+      _db.AlbumSongs.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = album.AlbumId });
     }
 
     public ActionResult Delete(int? Id)
@@ -137,22 +154,22 @@ namespace GuitarTunings.Controllers
         return RedirectToAction("Index");
       }
 
-      Song thisSong = _db.Songs.FirstOrDefault(song => song.SongId == Id);
+      Album thisAlbum = _db.Albums.FirstOrDefault(album => album.AlbumId == Id);
 
-      if (thisSong == null)
+      if (thisAlbum == null)
       {
         TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
         return RedirectToAction("Index");
       }
 
-      return View(thisSong);
+      return View(thisAlbum);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int Id)
     {
-      Song thisSong = _db.Songs.FirstOrDefault(song => song.SongId == Id);
-      _db.Songs.Remove(thisSong);
+      Album thisAlbum = _db.Albums.FirstOrDefault(album => album.AlbumId == Id);
+      _db.Albums.Remove(thisAlbum);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
