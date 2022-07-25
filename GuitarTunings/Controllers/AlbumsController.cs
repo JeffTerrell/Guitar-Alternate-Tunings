@@ -115,8 +115,24 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult AddArtist(Album album, int ArtistId)
     {
-      _db.AlbumArtists.Add(new AlbumArtist() { ArtistId = ArtistId , AlbumId = album.AlbumId});
-      _db.SaveChanges();
+      // AlbumArtist joinEntry = _db.AlbumArtists.FirstOrDefault(find => find.ArtistId == ArtistId);
+
+      AlbumArtist joinEntry = _db.AlbumArtists.Where(find => find.AlbumId == album.AlbumId).FirstOrDefault(q => q.ArtistId == ArtistId);
+
+      if(joinEntry == null)
+      {
+        _db.AlbumArtists.Add(new AlbumArtist() { ArtistId = ArtistId , AlbumId = album.AlbumId});
+        _db.SaveChanges();
+        Artist artist = _db.Artists.FirstOrDefault(find => find.ArtistId == ArtistId);
+        TempData["ArtistAdded"] = ($"Artist {artist.Name} added.");
+        return RedirectToAction("Edit", new { id = album.AlbumId });
+      }
+
+      if(joinEntry != null)
+      {
+        TempData["ArtistExists"] = ($"Cannot add artist, {joinEntry.Artist.Name} already exists.");
+        return RedirectToAction("Edit", new { id = album.AlbumId });
+      }
       return RedirectToAction("Edit", new { id = album.AlbumId });
     }
 
@@ -132,8 +148,19 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult AddSong(Album album, int SongId)
     {
-      _db.AlbumSongs.Add(new AlbumSong() { SongId = SongId , AlbumId = album.AlbumId});
-      _db.SaveChanges();
+      AlbumSong joinEntry = _db.AlbumSongs.FirstOrDefault(find => find.SongId == SongId);
+      if(joinEntry == null)
+      {
+        _db.AlbumSongs.Add(new AlbumSong() { SongId = SongId , AlbumId = album.AlbumId});
+        _db.SaveChanges();
+        return RedirectToAction("Edit", new { id = album.AlbumId });
+      }
+
+      if(joinEntry.SongId == SongId)
+        {
+          TempData["SongExists"] = ($"{joinEntry.Song.Name} already exists.");
+          return RedirectToAction("Edit", new { id = album.AlbumId });
+        }
       return RedirectToAction("Edit", new { id = album.AlbumId });
     }
 
@@ -168,9 +195,13 @@ namespace GuitarTunings.Controllers
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int Id)
     {
+      if(Id != 0)
+      {
       Album thisAlbum = _db.Albums.FirstOrDefault(album => album.AlbumId == Id);
+      TempData["AlbumDelete"] = ($"{thisAlbum.Name} deleted successfully!") ;
       _db.Albums.Remove(thisAlbum);
       _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
   }
