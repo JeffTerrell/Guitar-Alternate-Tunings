@@ -4,6 +4,13 @@
 
 @model GuitarTunings.Models.Album
 
+@if(TempData["AlbumDuplicate"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+    <a asp-action="Details" asp-route-id="@TempData["ExistingAlbumId"]">@TempData["AlbumDuplicate"]</a>
+  </div>  
+}
+
 <h2>Edit Album</h2>
 
 <h4>Edit this Album: @Html.DisplayFor(model => model.Name)</h4>
@@ -47,6 +54,7 @@
     <input type="hidden" asp-for="AlbumId" />
     @Html.DropDownList("ArtistId")
 </form>
+
 @if(@TempData["ArtistAdded"] != null)
 { 
   <div class="alert alert-success d-sm-inline-flex" role="alert">
@@ -57,12 +65,12 @@
   </div>  
 }
 
-@if(@TempData["ArtistExists"] != null)
+@if(@TempData["ArtistDuplicate"] != null)
 { 
   <div class="alert alert-danger d-sm-inline-flex" role="alert">
     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
     <div>
-      <b>@TempData["ArtistExists"]</b>
+      <b>@TempData["ArtistDuplicate"]</b>
     </div>  
   </div>  
 }
@@ -70,12 +78,6 @@
 <br>
 
 <h3>Songs on @Html.DisplayFor(model => model.Name)</h3>
-@if(@TempData["SongExists"] != null)
-{
-  <div class="alert alert-danger d-sm-inline-flex" role="alert">
-    @TempData["SongExists"]
-  </div>  
-}
 @foreach (var song in Model.JoinSong)
   {
     <li>
@@ -95,6 +97,26 @@
     <input type="hidden" asp-for="AlbumId" />
     @Html.DropDownList("SongId")
 </form>
+
+@if(@TempData["SongAdded"] != null)
+{ 
+  <div class="alert alert-success d-sm-inline-flex" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#check-circle-fill"/></svg>
+    <div>
+      <b>@TempData["SongAdded"]</b>
+    </div>  
+  </div>  
+}
+
+@if(@TempData["SongDuplicate"] != null)
+{ 
+  <div class="alert alert-danger d-sm-inline-flex" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+      <b>@TempData["SongDuplicate"]</b>
+    </div>  
+  </div>  
+}
 
 <br>
 

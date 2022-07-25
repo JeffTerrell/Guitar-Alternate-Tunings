@@ -1,14 +1,11 @@
 @using GuitarTunings.Models
 @model Album
 
-@if(ViewBag.chooseArtist != null)
+@if(TempData["AlbumDuplicate"] != null)
 {
-  @ViewBag.chooseArtist
-}
-
-@if(TempData["chooseSong"] != null)
-{
-  @TempData["chooseSong"]
+  <div class="alert alert-danger" role="alert">
+    <a asp-action="Details" asp-route-id="@TempData["ExistingAlbumId"]">@TempData["AlbumDuplicate"]</a>
+  </div>  
 }
 
 <h1>Add a new album</h1>

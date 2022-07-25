@@ -38,7 +38,17 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create (Album album, int ArtistId, int SongId)
     {
-      if(album != null & ArtistId != 0 & SongId != 0)
+      Album existingAlbum = _db.Albums.FirstOrDefault(x => x.Name == album.Name);
+      if (existingAlbum != null)
+      {
+        TempData["AlbumDuplicate"] = ($"Cannot create {album.Name}, album already exists");
+        ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+        ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
+        TempData["ExistingAlbumId"] = existingAlbum.AlbumId;
+        return View();
+      }
+
+      if(album != null)
       {
         TempData["AlbumCreate"] = ($"Album {album.Name} successfully created");
         _db.Albums.Add(album);
@@ -101,8 +111,19 @@ namespace GuitarTunings.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Album album)
+    public ActionResult Edit(Album album, int AlbumId)
     {
+      Album existingAlbum = _db.Albums.FirstOrDefault(x => x.Name == album.Name);
+      if (existingAlbum != null)
+      {
+        Album currentAlbum = _db.Albums.FirstOrDefault(x => x.AlbumId == AlbumId);
+        ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+        ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
+        TempData["AlbumDuplicate"] = ($"Cannot update {album.Name}, album already exists");
+        TempData["ExistingAlbumId"] = existingAlbum.AlbumId;
+        return View(currentAlbum);
+      }
+
       if(album != null)
       {
         TempData["AlbumUpdate"] = ($"{album.Name} updated successfully!") ;
@@ -115,22 +136,20 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult AddArtist(Album album, int ArtistId)
     {
-      // AlbumArtist joinEntry = _db.AlbumArtists.FirstOrDefault(find => find.ArtistId == ArtistId);
-
-      AlbumArtist joinEntry = _db.AlbumArtists.Where(find => find.AlbumId == album.AlbumId).FirstOrDefault(q => q.ArtistId == ArtistId);
+      AlbumArtist joinEntry = _db.AlbumArtists.Where(x => x.AlbumId == album.AlbumId).FirstOrDefault(y => y.ArtistId == ArtistId);
 
       if(joinEntry == null)
       {
         _db.AlbumArtists.Add(new AlbumArtist() { ArtistId = ArtistId , AlbumId = album.AlbumId});
         _db.SaveChanges();
         Artist artist = _db.Artists.FirstOrDefault(find => find.ArtistId == ArtistId);
-        TempData["ArtistAdded"] = ($"Artist {artist.Name} added.");
+        TempData["ArtistAdded"] = ($"\u00A0{artist.Name} added");
         return RedirectToAction("Edit", new { id = album.AlbumId });
       }
 
       if(joinEntry != null)
       {
-        TempData["ArtistExists"] = ($"Cannot add artist, {joinEntry.Artist.Name} already exists.");
+        TempData["ArtistDuplicate"] = ($"\u00A0Cannot add {joinEntry.Artist.Name}, artist already exists");
         return RedirectToAction("Edit", new { id = album.AlbumId });
       }
       return RedirectToAction("Edit", new { id = album.AlbumId });
@@ -148,17 +167,19 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult AddSong(Album album, int SongId)
     {
-      AlbumSong joinEntry = _db.AlbumSongs.FirstOrDefault(find => find.SongId == SongId);
+      AlbumSong joinEntry = _db.AlbumSongs.Where(x => x.AlbumId == album.AlbumId).FirstOrDefault(find => find.SongId == SongId);
       if(joinEntry == null)
       {
         _db.AlbumSongs.Add(new AlbumSong() { SongId = SongId , AlbumId = album.AlbumId});
         _db.SaveChanges();
+        Song song = _db.Songs.FirstOrDefault(find => find.SongId == SongId);
+        TempData["SongAdded"] = ($"\u00A0{song.Name} added");
         return RedirectToAction("Edit", new { id = album.AlbumId });
       }
 
-      if(joinEntry.SongId == SongId)
+      if(joinEntry != null)
         {
-          TempData["SongExists"] = ($"{joinEntry.Song.Name} already exists.");
+          TempData["SongDuplicate"] = ($"\u00A0Cannot add {joinEntry.Song.Name}, song already exists");
           return RedirectToAction("Edit", new { id = album.AlbumId });
         }
       return RedirectToAction("Edit", new { id = album.AlbumId });
