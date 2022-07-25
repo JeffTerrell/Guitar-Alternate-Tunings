@@ -1,5 +1,5 @@
 @{
-  Layout = "_Layout";
+  Layout = "_LayoutIcons";
 }
 
 @model GuitarTunings.Models.Album
@@ -47,10 +47,35 @@
     <input type="hidden" asp-for="AlbumId" />
     @Html.DropDownList("ArtistId")
 </form>
+@if(@TempData["ArtistAdded"] != null)
+{ 
+  <div class="alert alert-success d-sm-inline-flex" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#check-circle-fill"/></svg>
+    <div>
+      <b>@TempData["ArtistAdded"]</b>
+    </div>  
+  </div>  
+}
+
+@if(@TempData["ArtistExists"] != null)
+{ 
+  <div class="alert alert-danger d-sm-inline-flex" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+      <b>@TempData["ArtistExists"]</b>
+    </div>  
+  </div>  
+}
 
 <br>
 
 <h3>Songs on @Html.DisplayFor(model => model.Name)</h3>
+@if(@TempData["SongExists"] != null)
+{
+  <div class="alert alert-danger d-sm-inline-flex" role="alert">
+    @TempData["SongExists"]
+  </div>  
+}
 @foreach (var song in Model.JoinSong)
   {
     <li>
