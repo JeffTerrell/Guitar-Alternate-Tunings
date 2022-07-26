@@ -174,7 +174,7 @@ namespace GuitarTunings.Controllers
         _db.SaveChanges();
         Song song = _db.Songs.FirstOrDefault(find => find.SongId == SongId);
         TempData["SongAdded"] = ($"\u00A0{song.Name} added");
-        return RedirectToAction("Edit", new { id = album.AlbumId });
+        return Redirect(Url.Action("Edit", new { id = album.AlbumId }) + "#Songs");
       }
 
       if(joinEntry != null)
