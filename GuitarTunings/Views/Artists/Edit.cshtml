@@ -25,53 +25,80 @@
 </form>
 
 <br>
-
-<h3>Songs by @Html.DisplayFor(model => model.Name)</h3>
-@foreach (var song in Model.JoinSong)
-  {
-    <li>
-      <a asp-controller="Songs"
-      asp-action="Details"
-      asp-route-id="@song.Song.SongId">@song.Song.Name</a>
-      <form asp-controller="Artists" asp-action="DeleteSong", method="post">
+<div class="row">
+  <div class="col-sm-4">
+    <h3>Songs by @Html.DisplayFor(model => model.Name)</h3>
+    @foreach (var song in Model.JoinSong)
+      {
+        <li>
+          <a asp-controller="Songs"
+          asp-action="Details"
+          asp-route-id="@song.Song.SongId">@song.Song.Name</a>
+          <form asp-controller="Artists" asp-action="DeleteSong", method="post">
+            <input type="hidden" asp-for="ArtistId" />
+            @Html.Hidden("joinId", @song.ArtistSongId)
+            <input type="submit" value="Delete Song" class="btn btn-danger btn-sm"/>
+          </form>
+        </li>
+      }
+    <br>
+    <form asp-controller="Artists" asp-action="AddSong", method="post">
+        <input type="submit" value="Add Song" class="btn btn-success btn-sm"/>
         <input type="hidden" asp-for="ArtistId" />
-        @Html.Hidden("joinId", @song.ArtistSongId)
-        <input type="submit" value="Delete Song" class="btn btn-danger btn-sm"/>
-      </form>
-    </li>
-  }
+        @Html.DropDownList("SongId")
+    </form>
+  </div>
 
-<br>    
+  <div class="col-sm-4">
+    <h3>Tunings used by @Html.DisplayFor(model => model.Name)</h3>
+    @foreach (var tuning in Model.JoinTuning)
+      {
+        <li>
+          <a asp-controller="Tunings"
+          asp-action="Details"
+          asp-route-id="@tuning.Tuning.TuningId">@tuning.Tuning.Name</a>
+          <form asp-controller="Artists" asp-action="DeleteTuning", method="post">
+            <input type="hidden" asp-for="ArtistId" />
+            @Html.Hidden("joinId", @tuning.ArtistTuningId)
+            <input type="submit" value="Delete Tuning" class="btn btn-danger btn-sm"/>
+          </form>
+        </li>
+      }
+    <br>    
+    <form asp-controller="Artists" asp-action="AddTuning", method="post">
+        <input type="submit" value="Add Tuning" class="btn btn-success btn-sm"/>
+        <input type="hidden" asp-for="ArtistId" />
+        @Html.DropDownList("TuningId")
+    </form>
+  </div>
 
-<form asp-controller="Artists" asp-action="AddSong", method="post">
-    <input type="submit" value="Add Song" class="btn btn-success btn-sm"/>
-    <input type="hidden" asp-for="ArtistId" />
-    @Html.DropDownList("SongId")
-</form>
+  <div class="col-sm-4">
+    <h3>Albums by @Html.DisplayFor(model => model.Name)</h3>
+    @foreach (var album in Model.JoinAlbum)
+      {
+        <li>
+          <a asp-controller="Albums"
+          asp-action="Details"
+          asp-route-id="@album.Album.AlbumId">@album.Album.Name</a>
+          <form asp-controller="Artists" asp-action="DeleteAlbum", method="post">
+            <input type="hidden" asp-for="ArtistId" />
+            @Html.Hidden("joinId", @album.AlbumArtistId)
+            <input type="submit" value="Delete Album" class="btn btn-danger btn-sm"/>
+          </form>
+        </li>
+      }
+    <br>    
+    <form asp-controller="Artists" asp-action="AddAlbum", method="post">
+        <input type="submit" value="Add Album" class="btn btn-success btn-sm"/>
+        <input type="hidden" asp-for="ArtistId" />
+        @Html.DropDownList("AlbumId")
+    </form>
+  </div>
+</div>
 
 <br>
-
-<h3>Tunings used by @Html.DisplayFor(model => model.Name)</h3>
-@foreach (var tuning in Model.JoinTuning)
-  {
-    <li>
-      <a asp-controller="Tunings"
-      asp-action="Details"
-      asp-route-id="@tuning.Tuning.TuningId">@tuning.Tuning.Name</a>
-      <form asp-controller="Artists" asp-action="DeleteTuning", method="post">
-        <input type="hidden" asp-for="ArtistId" />
-        @Html.Hidden("joinId", @tuning.ArtistTuningId)
-        <input type="submit" value="Delete Tuning" class="btn btn-danger btn-sm"/>
-      </form>
-    </li>
-  }
-<br>    
-<form asp-controller="Artists" asp-action="AddTuning", method="post">
-    <input type="submit" value="Add Tuning" class="btn btn-success btn-sm"/>
-    <input type="hidden" asp-for="ArtistId" />
-    @Html.DropDownList("TuningId")
-</form>
 <br>
+
 <a asp-action="Details"
     asp-route-id="@Model.ArtistId">Back to Details for: @Model.Name</a>
 <br>

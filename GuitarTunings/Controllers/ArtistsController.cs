@@ -92,8 +92,9 @@ namespace GuitarTunings.Controllers
         return RedirectToAction("Index");
       }
 
+      ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
       ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
-      ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");     
+      ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");  
       return View(thisArtist);
     }
 
@@ -113,6 +114,23 @@ namespace GuitarTunings.Controllers
         _db.SaveChanges();     
       }
       return RedirectToAction("Details", new { id = artist.ArtistId});
+    }
+
+    [HttpPost]
+    public ActionResult AddAlbum(Artist artist, int AlbumId)
+    {
+      _db.AlbumArtists.Add(new AlbumArtist() { AlbumId = AlbumId , ArtistId = artist.ArtistId});
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = artist.ArtistId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteAlbum(Artist artist, int joinId)
+    {
+      AlbumArtist joinEntry = _db.AlbumArtists.FirstOrDefault(find => find.AlbumArtistId == joinId);
+      _db.AlbumArtists.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Edit", new { id = artist.ArtistId });
     }
 
     [HttpPost]
