@@ -113,7 +113,6 @@ namespace GuitarTunings.Controllers
       Artist existingArtist = _db.Artists.FirstOrDefault(x => x.Name == artist.Name);
       if(existingArtist != null)
       {
-        Artist currentArtist = _db.Artists.FirstOrDefault(x => x.ArtistId == artist.ArtistId);
         ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
         ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
         ViewBag.TuningId = new SelectList(_db.Artists, "ArtistId", "Name");

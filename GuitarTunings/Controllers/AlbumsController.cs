@@ -116,12 +116,11 @@ namespace GuitarTunings.Controllers
       Album existingAlbum = _db.Albums.FirstOrDefault(x => x.Name == album.Name);
       if (existingAlbum != null)
       {
-        Album currentAlbum = _db.Albums.FirstOrDefault(x => x.AlbumId == AlbumId);
         ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
         ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
         TempData["AlbumDuplicate"] = ($"Cannot update {album.Name}, album already exists");
         TempData["ExistingAlbumId"] = existingAlbum.AlbumId;
-        return View(currentAlbum);
+        return View(existingAlbum);
       }
 
       if(album != null)
