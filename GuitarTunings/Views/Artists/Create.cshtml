@@ -1,6 +1,13 @@
 @using GuitarTunings.Models
 @model Artist
 
+@if(TempData["ArtistDuplicate"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+    <a asp-action="Details" asp-route-id="@TempData["ExistingArtistId"]">@TempData["ArtistDuplicate"]</a>
+  </div>  
+}
+
 <h1>Add a new artist</h1>
 
 <form asp-controller="Artists" asp-action="Create" enctype="multipart/form-data" method="post">

@@ -43,6 +43,15 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create([Bind("ImageId, Name, Genre, Description, ArtistImageFile")] Artist artist, int TuningId)
     {
+      Artist existingArtist = _db.Artists.FirstOrDefault(x => x.Name == artist.Name);
+      if (existingArtist != null)
+      {
+        TempData["ArtistDuplicate"] = ($"Cannot create {artist.Name}, artist already exists");
+        ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
+        TempData["ExistingArtistId"] = existingArtist.ArtistId;
+        return View();
+      }
+
       AddImage(artist);
 
       _db.Artists.Add(artist);
@@ -101,6 +110,18 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Edit(Artist artist, string ArtistImageName)
     {
+      Artist existingArtist = _db.Artists.FirstOrDefault(x => x.Name == artist.Name);
+      if(existingArtist != null)
+      {
+        Artist currentArtist = _db.Artists.FirstOrDefault(x => x.ArtistId == artist.ArtistId);
+        ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
+        ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
+        ViewBag.TuningId = new SelectList(_db.Artists, "ArtistId", "Name");
+        TempData["ArtistDuplicate"] = ($"Cannot update {artist.Name}, artist already exists");
+        TempData["ExistingArtistId"] = existingArtist.ArtistId;
+        return View(existingArtist);
+      }
+
       if (ArtistImageName != null)
       {
         DeleteImage(ArtistImageName);
@@ -119,8 +140,22 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult AddAlbum(Artist artist, int AlbumId)
     {
-      _db.AlbumArtists.Add(new AlbumArtist() { AlbumId = AlbumId , ArtistId = artist.ArtistId});
-      _db.SaveChanges();
+      AlbumArtist joinEntry = _db.AlbumArtists.Where(x => x.ArtistId == artist.ArtistId).FirstOrDefault(y => y.AlbumId == AlbumId);
+
+      if(joinEntry == null)
+      {
+        _db.AlbumArtists.Add(new AlbumArtist() { AlbumId = AlbumId, ArtistId = artist.ArtistId});
+        _db.SaveChanges();
+        Album album = _db.Albums.FirstOrDefault(find => find.AlbumId == AlbumId);
+        TempData["AlbumAdded"] = ($"\u00A0{album.Name} added");
+        return RedirectToAction("Edit", new { id = artist.ArtistId });
+      }
+
+      if(joinEntry != null)
+      {
+        TempData["AlbumDuplicate"] = ($"\u00A0Cannot add {joinEntry.Album.Name}, album already exists");
+        return RedirectToAction("Edit", new { id = artist.ArtistId });
+      }
       return RedirectToAction("Edit", new { id = artist.ArtistId });
     }
 
@@ -136,10 +171,22 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult AddSong(Artist artist, int SongId)
     {
-      // Tuning thisTuning = _db.Tunings.FirstOrDefault(find => find.TuningId == TuningId);
+      ArtistSong joinEntry = _db.ArtistSongs.Where(x => x.ArtistId == artist.ArtistId).FirstOrDefault(y => y.SongId == SongId);
 
-      _db.ArtistSongs.Add(new ArtistSong() { SongId = SongId , ArtistId = artist.ArtistId});
-      _db.SaveChanges();
+      if(joinEntry == null)
+      {
+        _db.ArtistSongs.Add(new ArtistSong() { SongId = SongId, ArtistId = artist.ArtistId});
+        _db.SaveChanges();
+        Song song = _db.Songs.FirstOrDefault(find => find.SongId == SongId);
+        TempData["SongAdded"] = ($"\u00A0{song.Name} added");
+        return RedirectToAction("Edit", new { id = artist.ArtistId });
+      }
+
+      if(joinEntry != null)
+      {
+        TempData["SongDuplicate"] = ($"\u00A0Cannot add {joinEntry.Song.Name}, song already exists");
+        return RedirectToAction("Edit", new { id = artist.ArtistId });
+      }
       return RedirectToAction("Edit", new { id = artist.ArtistId });
     }
 
@@ -155,10 +202,22 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult AddTuning(Artist artist, int TuningId)
     {
-      // Tuning thisTuning = _db.Tunings.FirstOrDefault(find => find.TuningId == TuningId);
+      ArtistTuning joinEntry = _db.ArtistTunings.Where(x => x.ArtistId == artist.ArtistId).FirstOrDefault(y => y.TuningId == TuningId);
 
-      _db.ArtistTunings.Add(new ArtistTuning() { TuningId = TuningId , ArtistId = artist.ArtistId});
-      _db.SaveChanges();
+      if(joinEntry == null)
+      {
+        _db.ArtistTunings.Add(new ArtistTuning() { TuningId = TuningId, ArtistId = artist.ArtistId});
+        _db.SaveChanges();
+        Tuning tuning = _db.Tunings.FirstOrDefault(find => find.TuningId == TuningId);
+        TempData["TuningAdded"] = ($"\u00A0{tuning.Name} added");
+        return RedirectToAction("Edit", new { id = artist.ArtistId });
+      }
+
+      if(joinEntry != null)
+      {
+        TempData["TuningDuplicate"] = ($"\u00A0Cannot add {joinEntry.Tuning.Name}, tuning already exists");
+        return RedirectToAction("Edit", new { id = artist.ArtistId });
+      }
       return RedirectToAction("Edit", new { id = artist.ArtistId });
     }
 
