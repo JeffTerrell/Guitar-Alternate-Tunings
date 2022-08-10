@@ -24,17 +24,17 @@
 
 @foreach (TuningCategory tuningCategory in Model)
 {
-  <h4><a asp-action="Details"
-          asp-route-id="@tuningCategory.TuningCategoryId">@tuningCategory.Name</a></h4>
-  
-  @foreach (Tuning tuning in tuningCategory.Tunings)
-  {
-    <ul>
-    <li><h6><a asp-controller="Tunings"
-                asp-action="Details"
-                asp-route-id="@tuning.TuningId">@tuning.Name : </a>@tuning.Notes</h6></li>
-    </ul>        
-  }        
+  <h4><b><a asp-action="Details"
+        asp-route-id="@tuningCategory.TuningCategoryId">@tuningCategory.Name</a></b></h4>
+
+    @foreach (Tuning tuning in tuningCategory.Tunings)
+      {
+        <ul>
+        <li><h6><a asp-controller="Tunings"
+                    asp-action="Details"
+                    asp-route-id="@tuning.TuningId">@tuning.Name : </a>@tuning.Notes</h6></li>
+        </ul>        
+      }        
 }
 <br>
 <br>
@@ -47,3 +47,5 @@ else
 }
 <h6><a asp-controller="Home"
         asp-action="Index">Home</a></h6>
+
+<script src="~/js/details.js"></script>
