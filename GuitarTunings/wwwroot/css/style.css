@@ -8306,3 +8306,7 @@ a[data-toggle="collapse"] {
 #youtube-iframe {
   box-shadow: 0px 1px 15px #000;
 }
+
+#initially-hidden {
+  display: none;
+}
