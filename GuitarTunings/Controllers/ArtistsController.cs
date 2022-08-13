@@ -56,6 +56,11 @@ namespace GuitarTunings.Controllers
                     .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
                     .Select(p => p.Name)
                     .ToList();
+                model.ArtistIDs = _db.Artists
+                .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
+                .Select(p => p.ArtistId)
+                .ToList();
+                model.ArtistDict = Enumerable.Range(0, model.ArtistIDs.Count).ToDictionary(i => model.ArtistIDs[i], i=> model.ArtistNames[i]);     
             }
             else
             {
@@ -63,6 +68,11 @@ namespace GuitarTunings.Controllers
                     .Where(p => p.Name.StartsWith(selectedLetter))
                     .Select(p => p.Name)
                     .ToList();
+                model.ArtistIDs = _db.Artists
+                    .Where(p => p.Name.StartsWith(selectedLetter))
+                    .Select(p => p.ArtistId)
+                    .ToList();
+                model.ArtistDict = Enumerable.Range(0, model.ArtistIDs.Count).ToDictionary(i => model.ArtistIDs[i], i=> model.ArtistNames[i]);     
             }
       }
       return View(model);

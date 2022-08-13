@@ -16,36 +16,34 @@
 }
 
 <h1>Artists</h1>
-<h6>Sort</h6>
-<form asp-controller="Artists" asp-action="Index" method="post">
+@* <form asp-controller="Artists" asp-action="Index" method="post">
   <input class="form-control" type="text" name="searchText" placeholder="Search Artists">
   <input type="submit", value="Search", class="btn btn-warning" />
-</form>  
+</form>   *@
 
-
-<ul class="pagination alpha">
+<ul class="pagination justify-content-center">
     @foreach (var link in Model.Alphabet)
     {
         if (Model.FirstLetters.Contains(link) || (Model.NamesStartWithNumbers && link == "0-9") || link == "All")
         {
             if (Model.SelectedLetter == link || Model.SelectedLetter == null && link == "All")
             {
-                <li class="active"><span>@link</span></li>
+                <li class="page-item active"><span class="page-link">@link</span></li>
             }
             else
             {
-                <li>@Html.ActionLink(link, "Index", new {selectedLetter = link})</li>
+                <li class="page-link">@Html.ActionLink(link, "Index", new {selectedLetter = link})</li>
             }
         }
         else
         {
-            <li class="inactive"><span>@link</span></li>
+            <li class="page-item disabled" ><span class="page-link">@link</span></li>
         }
     }
 </ul>
 
 <ul>
-  @foreach (var artist in Model.ArtistDict)
+  @foreach (var artist in Model.ArtistDict.OrderBy(artist => artist.Value))
   {
     <li><h4><a asp-action="Details"
             asp-route-id="@artist.Key">@artist.Value</a></h4></li>
