@@ -4049,14 +4049,14 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #007bff;
+  background-color: #007bff; /* active color for alphabetical pagination on index pages */
   border-color: #007bff; }
 
 .page-item.disabled .page-link {
   color: #6c757d;
   pointer-events: none;
   cursor: auto;
-  background-color: #fff;
+  background-color: #fff; /* disabled color for alphabetical pagination on index pages */
   border-color: #dee2e6; }
 
 .pagination-lg .page-link {
