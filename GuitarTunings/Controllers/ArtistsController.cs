@@ -5,12 +5,14 @@ using System.Net;
 using System.Web;
 using System.Threading.Tasks;
 using GuitarTunings.Models;
+using GuitarTunings.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace GuitarTunings.Controllers
 {
@@ -28,10 +30,49 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Index(int Id)
+    public ActionResult Index(int Id, string selectedLetter)
     {
-      ViewBag.ArtistId = Id;
-      return View(_db.Artists.ToList());
+      var model = new AlphabetPaging {  SelectedLetter = selectedLetter };
+
+        model.FirstLetters = _db.Artists
+            .GroupBy(p => p.Name.Substring(0, 1))
+            .Select(x => x.Key.ToUpper())
+            .ToList();
+
+        if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
+        {
+            model.ArtistNames = _db.Artists
+                .Select(p => p.Name)
+                .ToList();
+            model.ArtistIDs = _db.Artists.Select(p => p.ArtistId).ToList(); 
+            model.ArtistDict = Enumerable.Range(0, model.ArtistIDs.Count).ToDictionary(i => model.ArtistIDs[i], i=> model.ArtistNames[i]);    
+        }
+        else
+        {
+            if (selectedLetter == "0-9")
+            {
+                var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
+                model.ArtistNames = _db.Artists
+                    .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
+                    .Select(p => p.Name)
+                    .ToList();
+            }
+            else
+            {
+                model.ArtistNames = _db.Artists
+                    .Where(p => p.Name.StartsWith(selectedLetter))
+                    .Select(p => p.Name)
+                    .ToList();
+            }
+      }
+      return View(model);
+    }
+
+    [AllowAnonymous]
+    [HttpPost]
+    public ActionResult Index(string searchText = "")
+    {
+      return View(_db.Artists.Where(artist => artist.Name.StartsWith(searchText)).OrderBy(artist => artist.Name).ToList());
     }
 
     public ActionResult Create()
