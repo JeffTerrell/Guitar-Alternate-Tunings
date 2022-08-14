@@ -25,6 +25,7 @@ namespace GuitarTunings.Controllers
     [AllowAnonymous]
     public ActionResult Index(int Id, string selectedLetter)
     {
+      ViewBag.SongId = Id;
       var model = new AlphabetPagingViewModel {  SelectedLetter = selectedLetter };
 
       model.FirstLetters = _db.Songs
