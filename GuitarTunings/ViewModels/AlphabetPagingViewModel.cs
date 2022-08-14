@@ -4,11 +4,11 @@ using System.Linq;
 namespace GuitarTunings.ViewModels 
 {
 
-    public class AlphabetPaging
+    public class AlphabetPagingViewModel
     {
-        public List<string> ArtistNames { get; set; }
-        public List<int> ArtistIDs { get; set; }
-        public Dictionary<int, string> ArtistDict { get; set; }
+        public List<string> Names { get; set; }
+        public List<int> IDs { get; set; }
+        public Dictionary<int, string> Dict { get; set; }
         public List<string> Alphabet
         {
             get
