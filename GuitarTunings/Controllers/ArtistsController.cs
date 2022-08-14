@@ -32,7 +32,7 @@ namespace GuitarTunings.Controllers
     [AllowAnonymous]
     public ActionResult Index(int Id, string selectedLetter)
     {
-      var model = new AlphabetPaging {  SelectedLetter = selectedLetter };
+      var model = new AlphabetPagingViewModel {  SelectedLetter = selectedLetter };
 
         model.FirstLetters = _db.Artists
             .GroupBy(p => p.Name.Substring(0, 1))
@@ -41,38 +41,38 @@ namespace GuitarTunings.Controllers
 
         if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
         {
-            model.ArtistNames = _db.Artists
+            model.Names = _db.Artists
                 .Select(p => p.Name)
                 .ToList();
-            model.ArtistIDs = _db.Artists.Select(p => p.ArtistId).ToList(); 
-            model.ArtistDict = Enumerable.Range(0, model.ArtistIDs.Count).ToDictionary(i => model.ArtistIDs[i], i=> model.ArtistNames[i]);    
+            model.IDs = _db.Artists.Select(p => p.ArtistId).ToList(); 
+            model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);    
         }
         else
         {
             if (selectedLetter == "0-9")
             {
                 var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
-                model.ArtistNames = _db.Artists
+                model.Names = _db.Artists
                     .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
                     .Select(p => p.Name)
                     .ToList();
-                model.ArtistIDs = _db.Artists
+                model.IDs = _db.Artists
                 .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
                 .Select(p => p.ArtistId)
                 .ToList();
-                model.ArtistDict = Enumerable.Range(0, model.ArtistIDs.Count).ToDictionary(i => model.ArtistIDs[i], i=> model.ArtistNames[i]);     
+                model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
             }
             else
             {
-                model.ArtistNames = _db.Artists
+                model.Names = _db.Artists
                     .Where(p => p.Name.StartsWith(selectedLetter))
                     .Select(p => p.Name)
                     .ToList();
-                model.ArtistIDs = _db.Artists
+                model.IDs = _db.Artists
                     .Where(p => p.Name.StartsWith(selectedLetter))
                     .Select(p => p.ArtistId)
                     .ToList();
-                model.ArtistDict = Enumerable.Range(0, model.ArtistIDs.Count).ToDictionary(i => model.ArtistIDs[i], i=> model.ArtistNames[i]);     
+                model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
             }
       }
       return View(model);
