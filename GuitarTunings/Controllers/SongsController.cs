@@ -27,46 +27,46 @@ namespace GuitarTunings.Controllers
     {
       var model = new AlphabetPagingViewModel {  SelectedLetter = selectedLetter };
 
-        model.FirstLetters = _db.Songs
-            .GroupBy(p => p.Name.Substring(0, 1))
-            .Select(x => x.Key.ToUpper())
-            .ToList();
+      model.FirstLetters = _db.Songs
+          .GroupBy(p => p.Name.Substring(0, 1))
+          .Select(x => x.Key.ToUpper())
+          .ToList();
 
-        if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
+      if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
+      {
+        model.Names = _db.Songs
+            .Select(p => p.Name)
+            .ToList();
+        model.IDs = _db.Songs.Select(p => p.SongId).ToList(); 
+        model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);    
+      }
+      else
+      {
+        if (selectedLetter == "0-9")
         {
-            model.Names = _db.Songs
-                .Select(p => p.Name)
-                .ToList();
-            model.IDs = _db.Songs.Select(p => p.SongId).ToList(); 
-            model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);    
+          var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
+          model.Names = _db.Songs
+              .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
+              .Select(p => p.Name)
+              .ToList();
+          model.IDs = _db.Songs
+          .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
+          .Select(p => p.SongId)
+          .ToList();
+          model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
         }
         else
         {
-            if (selectedLetter == "0-9")
-            {
-                var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
-                model.Names = _db.Songs
-                    .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
-                    .Select(p => p.Name)
-                    .ToList();
-                model.IDs = _db.Songs
-                .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
-                .Select(p => p.SongId)
-                .ToList();
-                model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
-            }
-            else
-            {
-                model.Names = _db.Songs
-                    .Where(p => p.Name.StartsWith(selectedLetter))
-                    .Select(p => p.Name)
-                    .ToList();
-                model.IDs = _db.Songs
-                    .Where(p => p.Name.StartsWith(selectedLetter))
-                    .Select(p => p.SongId)
-                    .ToList();
-                model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
-            }
+          model.Names = _db.Songs
+              .Where(p => p.Name.StartsWith(selectedLetter))
+              .Select(p => p.Name)
+              .ToList();
+          model.IDs = _db.Songs
+              .Where(p => p.Name.StartsWith(selectedLetter))
+              .Select(p => p.SongId)
+              .ToList();
+          model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
+        }
       }
       return View(model);
     }

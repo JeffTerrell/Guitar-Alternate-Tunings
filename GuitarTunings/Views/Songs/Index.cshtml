@@ -25,26 +25,26 @@
 <ul class="pagination justify-content-center">
     @foreach (var link in Model.Alphabet)
     {
-        if (Model.FirstLetters.Contains(link) || (Model.NamesStartWithNumbers && link == "0-9") || link == "All")
-        {
-            if (Model.SelectedLetter == link || Model.SelectedLetter == null && link == "All")
-            {
-                <li class="page-item active"><span class="page-link">@link</span></li>
-            }
-            else
-            {
-                <li class="page-link">@Html.ActionLink(link, "Index", new {selectedLetter = link})</li>
-            }
-        }
-        else
-        {
-            <li class="page-item disabled" ><span class="page-link">@link</span></li>
-        }
+      if (Model.FirstLetters.Contains(link) || (Model.NamesStartWithNumbers && link == "0-9") || link == "All")
+      {
+          if (Model.SelectedLetter == link || Model.SelectedLetter == null && link == "All")
+          {
+              <li class="page-item active"><span class="page-link">@link</span></li>
+          }
+          else
+          {
+            <li class="page-link">@Html.ActionLink(link, "Index", new {selectedLetter = link})</li>
+          }
+      }
+      else
+      {
+        <li class="page-item disabled" ><span class="page-link">@link</span></li>
+      }
     }
 </ul>
 
 <ul>
-  @foreach (var song in Model.Dict.OrderBy(artist => artist.Value))
+  @foreach (var song in Model.Dict.OrderBy(song => song.Value))
   {
     <li><h4><a asp-action="Details"
             asp-route-id="@song.Key">@song.Value</a></h4></li>
