@@ -23,6 +23,27 @@
   <p>No categories have been added</p>
 }
 
+<ul class="pagination justify-content-center">
+  @foreach (var link in Model.Alphabet)
+  {
+    if (Model.FirstLetters.Contains(link) || (Model.NamesStartWithNumbers && link == "0-9") || link == "All")
+    {
+      if (Model.SelectedLetter == link || Model.SelectedLetter == null && link == "All")
+      {
+          <li class="page-item active"><span class="page-link">@link</span></li>
+      }
+      else
+      {
+        <li class="page-link">@Html.ActionLink(link, "Index", new {selectedLetter = link})</li>
+      }
+    }
+    else
+    {
+      <li class="page-item disabled" ><span class="page-link">@link</span></li>
+    }
+  }
+</ul>
+
 @foreach (TuningCategory tuningCategory in Model.GenericList)
 {
   <h4><b><a asp-action="Details"
@@ -36,6 +57,11 @@
                     asp-route-id="@tuning.TuningId">@tuning.Name : </a>@tuning.Notes</h6></li>
         </ul>        
       }        
+}
+
+@foreach (string letter in Model.Alphabet)
+{
+  @letter
 }
 
 <br>

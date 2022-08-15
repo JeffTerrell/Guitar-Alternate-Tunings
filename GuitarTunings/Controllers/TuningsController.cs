@@ -31,6 +31,7 @@ namespace GuitarTunings.Controllers
     {
       ViewBag.TuningId = Id;
       var model = new AlphabetPagingViewModel<Tuning> {  SelectedLetter = selectedLetter };
+      model.AddToListAllAndNumbers();
 
       model.FirstLetters = _db.Tunings
           .GroupBy(p => p.Name.Substring(0, 1))

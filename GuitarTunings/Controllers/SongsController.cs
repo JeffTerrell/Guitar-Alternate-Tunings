@@ -26,7 +26,8 @@ namespace GuitarTunings.Controllers
     public ActionResult Index(int Id, string selectedLetter)
     {
       ViewBag.SongId = Id;
-      var model = new AlphabetPagingViewModel<Song> {  SelectedLetter = selectedLetter };
+      var model = new AlphabetPagingViewModel<Song> { SelectedLetter = selectedLetter };
+      model.AddToListAllAndNumbers();
 
       model.FirstLetters = _db.Songs
           .GroupBy(p => p.Name.Substring(0, 1))
@@ -42,11 +43,11 @@ namespace GuitarTunings.Controllers
         if (selectedLetter == "0-9")
         {
           var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
-          model.GenericList = _db.Songs.Where(p => numbers.Contains(p.Name.Substring(0, 1))).Select(p => p).ToList();  
+          model.GenericList = _db.Songs.Where(p => numbers.Contains(p.Name.Substring(0, 1))).Select(p => p).ToList();
         }
         else
         {
-          model.GenericList = _db.Songs.Where(p => p.Name.StartsWith(selectedLetter)).Select(p => p).ToList();     
+          model.GenericList = _db.Songs.Where(p => p.Name.StartsWith(selectedLetter)).Select(p => p).ToList();
         }
       }
       return View(model);
