@@ -22,7 +22,7 @@ An informational website that allows visitors to view alternate tunings for the 
 
 ## Description
 
-A web application that allows registered users to create, update, and delete tuning categories, specific tunings, artists, and songs. Visitors to the website only have read access. This information is saved so that any user can view all of the associated data based on the specific object being accessed (ex: tuning used in a specific song or artist using a specific tuning). Each song has a details page that provides links to additional resources such guitar tabs and video tutorials. Note, currently images in the wwwroot/image folder need to be uploaded upon creation of an object.
+A web application that allows registered users to create, update, and delete tuning categories, specific tunings, artists, and songs. Visitors to the website only have read access. This information is saved so that any user can view all of the associated data based on the specific object being accessed (ex: tuning used in a specific song or artist using a specific tuning). Each song has a details page that provides links to additional resources such as guitar tabs and video tutorials. Note, currently images in the wwwroot/image folder need to be uploaded upon creation of an object.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
@@ -69,8 +69,7 @@ After completing the Setup/Installation requirements follow these steps to creat
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
 ## Known Bugs
-* Duplicate entries are allowed
-* Images are not deleted from wwwroot upon object deletion
+* None at this time
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/solar.png)
 
