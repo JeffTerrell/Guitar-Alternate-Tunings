@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using GuitarTunings.Models;
 using GuitarTunings.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuitarTunings.Controllers
@@ -52,7 +50,6 @@ namespace GuitarTunings.Controllers
         }
       }
       return View(model);
-      // return View(_db.TuningCategories.ToList());
     }
 
     public ActionResult Create()

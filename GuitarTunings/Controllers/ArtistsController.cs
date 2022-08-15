@@ -1,9 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Web;
-using System.Threading.Tasks;
 using GuitarTunings.Models;
 using GuitarTunings.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace GuitarTunings.Controllers
 {
