@@ -31,7 +31,7 @@ namespace GuitarTunings.Controllers
     public ActionResult Index(int Id, string selectedLetter)
     {
       ViewBag.TuningId = Id;
-      var model = new AlphabetPagingViewModel {  SelectedLetter = selectedLetter };
+      var model = new AlphabetPagingViewModel<Tuning> {  SelectedLetter = selectedLetter };
 
       model.FirstLetters = _db.Tunings
           .GroupBy(p => p.Name.Substring(0, 1))
@@ -40,38 +40,18 @@ namespace GuitarTunings.Controllers
 
       if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
       {
-        model.Names = _db.Tunings
-            .Select(p => p.Name)
-            .ToList();
-        model.IDs = _db.Tunings.Select(p => p.TuningId).ToList(); 
-        model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);    
+        model.GenericList = _db.Tunings.ToList();   
       }
       else
       {
         if (selectedLetter == "0-9")
         {
           var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
-          model.Names = _db.Tunings
-              .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
-              .Select(p => p.Name)
-              .ToList();
-          model.IDs = _db.Tunings
-          .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
-          .Select(p => p.TuningId)
-          .ToList();
-          model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
+          model.GenericList = _db.Tunings.Where(p => numbers.Contains(p.Name.Substring(0, 1))).Select(p => p).ToList();   
         }
         else
         {
-          model.Names = _db.Tunings
-              .Where(p => p.Name.StartsWith(selectedLetter))
-              .Select(p => p.Name)
-              .ToList();
-          model.IDs = _db.Tunings
-              .Where(p => p.Name.StartsWith(selectedLetter))
-              .Select(p => p.TuningId)
-              .ToList();
-          model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
+          model.GenericList = _db.Tunings.Where(p => p.Name.StartsWith(selectedLetter)).Select(p => p).ToList(); 
         }
       }
       return View(model);

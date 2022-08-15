@@ -33,48 +33,28 @@ namespace GuitarTunings.Controllers
     public ActionResult Index(int Id, string selectedLetter)
     {
       ViewBag.ArtistId = Id;
-      var model = new AlphabetPagingViewModel {  SelectedLetter = selectedLetter };
+      var model = new AlphabetPagingViewModel<Artist> {  SelectedLetter = selectedLetter };
 
-        model.FirstLetters = _db.Artists
-            .GroupBy(p => p.Name.Substring(0, 1))
-            .Select(x => x.Key.ToUpper())
-            .ToList();
+      model.FirstLetters = _db.Artists
+          .GroupBy(p => p.Name.Substring(0, 1))
+          .Select(x => x.Key.ToUpper())
+          .ToList();
 
-        if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
+      if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
+      {
+        model.GenericList = _db.Artists.ToList();    
+      }
+      else
+      {
+        if (selectedLetter == "0-9")
         {
-            model.Names = _db.Artists
-                .Select(p => p.Name)
-                .ToList();
-            model.IDs = _db.Artists.Select(p => p.ArtistId).ToList(); 
-            model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);    
-        }
+          var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
+          model.GenericList = _db.Artists.Where(p => numbers.Contains(p.Name.Substring(0, 1))).Select(p => p).ToList();
+        }   
         else
         {
-            if (selectedLetter == "0-9")
-            {
-                var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
-                model.Names = _db.Artists
-                    .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
-                    .Select(p => p.Name)
-                    .ToList();
-                model.IDs = _db.Artists
-                .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
-                .Select(p => p.ArtistId)
-                .ToList();
-                model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
-            }
-            else
-            {
-                model.Names = _db.Artists
-                    .Where(p => p.Name.StartsWith(selectedLetter))
-                    .Select(p => p.Name)
-                    .ToList();
-                model.IDs = _db.Artists
-                    .Where(p => p.Name.StartsWith(selectedLetter))
-                    .Select(p => p.ArtistId)
-                    .ToList();
-                model.Dict = Enumerable.Range(0, model.IDs.Count).ToDictionary(i => model.IDs[i], i=> model.Names[i]);     
-            }
+          model.GenericList = _db.Artists.Where(p => p.Name.StartsWith(selectedLetter)).Select(p => p).ToList();  
+        }
       }
       return View(model);
     }

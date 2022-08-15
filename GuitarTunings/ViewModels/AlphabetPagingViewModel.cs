@@ -1,14 +1,15 @@
+using GuitarTunings.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GuitarTunings.ViewModels 
+namespace GuitarTunings.ViewModels
 {
 
-    public class AlphabetPagingViewModel
+
+    public class AlphabetPagingViewModel<T>
     {
         public List<string> Names { get; set; }
-        public List<int> IDs { get; set; }
-        public Dictionary<int, string> Dict { get; set; }
+        public List<T> GenericList { get; set; }
         public List<string> Alphabet
         {
             get

@@ -1,5 +1,6 @@
+@using GuitarTunings.Models;
 @using GuitarTunings.ViewModels;
-@model AlphabetPagingViewModel;
+@model AlphabetPagingViewModel<Artist>;
 
 @if(@TempData["ArtistCreate"] != null)
 {
@@ -43,10 +44,10 @@
 </ul>
 
 <ul>
-  @foreach (var artist in Model.Dict.OrderBy(artist => artist.Value))
+  @foreach (Artist artist in Model.GenericList)
   {
     <li><h4><a asp-action="Details"
-            asp-route-id="@artist.Key">@artist.Value</a></h4></li>
+                asp-route-id="@artist.ArtistId">@artist.Name</a></h4></li>  
   }
 </ul>
 

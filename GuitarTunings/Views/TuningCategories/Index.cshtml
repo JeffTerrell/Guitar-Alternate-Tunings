@@ -1,5 +1,5 @@
-@using GuitarTunings.ViewModels;
 @using GuitarTunings.Models;
+@using GuitarTunings.ViewModels;
 @model AlphabetPagingViewModel<TuningCategory>;
 
 @if(@TempData["TuningCategoryCreate"] != null)
@@ -38,20 +38,6 @@
       }        
 }
 
-@* @foreach (TuningCategory tuningCategory in Model)
-{
-  <h4><b><a asp-action="Details"
-        asp-route-id="@tuningCategory.TuningCategoryId">@tuningCategory.Name</a></b></h4>
-
-    @foreach (Tuning tuning in tuningCategory.Tunings)
-      {
-        <ul>
-        <li><h6><a asp-controller="Tunings"
-                    asp-action="Details"
-                    asp-route-id="@tuning.TuningId">@tuning.Name : </a>@tuning.Notes</h6></li>
-        </ul>        
-      }        
-} *@
 <br>
 <br>
 @if (!User.Identity.IsAuthenticated)
