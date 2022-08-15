@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using GuitarTunings.Models;
+using GuitarTunings.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +25,54 @@ namespace GuitarTunings.Controllers
     }
 
     [AllowAnonymous]
-    public ActionResult Index(int Id)
+    public ActionResult Index(int Id, string selectedLetter)
     {
       ViewBag.TuningCategoryId = Id;
-      return View(_db.TuningCategories.ToList());
+      var model = new AlphabetPagingViewModel<TuningCategory> {  SelectedLetter = selectedLetter };
+
+      model.FirstLetters = _db.TuningCategories
+          .GroupBy(p => p.Name.Substring(0, 1))
+          .Select(x => x.Key.ToUpper())
+          .ToList();
+
+      if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
+      {
+        model.Names = _db.TuningCategories
+            .Select(p => p.Name)
+            .ToList();
+        model.IDs = _db.TuningCategories.Select(p => p.TuningCategoryId).ToList(); 
+        model.GenericList = _db.TuningCategories.ToList();
+      }
+      else
+      {
+        if (selectedLetter == "0-9")
+        {
+          var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
+          model.Names = _db.TuningCategories
+              .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
+              .Select(p => p.Name)
+              .ToList();
+          model.IDs = _db.TuningCategories
+          .Where(p => numbers.Contains(p.Name.Substring(0, 1)))
+          .Select(p => p.TuningCategoryId)
+          .ToList();
+          model.GenericList = _db.TuningCategories.ToList();     
+        }
+        else
+        {
+          model.Names = _db.TuningCategories
+              .Where(p => p.Name.StartsWith(selectedLetter))
+              .Select(p => p.Name)
+              .ToList();
+          model.IDs = _db.TuningCategories
+              .Where(p => p.Name.StartsWith(selectedLetter))
+              .Select(p => p.TuningCategoryId)
+              .ToList();
+          model.GenericList = _db.TuningCategories.ToList(); 
+        }
+      }
+      return View(model);
+      // return View(_db.TuningCategories.ToList());
     }
 
     public ActionResult Create()
