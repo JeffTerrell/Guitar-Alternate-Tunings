@@ -32,7 +32,6 @@ namespace GuitarTunings.Controllers
       List<string> newSort = new List<string> {"All", "Open"};
       model.ClearList();
       model.AddToList(newSort);
-      // model.Alphabet.AddRange(new List<string>() {"All", "Open"});
       model.FirstLetters = _db.TuningCategories
           .GroupBy(p => p.Name.Substring(0, 1))
           .Select(x => x.Key.ToUpper())
