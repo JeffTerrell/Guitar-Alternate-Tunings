@@ -29,12 +29,12 @@ namespace GuitarTunings.Controllers
       ViewBag.TuningCategoryId = Id;
       var model = new AlphabetPagingViewModel<TuningCategory> {  SelectedLetter = selectedLetter };
 
-      List<string> newSort = new List<string> {"All", "Open"};
+      List<string> newSort = new List<string> {"All", "Open Major", "Open Minor", "Open Modal", "Dropped", "Regular", "Lowered", "Special"};
       model.ClearList();
       model.AddToList(newSort);
       model.FirstLetters = _db.TuningCategories
-          .GroupBy(p => p.Name.Substring(0, 1))
-          .Select(x => x.Key.ToUpper())
+          .GroupBy(p => p.Name.Substring(0, 10))
+          .Select(x => x.Key)
           .ToList();
 
       if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
