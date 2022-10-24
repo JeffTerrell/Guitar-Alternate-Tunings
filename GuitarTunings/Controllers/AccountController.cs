@@ -26,12 +26,12 @@ public class AccountController : Controller
     {
       return View();
     }
-
+    [AllowAnonymous]
     public IActionResult Register()
     {
       return View();
     }
-
+    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult> Register (RegisterViewModel model)
     {

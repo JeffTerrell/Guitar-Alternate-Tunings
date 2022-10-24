@@ -1,4 +1,9 @@
 */bin/
 */obj/
 */appsettings.json
-.vscode 
+.vscode
+*/Properties/
+.vs
+.config
+*/GuitarTunings.csproj.user
+*/web.config
