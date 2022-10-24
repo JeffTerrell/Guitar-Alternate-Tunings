@@ -3,82 +3,21 @@ using System;
 using GuitarTunings.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GuitarTunings.Migrations
 {
     [DbContext(typeof(GuitarTuningsContext))]
-    partial class GuitarTuningsContextModelSnapshot : ModelSnapshot
+    [Migration("20220304213502_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("GuitarTunings.Models.Album", b =>
-                {
-                    b.Property<int>("AlbumId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("AlbumId");
-
-                    b.ToTable("Albums");
-                });
-
-            modelBuilder.Entity("GuitarTunings.Models.AlbumArtist", b =>
-                {
-                    b.Property<int>("AlbumArtistId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AlbumId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlbumArtistId");
-
-                    b.HasIndex("AlbumId");
-
-                    b.HasIndex("ArtistId");
-
-                    b.ToTable("AlbumArtists");
-                });
-
-            modelBuilder.Entity("GuitarTunings.Models.AlbumSong", b =>
-                {
-                    b.Property<int>("AlbumSongId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AlbumId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SongId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlbumSongId");
-
-                    b.HasIndex("AlbumId");
-
-                    b.HasIndex("SongId");
-
-                    b.ToTable("AlbumSongs");
-                });
 
             modelBuilder.Entity("GuitarTunings.Models.ApplicationUser", b =>
                 {
@@ -216,15 +155,15 @@ namespace GuitarTunings.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Album")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Tab")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("TuningId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Tutorial")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -234,9 +173,28 @@ namespace GuitarTunings.Migrations
 
                     b.HasKey("SongId");
 
+                    b.ToTable("Songs");
+                });
+
+            modelBuilder.Entity("GuitarTunings.Models.SongTuning", b =>
+                {
+                    b.Property<int>("SongTuningId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("SongId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TuningId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SongTuningId");
+
+                    b.HasIndex("SongId");
+
                     b.HasIndex("TuningId");
 
-                    b.ToTable("Songs");
+                    b.ToTable("SongTunings");
                 });
 
             modelBuilder.Entity("GuitarTunings.Models.Tuning", b =>
@@ -274,6 +232,7 @@ namespace GuitarTunings.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("TuningCategoryId")
@@ -432,44 +391,6 @@ namespace GuitarTunings.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GuitarTunings.Models.AlbumArtist", b =>
-                {
-                    b.HasOne("GuitarTunings.Models.Album", "Album")
-                        .WithMany("JoinArtist")
-                        .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GuitarTunings.Models.Artist", "Artist")
-                        .WithMany("JoinAlbum")
-                        .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Album");
-
-                    b.Navigation("Artist");
-                });
-
-            modelBuilder.Entity("GuitarTunings.Models.AlbumSong", b =>
-                {
-                    b.HasOne("GuitarTunings.Models.Album", "Album")
-                        .WithMany("JoinSong")
-                        .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GuitarTunings.Models.Song", "Song")
-                        .WithMany("JoinAlbum")
-                        .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Album");
-
-                    b.Navigation("Song");
-                });
-
             modelBuilder.Entity("GuitarTunings.Models.ArtistSong", b =>
                 {
                     b.HasOne("GuitarTunings.Models.Artist", "Artist")
@@ -508,13 +429,21 @@ namespace GuitarTunings.Migrations
                     b.Navigation("Tuning");
                 });
 
-            modelBuilder.Entity("GuitarTunings.Models.Song", b =>
+            modelBuilder.Entity("GuitarTunings.Models.SongTuning", b =>
                 {
+                    b.HasOne("GuitarTunings.Models.Song", "Song")
+                        .WithMany("JoinTuning")
+                        .HasForeignKey("SongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GuitarTunings.Models.Tuning", "Tuning")
-                        .WithMany("Songs")
+                        .WithMany("JoinSong")
                         .HasForeignKey("TuningId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Song");
 
                     b.Navigation("Tuning");
                 });
@@ -581,17 +510,8 @@ namespace GuitarTunings.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GuitarTunings.Models.Album", b =>
-                {
-                    b.Navigation("JoinArtist");
-
-                    b.Navigation("JoinSong");
-                });
-
             modelBuilder.Entity("GuitarTunings.Models.Artist", b =>
                 {
-                    b.Navigation("JoinAlbum");
-
                     b.Navigation("JoinSong");
 
                     b.Navigation("JoinTuning");
@@ -599,16 +519,16 @@ namespace GuitarTunings.Migrations
 
             modelBuilder.Entity("GuitarTunings.Models.Song", b =>
                 {
-                    b.Navigation("JoinAlbum");
-
                     b.Navigation("JoinArtist");
+
+                    b.Navigation("JoinTuning");
                 });
 
             modelBuilder.Entity("GuitarTunings.Models.Tuning", b =>
                 {
                     b.Navigation("JoinArtist");
 
-                    b.Navigation("Songs");
+                    b.Navigation("JoinSong");
                 });
 
             modelBuilder.Entity("GuitarTunings.Models.TuningCategory", b =>

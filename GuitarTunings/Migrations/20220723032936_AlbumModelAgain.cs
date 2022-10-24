@@ -2,7 +2,7 @@
 
 namespace GuitarTunings.Migrations
 {
-    public partial class mssql_migration_201 : Migration
+    public partial class AlbumModelAgain : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

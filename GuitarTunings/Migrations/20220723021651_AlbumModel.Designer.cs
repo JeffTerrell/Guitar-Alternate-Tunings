@@ -3,14 +3,16 @@ using System;
 using GuitarTunings.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GuitarTunings.Migrations
 {
     [DbContext(typeof(GuitarTuningsContext))]
-    partial class GuitarTuningsContextModelSnapshot : ModelSnapshot
+    [Migration("20220723021651_AlbumModel")]
+    partial class AlbumModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace GuitarTunings.Migrations
 
             modelBuilder.Entity("GuitarTunings.Models.Album", b =>
                 {
-                    b.Property<int>("AlbumId")
+                    b.Property<int>("ArtistId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -33,7 +35,7 @@ namespace GuitarTunings.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("AlbumId");
+                    b.HasKey("ArtistId");
 
                     b.ToTable("Albums");
                 });
@@ -44,6 +46,9 @@ namespace GuitarTunings.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("AlbumArtistId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
 
@@ -52,7 +57,7 @@ namespace GuitarTunings.Migrations
 
                     b.HasKey("AlbumArtistId");
 
-                    b.HasIndex("AlbumId");
+                    b.HasIndex("AlbumArtistId1");
 
                     b.HasIndex("ArtistId");
 
@@ -436,7 +441,7 @@ namespace GuitarTunings.Migrations
                 {
                     b.HasOne("GuitarTunings.Models.Album", "Album")
                         .WithMany("JoinArtist")
-                        .HasForeignKey("AlbumId")
+                        .HasForeignKey("AlbumArtistId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
