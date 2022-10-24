@@ -168,7 +168,7 @@ namespace GuitarTunings.Controllers
         _db.SaveChanges();
         Artist artist = _db.Artists.FirstOrDefault(find => find.ArtistId == ArtistId);
         TempData["ArtistAdded"] = ($"\u00A0{artist.Name} added");
-        return RedirectToAction("Edit", new { id = album.AlbumId });
+        return Redirect(Url.Action("Edit", new { id = album.AlbumId }) + "#Artists");
       }
 
       if(joinEntry != null)

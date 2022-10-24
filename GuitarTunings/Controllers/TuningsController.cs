@@ -144,8 +144,23 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult AddArtist(Tuning tuning, int ArtistId)
     {
-      _db.ArtistTunings.Add(new ArtistTuning() { ArtistId = ArtistId , TuningId = tuning.TuningId});
-      _db.SaveChanges();
+      ArtistTuning joinEntry = _db.ArtistTunings.Where(x => x.TuningId == tuning.TuningId).FirstOrDefault(y => y.ArtistId == ArtistId);
+
+      if(joinEntry == null)
+      {
+        _db.ArtistTunings.Add(new ArtistTuning() { ArtistId = ArtistId , TuningId = tuning.TuningId});
+        _db.SaveChanges();
+        Artist artist = _db.Artists.FirstOrDefault(find => find.ArtistId == ArtistId);
+        TempData["ArtistAdded"] = ($"\u00A0{artist.Name} added");
+        return RedirectToAction("Edit", new { id = tuning.TuningId });
+      }
+
+      if (joinEntry != null)
+      {
+        TempData["ArtistDuplicate"] = ($"\u00A0Cannot add {joinEntry.Artist.Name}, artist already exists");
+        return RedirectToAction("Edit", new { id = tuning.TuningId });
+      }
+
       return RedirectToAction("Edit", new { id = tuning.TuningId });
     }
 

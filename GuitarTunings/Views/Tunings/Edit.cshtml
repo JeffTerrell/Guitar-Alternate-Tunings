@@ -1,3 +1,7 @@
+@{
+  Layout = "_LayoutIcons";
+}
+
 @model GuitarTunings.Models.Tuning
 
 <h2>Edit @Html.DisplayFor(model => model.Name)</h2>
@@ -86,6 +90,27 @@
     <input type="hidden" asp-for="TuningId" />
     @Html.DropDownList("ArtistId")
 </form>
+
+@if(@TempData["ArtistAdded"] != null)
+    { 
+      <div class="alert alert-success d-sm-inline-flex" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+          <b>@TempData["ArtistAdded"]</b>
+        </div>  
+      </div>  
+    }
+
+    @if(@TempData["ArtistDuplicate"] != null)
+    { 
+      <div class="alert alert-danger d-sm-inline-flex" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+          <b>@TempData["ArtistDuplicate"]</b>
+        </div>  
+      </div>  
+    }
+
 <br>    
 <a asp-action="Details"
     asp-route-id="@Model.TuningId">Back to Details for: @Model.Name</a>
