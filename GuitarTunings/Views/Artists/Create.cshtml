@@ -24,10 +24,11 @@
     <label asp-for="Description"></label>
     <input asp-for="Description" />
   </li>
-  <li>
+  @* *** For adding images, not currently needed 10/23/2022 *** *@ 
+  @* <li>
     <label asp-for="ArtistImageName"></label>
     <input asp-for="ArtistImageFile" accept="image/*" required />
-  </li>
+  </li> *@
   <li>
     @Html.Label("Alternate Tuning")
     @Html.DropDownList("TuningId")

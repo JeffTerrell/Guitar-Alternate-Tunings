@@ -25,7 +25,8 @@
         @* <option>Please select a category</option> *@
       </select>     
     </li>
-    <li>
+    @* *** For adding images, not currently needed 10/23/2022 *** *@  
+    @* <li>
       <label asp-for="ImageNameA"></label>
       <input asp-for="ImageFileA" accept="image/*" required/>
     </li>
@@ -52,7 +53,7 @@
     <li>
       <label asp-for="ImageNameG"></label>
       <input asp-for="ImageFileG" accept="image/*" required/>
-    </li>
+    </li> *@
   </ul>
   
   <input type="submit", value="Add", class="btn btn-dark"/>
