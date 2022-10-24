@@ -25,9 +25,9 @@ namespace GuitarTunings
     {
       services.AddMvc();
 
-      services.AddEntityFrameworkSqlServer()
+      services.AddEntityFrameworkMySql()
         .AddDbContext<GuitarTuningsContext>(options => options
-        .UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+        .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
 
       services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<GuitarTuningsContext>()

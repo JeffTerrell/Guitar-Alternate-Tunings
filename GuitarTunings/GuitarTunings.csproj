@@ -3,7 +3,7 @@
   <PropertyGroup>
       <OutputType>Exe</OutputType>
       <TargetFramework>net5.0</TargetFramework>
-	  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+      <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0-alpha.2" />
   </ItemGroup>
 
 </Project>
