@@ -19,6 +19,13 @@
               asp-action="Details"
               asp-route-id="@artist.Artist.ArtistId">@artist.Artist.Name</a></h6>
     }
+    <h3>Album(s)</h3>
+    @foreach (var album in Model.JoinAlbum)
+    {
+      <h6><a asp-controller="Albums"
+              asp-action="Details"
+              asp-route-id="@album.Album.AlbumId">@album.Album.Name</a></h6>
+    }
     <h3>Tuning</h3>
     <h6><a asp-controller="Tunings"
             asp-action="Details"
