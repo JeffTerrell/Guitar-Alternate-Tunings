@@ -29,7 +29,7 @@
     <h3>Tuning</h3>
     <h6><a asp-controller="Tunings"
             asp-action="Details"
-            asp-route-id="@Model.Tuning.TuningId">@Model.Tuning.Name</a></h6>
+            asp-route-id="@Model.Tuning.TuningId">@Model.Tuning.Name : </a>@Model.Tuning.Notes</h6>
     <h3>@Html.DisplayNameFor(model => model.Tab):</h3><h6><a href="@Html.DisplayFor(model => model.Tab)" Target="_blank">@Html.DisplayFor(model => model.Tab)</a></h6>       
   </div>
   <div class="col-sm-4">
