@@ -27,6 +27,10 @@
     <input asp-for="Tutorial" />
   </li>
   <li>
+    @Html.Label("Artist")
+    @Html.DropDownList("ArtistId")
+  </li> 
+  <li>  
     <label asp-for="TuningId">Alternate Tuning</label>
     <select asp-for="TuningId"
             asp-items="ViewBag.TuningId">

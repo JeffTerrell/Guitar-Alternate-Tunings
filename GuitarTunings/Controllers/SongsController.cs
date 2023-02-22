@@ -56,11 +56,12 @@ namespace GuitarTunings.Controllers
     public ActionResult Create()
     {
       ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
+      ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create (Song song)
+    public ActionResult Create (Song song, int ArtistId)
     {
       if(song.TuningId == 0)
       {
@@ -71,10 +72,16 @@ namespace GuitarTunings.Controllers
 
       if(song != null)
       {
-        TempData["SongCreate"] = ($"Song {song.Name} successfully created");
         _db.Songs.Add(song);
         _db.SaveChanges();
-      }  
+      }
+
+      if(ArtistId != 0)
+      {
+        TempData["SongCreate"] = ($"Song {song.Name} successfully created");
+        _db.ArtistSongs.Add(new ArtistSong() { SongId = song.SongId, ArtistId = ArtistId});
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index", new {id = song.SongId});
     }
 
