@@ -1,6 +1,13 @@
 @using GuitarTunings.Models
 @model Tuning
 
+@if(TempData["TuningDuplicate"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+    <a asp-action="Details" asp-route-id="@TempData["ExistingTuningId"]">@TempData["TuningDuplicate"]</a>
+  </div>  
+}
+
 <h1>Add a new alternate tuning</h1>
 <div class="row">
   <div class ="col-sm">

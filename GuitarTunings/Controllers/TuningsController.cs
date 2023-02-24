@@ -66,6 +66,14 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public async Task<ActionResult> Create ([Bind("Name, Notes, Description, TuningCategoryId, ImageFileA, ImageFileB, ImageFileC, ImageFileD, ImageFileE, ImageFileF, ImageFileG")] Tuning tuning)
     {
+      Tuning existingTuning = _db.Tunings.FirstOrDefault(x => x.Name == tuning.Name);
+      if (existingTuning != null)
+      {
+        TempData["TuningDuplicate"] = ($"Cannot create {tuning.Name}, tuning already exists");
+        ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
+        TempData["ExistingTuningId"] = existingTuning.TuningId;
+        return View();
+      }
 
       AddImage(tuning);
       TempData["TuningCreate"] = ($"Tuning {tuning.Name} successfully created");
