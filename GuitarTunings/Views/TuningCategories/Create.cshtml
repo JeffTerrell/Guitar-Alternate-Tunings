@@ -1,8 +1,14 @@
 @using GuitarTunings.Models
 @model TuningCategory
 
-<h1>Add a new alternate tuning category</h1>
+@if(TempData["TuningCategoryDuplicate"] != null)
+{
+  <div class="alert alert-danger" role="alert">
+    <a asp-action="Details" asp-route-id="@TempData["ExistingTuningCategoryId"]">@TempData["TuningCategoryDuplicate"]</a>
+  </div>  
+}
 
+<h1>Add a new alternate tuning category</h1>
 <form asp-controller="TuningCategories" asp-action="Create" method="post">
   <ul>
     <li>
