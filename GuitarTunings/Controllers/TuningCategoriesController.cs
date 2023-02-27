@@ -6,6 +6,7 @@ using GuitarTunings.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuitarTunings.Controllers
@@ -64,12 +65,19 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create (TuningCategory tuningCategory)
     {
-      if(tuningCategory != null)
+      TuningCategory existingTuningCategory = _db.TuningCategories.FirstOrDefault(x => x.Name == tuningCategory.Name);
+
+      if(existingTuningCategory != null)
       {
-        TempData["TuningCategoryCreate"] = ($"Tuning category {tuningCategory.Name} successfully created");
-        _db.TuningCategories.Add(tuningCategory);
-        _db.SaveChanges();
-      }  
+        TempData["TuningCategoryDuplicate"] = ($"Cannot create {tuningCategory.Name}, tuning category already exists");
+        ViewBag.TuningCategoryId = new SelectList(_db.TuningCategories, "TuningCategoryId", "Name");
+        TempData["ExistingTuningCategoryId"] = existingTuningCategory.TuningCategoryId;
+        return View();
+      }
+
+      TempData["TuningCategoryCreate"] = ($"Tuning category {tuningCategory.Name} successfully created");
+      _db.TuningCategories.Add(tuningCategory);
+      _db.SaveChanges();  
       return RedirectToAction("Index", new {id = tuningCategory.TuningCategoryId});
     }
 
