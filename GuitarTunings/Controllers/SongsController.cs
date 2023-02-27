@@ -63,25 +63,29 @@ namespace GuitarTunings.Controllers
     [HttpPost]
     public ActionResult Create (Song song, int ArtistId)
     {
-      if(song.TuningId == 0)
+      Song existingSong = _db.Songs.FirstOrDefault(x => x.Name == song.Name);
+
+      if(existingSong != null)
       {
-        ViewBag.Message = "Please choose an Alternate Tuning";
-        ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
+        TempData["SongDuplicate"] = ($"Cannot create {song.Name}, song already exists");
+        ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+        TempData["ExistingSongId"] = existingSong.SongId;
         return View();
       }
 
       if(song != null)
       {
+        TempData["SongCreate"] = ($"Song {song.Name} successfully created");
         _db.Songs.Add(song);
         _db.SaveChanges();
       }
 
       if(ArtistId != 0)
       {
-        TempData["SongCreate"] = ($"Song {song.Name} successfully created");
         _db.ArtistSongs.Add(new ArtistSong() { SongId = song.SongId, ArtistId = ArtistId});
         _db.SaveChanges();
       }
+      
       return RedirectToAction("Index", new {id = song.SongId});
     }
 
