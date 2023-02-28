@@ -55,13 +55,14 @@ namespace GuitarTunings.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
       ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+      ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
+      ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create (Song song, int ArtistId)
+    public ActionResult Create (Song song, int ArtistId, int AlbumId)
     {
       Song existingSong = _db.Songs.FirstOrDefault(x => x.Name == song.Name);
 
@@ -69,6 +70,7 @@ namespace GuitarTunings.Controllers
       {
         TempData["SongDuplicate"] = ($"Cannot create {song.Name}, song already exists");
         ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+        ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
         TempData["ExistingSongId"] = existingSong.SongId;
         return View();
       }
@@ -80,12 +82,20 @@ namespace GuitarTunings.Controllers
         _db.SaveChanges();
       }
 
-      if(ArtistId != 0)
+      if(AlbumId != 0 & ArtistId != 0)
       {
+        AlbumArtist existingAlbumArtist = _db.AlbumArtists.Where(x => x.AlbumId == AlbumId).FirstOrDefault(y => y.ArtistId == ArtistId);
+
+        _db.AlbumSongs.Add(new AlbumSong() { SongId = song.SongId, AlbumId = AlbumId});
         _db.ArtistSongs.Add(new ArtistSong() { SongId = song.SongId, ArtistId = ArtistId});
-        _db.SaveChanges();
+
+        if(existingAlbumArtist == null)
+        {
+          _db.AlbumArtists.Add(new AlbumArtist() { AlbumId = AlbumId, ArtistId = ArtistId});
+        }
+        _db.SaveChanges();  
       }
-      
+
       return RedirectToAction("Index", new {id = song.SongId});
     }
 
