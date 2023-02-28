@@ -80,15 +80,18 @@ namespace GuitarTunings.Controllers
         _db.SaveChanges();
       }  
 
-      if(ArtistId != 0)
+      if(ArtistId != 0 & SongId != 0)
       {
-        _db.AlbumArtists.Add(new AlbumArtist() { AlbumId = album.AlbumId, ArtistId = ArtistId});
-        _db.SaveChanges();
-      }
+        ArtistSong existingArtistSong = _db.ArtistSongs.Where(x => x.ArtistId == ArtistId).FirstOrDefault(y => y.SongId == SongId);
 
-      if(SongId != 0)
-      {
+        _db.AlbumArtists.Add(new AlbumArtist() { AlbumId = album.AlbumId, ArtistId = ArtistId});
         _db.AlbumSongs.Add(new AlbumSong() { AlbumId = album.AlbumId, SongId = SongId});
+
+        if(existingArtistSong == null)
+        {
+          _db.ArtistSongs.Add(new ArtistSong() { ArtistId = ArtistId, SongId = SongId});
+        }
+
         _db.SaveChanges();
       }
 
