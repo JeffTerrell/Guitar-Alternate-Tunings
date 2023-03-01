@@ -50,6 +50,7 @@ namespace GuitarTunings.Controllers
           model.GenericList = _db.Albums.Where(p => p.Name.StartsWith(selectedLetter)).Select(p => p).ToList();
         }
       }
+      
       return View(model);
     }
 
@@ -114,6 +115,7 @@ namespace GuitarTunings.Controllers
         TempData["urlNotFound"] = string.Format("{0}://{1}{2}", HttpContext.Request.Scheme, HttpContext.Request.Host, HttpContext.Request.Path);
         return RedirectToAction("Index");
       }
+
       return View(thisAlbum);
     }
 
@@ -142,21 +144,33 @@ namespace GuitarTunings.Controllers
     public ActionResult Edit(Album album, int AlbumId)
     {
       Album existingAlbum = _db.Albums.FirstOrDefault(x => x.Name == album.Name);
-      if (existingAlbum != null)
+
+      if (existingAlbum == null)
+      {
+        TempData["AlbumUpdate"] = ($"{album.Name} updated successfully!");
+        _db.Entry(album).State = EntityState.Modified;
+        _db.SaveChanges();  
+        return RedirectToAction("Details", new { id = album.AlbumId});
+      }
+
+      if(existingAlbum.ReleaseDate == album.ReleaseDate & existingAlbum.Description == album.Description)
       {
         ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
         ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
-        TempData["AlbumDuplicate"] = ($"Cannot update {album.Name}, album already exists");
+        TempData["AlbumDuplicate"] = ($"Cannot update {album.Name}, nothing has changed");
         TempData["ExistingAlbumId"] = existingAlbum.AlbumId;
         return View(existingAlbum);
       }
 
       if(album != null)
       {
-        TempData["AlbumUpdate"] = ($"{album.Name} updated successfully!") ;
-        _db.Entry(album).State = EntityState.Modified;
+        TempData["AlbumUpdate"] = ($"{album.Name} updated successfully!");
+        existingAlbum.ReleaseDate = album.ReleaseDate;
+        existingAlbum.Description = album.Description;
+        _db.Entry(existingAlbum).State = EntityState.Modified;
         _db.SaveChanges();
-      }  
+      }
+
       return RedirectToAction("Details", new { id = album.AlbumId});
     }
 
@@ -179,6 +193,7 @@ namespace GuitarTunings.Controllers
         TempData["ArtistDuplicate"] = ($"\u00A0Cannot add {joinEntry.Artist.Name}, artist already exists");
         return RedirectToAction("Edit", new { id = album.AlbumId });
       }
+
       return RedirectToAction("Edit", new { id = album.AlbumId });
     }
 
@@ -209,6 +224,7 @@ namespace GuitarTunings.Controllers
           TempData["SongDuplicate"] = ($"\u00A0Cannot add {joinEntry.Song.Name}, song already exists");
           return RedirectToAction("Edit", new { id = album.AlbumId });
         }
+
       return RedirectToAction("Edit", new { id = album.AlbumId });
     }
 
@@ -250,6 +266,7 @@ namespace GuitarTunings.Controllers
       _db.Albums.Remove(thisAlbum);
       _db.SaveChanges();
       }
+
       return RedirectToAction("Index");
     }
   }
