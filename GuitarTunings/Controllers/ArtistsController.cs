@@ -159,7 +159,7 @@ namespace GuitarTunings.Controllers
       {
         ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Name");
         ViewBag.SongId = new SelectList(_db.Songs, "SongId", "Name");
-        ViewBag.TuningId = new SelectList(_db.Artists, "ArtistId", "Name");
+        ViewBag.TuningId = new SelectList(_db.Tunings, "TuningId", "Name");
         TempData["ArtistDuplicate"] = ($"Cannot update {artist.Name}, nothing has changed");
         TempData["ExistingArtistId"] = existingArtist.ArtistId;
         return View(existingArtist);
