@@ -33,7 +33,7 @@
         }
         else
         {
-            <li class="page-link">@Html.ActionLink(link, "Index", new {selectedLetter = link})</li>
+          <li class="page-link">@Html.ActionLink(link, "Index", new {selectedLetter = link})</li>
         }
       }
       else
@@ -46,19 +46,31 @@
 <ul>
   @foreach (Artist artist in Model.GenericList)
   {
-    <li><h4><a asp-action="Details"
-                asp-route-id="@artist.ArtistId">@artist.Name</a></h4></li>  
+    <li>
+      <div id="showButtons">
+        <h4> 
+          <a class="linkDetails" asp-action="Details" asp-route-id="@artist.ArtistId">@artist.Name</a>
+          
+            @if (User.Identity.IsAuthenticated)
+            {
+            <span class="hide" style="margin-left:1.25em"> 
+              <a asp-action="Edit" asp-route-id="@artist.ArtistId" class="btn-sm btn-warning">Edit</a>
+              <a asp-action="Delete" asp-route-id="@artist.ArtistId" class="btn-sm btn-danger" >Delete</a>
+            </span>
+            }   
+        </h4>
+      </div>
+    </li> 
   }
 </ul>
 
 <br>
 <br>
-@if (!User.Identity.IsAuthenticated)
+
+@if (User.Identity.IsAuthenticated)
 {
+  <h6><a asp-action="Create">Add new Artist</a></h6>
 }
-else
-{
-<h6><a asp-action="Create">Add new Artist</a></h6>
-}
+
 <h6><a asp-controller="Home"
-        asp-action="Index">Home</a></h6>
+        asp-action="Index">Home</a></h6>       
